@@ -1,13 +1,1 @@
-venv/
-__pycache__/
-instance/
-.venv/
-*.db
-*.sqlite3
-.pytest_cache/
-.ruff_cache/
-.coverage
-htmlcov/
-.vscode/
-.idea/
-.env
+*.swp
