@@ -9,14 +9,12 @@ def client():
 
 
 def test_home_returns_200(client):
-    client = app.test_client()
     response = client.get("/")
     assert response.status_code == 200
     assert "اختر الفصل وابدأ الاختبار" in response.get_data(as_text=True)
 
 
 def test_error_return_404(client):
-    client = app.test_client()
     response = client.get("/test")
     assert response.status_code == 404
 
