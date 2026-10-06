@@ -20,10 +20,10 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install psutil bandit pip-audit
+        run: pip install bandit pip-audit
 
       - name: Run security scan (Bandit)
-        run: bandit -r . -c pyproject.toml
+        run: bandit -r .
 
       - name: Audit dependencies (pip-audit)
         run: pip-audit -r requirements.txt
