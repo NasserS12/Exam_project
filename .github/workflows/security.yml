@@ -23,7 +23,7 @@ jobs:
         run: pip install bandit pip-audit
 
       - name: Run security scan (Bandit)
-        run: bandit -r .
+        run: bandit -r . -c pyproject.toml
 
       - name: Audit dependencies (pip-audit)
         run: pip-audit -r requirements.txt
