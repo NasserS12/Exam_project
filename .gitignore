@@ -1,1 +1,23 @@
+# Secrets
+.env
+
+# Python
+venv/
+.venv/
+__pycache__/
+
+# Database
+instance/
+*.db
+*.sqlite3
+
+# Tools cache
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Editors
+.vscode/
+.idea/
 *.swp
