@@ -1,10 +1,13 @@
 import pytest
 
+import db
 from app import app
 
 
 @pytest.fixture
-def client():
+def client(tmp_path, monkeypatch):
+    monkeypatch.setattr(db, "DB_PATH", str(tmp_path / "test.db"))
+    db.init_db()
     return app.test_client()
 
 
@@ -23,6 +26,7 @@ def test_about_returns_200(client):
     response = client.get("/about")
     assert response.status_code == 200
     assert "المنصة تقدر ترفع فيها ملفات" in response.get_data(as_text=True)
+    assert "Networking" in response.get_data(as_text=True)
 
 
 def test_quiz_correct_answer(client):
