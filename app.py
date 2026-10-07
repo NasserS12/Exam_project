@@ -12,7 +12,7 @@ def home():
 
 def get_question(question_id):
     conn = get_connection()
-    row = conn.execute("SELECT * FROM questions WHERE id = 1").fetchone()
+    row = conn.execute("SELECT * FROM questions WHERE id = ?", (question_id,)).fetchone()
     conn.close()
     options = [row["option_1"], row["option_2"], row["option_3"], row["option_4"]]
     return row["text"], options, row["answer"]
