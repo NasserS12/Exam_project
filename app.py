@@ -12,7 +12,9 @@ def home():
 
 def get_question(question_id):
     conn = get_connection()
-    row = conn.execute("SELECT * FROM questions WHERE id = ?", (question_id,)).fetchone()
+    row = conn.execute(
+        "SELECT * FROM questions WHERE id = ?", (question_id,)
+    ).fetchone()
     conn.close()
     options = [row["option_1"], row["option_2"], row["option_3"], row["option_4"]]
     return row["text"], options, row["answer"]
@@ -24,6 +26,14 @@ def about():
     chapters = conn.execute("SELECT name FROM chapters").fetchall()
     conn.close()
     return render_template("about.html", chapters=chapters)
+
+
+@app.route("/chapters")
+def chapters():
+    conn = get_connection()
+    rows = conn.execute("SELECT id, name FROM chapters ORDER BY id").fetchall()
+    conn.close()
+    return render_template("chapters.html", chapters=rows)
 
 
 @app.route("/quiz", methods=["GET", "POST"])
