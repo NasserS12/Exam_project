@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}الفصول{% endblock %}
+
+{% block content %}
+    <h1>الفصول</h1>
+    <p>اختر الفصل اللي تبي تذاكره.</p>
+
+    <ul>
+        {% for chapter in chapters %}
+            <li>{{ chapter["name"] }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="/">الرئيسية</a>
+{% endblock %}

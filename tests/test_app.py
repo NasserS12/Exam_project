@@ -41,6 +41,13 @@ def test_quiz_without_answer(client):
     assert "اختر إجابة من الخيارات" in response.get_data(as_text=True)
 
 
+def test_chapters_page(client):
+    response = client.get("/chapters")
+    assert response.status_code == 200
+    assert "اختر الفصل اللي تبي تذاكره" in response.get_data(as_text=True)
+    assert "Cryptography" in response.get_data(as_text=True)
+
+
 def test_quiz_invalid_answer(client):
     response = client.post("/quiz", data={"answer": "999"})
     assert response.status_code == 400
@@ -51,3 +58,9 @@ def test_quiz_wrong_answer(client):
     response = client.post("/quiz", data={"answer": "80"})
     assert response.status_code == 200
     assert "إجابة خاطئة" in response.get_data(as_text=True)
+
+
+def test_home_links_to_chapters(client):
+    response = client.get("/")
+    assert response.status_code == 200
+    assert 'href="/chapters"' in response.get_data(as_text=True)
