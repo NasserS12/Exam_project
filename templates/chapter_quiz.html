@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}{{ chapter["name"] }}{% endblock %}
+
+{% block content %}
+    <h1>{{ chapter["name"] }}</h1>
+
+    {% for question in questions %}
+        <h3>{{ question["text"] }}</h3>
+        <ul>
+            <li>{{ question["option_1"] }}</li>
+            <li>{{ question["option_2"] }}</li>
+            <li>{{ question["option_3"] }}</li>
+            <li>{{ question["option_4"] }}</li>
+        </ul>
+    {% endfor %}
+
+    <a href="/chapters">الفصول</a>
+{% endblock %}

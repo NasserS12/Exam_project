@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, abort, render_template, request
 
 from db import get_connection
 
@@ -34,6 +34,24 @@ def chapters():
     rows = conn.execute("SELECT id, name FROM chapters ORDER BY id").fetchall()
     conn.close()
     return render_template("chapters.html", chapters=rows)
+
+
+@app.route("/chapters/<int:chapter_id>")
+def chapter_quiz(chapter_id):
+    conn = get_connection()
+    chapter = conn.execute(
+        "SELECT id, name FROM chapters WHERE id = ?", (chapter_id,)
+    ).fetchone()
+    if chapter is None:
+        conn.close()
+        abort(404)
+    questions = conn.execute(
+        "SELECT id, text, option_1, option_2, option_3, option_4 "
+        "FROM questions WHERE chapter_id = ? ORDER BY id",
+        (chapter_id,),
+    ).fetchall()
+    conn.close()
+    return render_template("chapter_quiz.html", chapter=chapter, questions=questions)
 
 
 @app.route("/quiz", methods=["GET", "POST"])

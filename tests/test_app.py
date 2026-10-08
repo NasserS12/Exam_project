@@ -64,3 +64,20 @@ def test_home_links_to_chapters(client):
     response = client.get("/")
     assert response.status_code == 200
     assert 'href="/chapters"' in response.get_data(as_text=True)
+
+
+def test_chapter_page_shows_questions(client):
+    response = client.get("/chapters/1")
+    assert response.status_code == 200
+    assert "وش المنفذ الافتراضي" in response.get_data(as_text=True)
+
+
+def test_missing_chapter_returns_404(client):
+    response = client.get("/chapters/999")
+    assert response.status_code == 404
+
+
+def test_chapters_page_links_to_chapter(client):
+    response = client.get("/chapters")
+    assert response.status_code == 200
+    assert 'href="/chapters/1"' in response.get_data(as_text=True)
