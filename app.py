@@ -61,6 +61,8 @@ def chapter_quiz(chapter_id):
 
     results = None
     error = None
+    score = None
+    total = None
     if request.method == "POST":
         results = {}
         for question in questions:
@@ -75,11 +77,14 @@ def chapter_quiz(chapter_id):
                     error=error,
                 ), 400
             results[question["id"]] = selected == answers[question["id"]]
-
+        score = sum(results.values())
+        total = len(results)
     return render_template(
         "chapter_quiz.html",
         chapter=chapter,
         questions=questions,
         results=results,
         error=error,
+        score=score,
+        total=total,
     )

@@ -64,6 +64,7 @@ def test_chapter_quiz_one_wrong_answer(client):
     assert response.status_code == 200
     assert "إجابة خاطئة" in response.get_data(as_text=True)
     assert "إجابة صحيحة" in response.get_data(as_text=True)
+    assert "نتيجتك: 1 من 2" in response.get_data(as_text=True)
 
 
 def test_chapter_quiz_all_answers_correct(client):
@@ -71,6 +72,7 @@ def test_chapter_quiz_all_answers_correct(client):
     assert response.status_code == 200
     assert "إجابة صحيحة" in response.get_data(as_text=True)
     assert "إجابة خاطئة" not in response.get_data(as_text=True)
+    assert "نتيجتك: 2 من 2" in response.get_data(as_text=True)
 
 
 def test_chapter_quiz_missing_answer(client):
@@ -83,6 +85,13 @@ def test_chapter_quiz_invalid_answer(client):
     response = client.post("/chapters/1", data={"q1": "22222222", "q2": "443"})
     assert response.status_code == 400
     assert "جاوب على كل الأسئلة من الخيارات" in response.get_data(as_text=True)
+
+
+def test_chapter_quiz_all_answers_wrong_shows_zero(client):
+    response = client.post("/chapters/1", data={"q1": "21", "q2": "80"})
+    assert response.status_code == 200
+    assert "نتيجتك: 0 من 2" in response.get_data(as_text=True)
+    assert "إجابة صحيحة" not in response.get_data(as_text=True)
 
 
 def test_old_quiz_page_removed(client):

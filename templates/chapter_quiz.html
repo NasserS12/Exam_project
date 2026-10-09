@@ -5,6 +5,10 @@
 {% block content %}
     <h1>{{ chapter["name"] }}</h1>
 
+    {% if score is not none %}
+        <p>نتيجتك: {{ score }} من {{ total }}</p>
+    {% endif %}
+
     {% if error %}
         <p>{{ error }}</p>
     {% endif %}
