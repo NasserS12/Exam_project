@@ -17,7 +17,7 @@ def test_home_returns_200(client):
     assert "اختر الفصل وابدأ الاختبار" in response.get_data(as_text=True)
 
 
-def test_error_return_404(client):
+def test_unknown_route_returns_404(client):
     response = client.get("/test")
     assert response.status_code == 404
 
@@ -29,35 +29,11 @@ def test_about_returns_200(client):
     assert "Networking" in response.get_data(as_text=True)
 
 
-def test_quiz_correct_answer(client):
-    response = client.post("/quiz", data={"answer": "22"})
-    assert response.status_code == 200
-    assert "إجابة صحيحة" in response.get_data(as_text=True)
-
-
-def test_quiz_without_answer(client):
-    response = client.post("/quiz", data={})
-    assert response.status_code == 400
-    assert "اختر إجابة من الخيارات" in response.get_data(as_text=True)
-
-
 def test_chapters_page(client):
     response = client.get("/chapters")
     assert response.status_code == 200
     assert "اختر الفصل اللي تبي تذاكره" in response.get_data(as_text=True)
     assert "Cryptography" in response.get_data(as_text=True)
-
-
-def test_quiz_invalid_answer(client):
-    response = client.post("/quiz", data={"answer": "999"})
-    assert response.status_code == 400
-    assert "اختر إجابة من الخيارات" in response.get_data(as_text=True)
-
-
-def test_quiz_wrong_answer(client):
-    response = client.post("/quiz", data={"answer": "80"})
-    assert response.status_code == 200
-    assert "إجابة خاطئة" in response.get_data(as_text=True)
 
 
 def test_home_links_to_chapters(client):
@@ -107,3 +83,8 @@ def test_chapter_quiz_invalid_answer(client):
     response = client.post("/chapters/1", data={"q1": "22222222", "q2": "443"})
     assert response.status_code == 400
     assert "جاوب على كل الأسئلة من الخيارات" in response.get_data(as_text=True)
+
+
+def test_old_quiz_page_removed(client):
+    response = client.get("/quiz")
+    assert response.status_code == 404
