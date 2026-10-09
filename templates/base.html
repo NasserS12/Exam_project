@@ -5,6 +5,18 @@
     <title>{% block title %}منصة الاختبارات{% endblock %}</title>
 </head>
 <body>
+    <nav>
+        {% if session.get("user_id") %}
+            مرحباً {{ session["username"] }}
+            <form method="post" action="/logout" style="display: inline;">
+                <button type="submit">تسجيل الخروج</button>
+            </form>
+        {% else %}
+            <a href="/login">تسجيل الدخول</a>
+            <a href="/register">إنشاء حساب</a>
+        {% endif %}
+    </nav>
+    <hr>
     {% block content %}{% endblock %}
 </body>
 </html>

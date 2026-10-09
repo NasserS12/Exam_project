@@ -8,7 +8,60 @@ from app import app
 def client(tmp_path, monkeypatch):
     monkeypatch.setattr(db, "DB_PATH", str(tmp_path / "test.db"))
     db.init_db()
+    app.config["SECRET_KEY"] = "test-secret-key"
     return app.test_client()
+
+
+def register_user(client, username="nasser", password="mypassword123"):
+    return client.post("/register", data={"username": username, "password": password})
+
+
+def test_login_success_shows_username(client):
+    register_user(client)
+    response = client.post(
+        "/login",
+        data={"username": "nasser", "password": "mypassword123"},
+        follow_redirects=True,
+    )
+    assert response.status_code == 200
+    assert "مرحباً nasser" in response.get_data(as_text=True)
+
+
+def test_logout_clears_session(client):
+    register_user(client)
+    client.post("/login", data={"username": "nasser", "password": "mypassword123"})
+    response = client.post("/logout", follow_redirects=True)
+    assert "مرحباً nasser" not in response.get_data(as_text=True)
+    assert 'href="/login"' in response.get_data(as_text=True)
+
+
+def test_tampered_session_is_ignored(client):
+    client.set_cookie("session", "fake-session-value")
+    response = client.get("/")
+    assert response.status_code == 200
+    assert 'href="/login"' in response.get_data(as_text=True)
+
+
+def test_login_wrong_password(client):
+    register_user(client)
+    response = client.post(
+        "/login", data={"username": "nasser", "password": "Wornspass"}
+    )
+    assert response.status_code == 401
+    assert "اسم المستخدم أو كلمة المرور غير صحيحة" in response.get_data(as_text=True)
+
+
+def test_login_unknown_username(client):
+    response = client.post(
+        "/login", data={"username": "nobody", "password": "mypassword123"}
+    )
+    assert response.status_code == 401
+    assert "اسم المستخدم أو كلمة المرور غير صحيحة" in response.get_data(as_text=True)
+
+
+def test_logout_requires_post(client):
+    response = client.get("/logout")
+    assert response.status_code == 405
 
 
 def test_home_returns_200(client):
