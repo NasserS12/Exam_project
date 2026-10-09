@@ -36,7 +36,7 @@ def chapters():
     return render_template("chapters.html", chapters=rows)
 
 
-@app.route("/chapters/<int:chapter_id>")
+@app.route("/chapters/<int:chapter_id>", methods=["GET", "POST"])
 def chapter_quiz(chapter_id):
     conn = get_connection()
     chapter = conn.execute(
@@ -45,13 +45,54 @@ def chapter_quiz(chapter_id):
     if chapter is None:
         conn.close()
         abort(404)
-    questions = conn.execute(
-        "SELECT id, text, option_1, option_2, option_3, option_4 "
+    rows = conn.execute(
+        "SELECT id, text, option_1, option_2, option_3, option_4, answer "
         "FROM questions WHERE chapter_id = ? ORDER BY id",
         (chapter_id,),
     ).fetchall()
     conn.close()
-    return render_template("chapter_quiz.html", chapter=chapter, questions=questions)
+
+    questions = []
+    answers = {}
+    for row in rows:
+        questions.append(
+            {
+                "id": row["id"],
+                "text": row["text"],
+                "options": [
+                    row["option_1"],
+                    row["option_2"],
+                    row["option_3"],
+                    row["option_4"],
+                ],
+            }
+        )
+        answers[row["id"]] = row["answer"]
+
+    results = None
+    error = None
+    if request.method == "POST":
+        results = {}
+        for question in questions:
+            selected = request.form.get(f"q{question['id']}")
+            if selected not in question["options"]:
+                error = "جاوب على كل الأسئلة من الخيارات"
+                return render_template(
+                    "chapter_quiz.html",
+                    chapter=chapter,
+                    questions=questions,
+                    results=None,
+                    error=error,
+                ), 400
+            results[question["id"]] = selected == answers[question["id"]]
+
+    return render_template(
+        "chapter_quiz.html",
+        chapter=chapter,
+        questions=questions,
+        results=results,
+        error=error,
+    )
 
 
 @app.route("/quiz", methods=["GET", "POST"])

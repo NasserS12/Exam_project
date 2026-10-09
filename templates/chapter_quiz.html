@@ -5,15 +5,33 @@
 {% block content %}
     <h1>{{ chapter["name"] }}</h1>
 
-    {% for question in questions %}
-        <h3>{{ question["text"] }}</h3>
-        <ul>
-            <li>{{ question["option_1"] }}</li>
-            <li>{{ question["option_2"] }}</li>
-            <li>{{ question["option_3"] }}</li>
-            <li>{{ question["option_4"] }}</li>
-        </ul>
-    {% endfor %}
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+
+    <form method="post">
+        {% for question in questions %}
+            <h3>{{ question["text"] }}</h3>
+
+            {% for option in question["options"] %}
+                <label>
+                    <input type="radio" name="q{{ question['id'] }}" value="{{ option }}">
+                    {{ option }}
+                </label>
+                <br>
+            {% endfor %}
+
+            {% if results is not none %}
+                {% if results[question["id"]] %}
+                    <p>إجابة صحيحة</p>
+                {% else %}
+                    <p>إجابة خاطئة</p>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        <button type="submit">إرسال</button>
+    </form>
 
     <a href="/chapters">الفصول</a>
 {% endblock %}

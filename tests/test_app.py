@@ -81,3 +81,29 @@ def test_chapters_page_links_to_chapter(client):
     response = client.get("/chapters")
     assert response.status_code == 200
     assert 'href="/chapters/1"' in response.get_data(as_text=True)
+
+
+def test_chapter_quiz_one_wrong_answer(client):
+    response = client.post("/chapters/1", data={"q1": "21", "q2": "443"})
+    assert response.status_code == 200
+    assert "إجابة خاطئة" in response.get_data(as_text=True)
+    assert "إجابة صحيحة" in response.get_data(as_text=True)
+
+
+def test_chapter_quiz_all_answers_correct(client):
+    response = client.post("/chapters/1", data={"q1": "22", "q2": "443"})
+    assert response.status_code == 200
+    assert "إجابة صحيحة" in response.get_data(as_text=True)
+    assert "إجابة خاطئة" not in response.get_data(as_text=True)
+
+
+def test_chapter_quiz_missing_answer(client):
+    response = client.post("/chapters/1", data={"q1": "22"})
+    assert response.status_code == 400
+    assert "جاوب على كل الأسئلة من الخيارات" in response.get_data(as_text=True)
+
+
+def test_chapter_quiz_invalid_answer(client):
+    response = client.post("/chapters/1", data={"q1": "22222222", "q2": "443"})
+    assert response.status_code == 400
+    assert "جاوب على كل الأسئلة من الخيارات" in response.get_data(as_text=True)
