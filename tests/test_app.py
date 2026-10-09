@@ -94,6 +94,70 @@ def test_chapter_quiz_all_answers_wrong_shows_zero(client):
     assert "إجابة صحيحة" not in response.get_data(as_text=True)
 
 
+def test_register_stores_password_hash(client):
+    response = client.post(
+        "/register", data={"username": "nasser", "password": "mypassword123"}
+    )
+    assert response.status_code == 200
+    assert "تم إنشاء الحساب بنجاح" in response.get_data(as_text=True)
+
+    conn = db.get_connection()
+    user = conn.execute(
+        "SELECT password_hash FROM users WHERE username = ?", ("nasser",)
+    ).fetchone()
+    conn.close()
+
+    assert user is not None
+    assert user["password_hash"] != "mypassword123"
+    assert user["password_hash"].startswith("scrypt:")
+
+
+def test_register_duplicate_username(client):
+    data = {"username": "nasser", "password": "mypassword123"}
+    client.post("/register", data=data)
+    response = client.post("/register", data=data)
+    assert response.status_code == 400
+    assert "اسم المستخدم مستخدم" in response.get_data(as_text=True)
+
+
+def test_register_username_with_space(client):
+    response = client.post(
+        "/register", data={"username": "nas ser", "password": "mypassword123"}
+    )
+    assert response.status_code == 400
+    assert "اسم المستخدم لازم يبدأ بحرف" in response.get_data(as_text=True)
+
+
+def test_register_username_starts_with_digit(client):
+    response = client.post(
+        "/register", data={"username": "1nasser", "password": "mypassword123"}
+    )
+    assert response.status_code == 400
+    assert "اسم المستخدم لازم يبدأ بحرف" in response.get_data(as_text=True)
+
+
+def test_register_short_password(client):
+    response = client.post(
+        "/register", data={"username": "nasser", "password": "short"}
+    )
+    assert response.status_code == 400
+    assert "كلمة المرور لازم تكون 8 حروف" in response.get_data(as_text=True)
+
+
+def test_register_password_only_spaces(client):
+    response = client.post(
+        "/register", data={"username": "nasser", "password": "          "}
+    )
+    assert response.status_code == 400
+    assert "كلمة المرور لازم تكون 8 حروف" in response.get_data(as_text=True)
+
+
+def test_home_links_to_register(client):
+    response = client.get("/")
+    assert response.status_code == 200
+    assert 'href="/register"' in response.get_data(as_text=True)
+
+
 def test_old_quiz_page_removed(client):
     response = client.get("/quiz")
     assert response.status_code == 404
