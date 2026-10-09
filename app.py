@@ -1,12 +1,16 @@
+import os
 import re
 import sqlite3
 
-from flask import Flask, abort, render_template, request
-from werkzeug.security import generate_password_hash
+from flask import Flask, abort, redirect, render_template, request, session
+from werkzeug.security import check_password_hash, generate_password_hash
 
 from db import get_connection
 
 app = Flask(__name__)
+
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
+
 USERNAME_PATTERN = re.compile(r"[A-Za-z][A-Za-z0-9_]{2,29}")
 
 
@@ -124,3 +128,34 @@ def register():
 
         return render_template("register.html", success=True)
     return render_template("register.html")
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form.get("username", "")
+        password = request.form.get("password", "")
+
+        conn = get_connection()
+        user = conn.execute(
+            "SELECT id, username, password_hash FROM users WHERE username = ?",
+            (username,),
+        ).fetchone()
+        conn.close()
+
+        if user is None or not check_password_hash(user["password_hash"], password):
+            error = "اسم المستخدم أو كلمة المرور غير صحيحة"
+            return render_template("login.html", error=error), 401
+
+        session.clear()
+        session["user_id"] = user["id"]
+        session["username"] = user["username"]
+        return redirect("/")
+
+    return render_template("login.html")
+
+
+@app.route("/logout", methods=["POST"])
+def logout():
+    session.clear()
+    return redirect("/")
