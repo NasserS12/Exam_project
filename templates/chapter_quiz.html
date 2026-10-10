@@ -9,6 +9,14 @@
         <p>نتيجتك: {{ score }} من {{ total }}</p>
     {% endif %}
 
+    {% if saved is not none %}
+        {% if saved %}
+            <p>تم حفظ نتيجتك.</p>
+        {% else %}
+            <p><a href="/login">سجل دخول</a> عشان تنحفظ نتائجك.</p>
+        {% endif %}
+    {% endif %}
+
     {% if error %}
         <p>{{ error }}</p>
     {% endif %}

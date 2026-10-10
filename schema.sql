@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS results;
 DROP TABLE IF EXISTS questions;
 DROP TABLE IF EXISTS chapters;
 DROP TABLE IF EXISTS users;
@@ -23,4 +24,14 @@ CREATE TABLE users (
     id INTEGER PRIMARY KEY,
     username TEXT NOT NULL UNIQUE,
     password_hash TEXT NOT NULL
+);
+
+CREATE TABLE results (
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id),
+    chapter_id INTEGER NOT NULL REFERENCES chapters(id),
+    score INTEGER NOT NULL,
+    total INTEGER NOT NULL,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CHECK (score >= 0 AND score <= total)
 );

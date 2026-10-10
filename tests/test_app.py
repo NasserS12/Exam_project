@@ -211,6 +211,54 @@ def test_home_links_to_register(client):
     assert 'href="/register"' in response.get_data(as_text=True)
 
 
+def login_user(client, username="nasser", password="mypassword123"):
+    return client.post("/login", data={"username": username, "password": password})
+
+
+def test_result_saved_for_logged_in_user(client):
+    register_user(client)
+    login_user(client)
+    response = client.post("/chapters/1", data={"q1": "22", "q2": "443"})
+    assert "تم حفظ نتيجتك" in response.get_data(as_text=True)
+
+    response = client.get("/results")
+    assert response.status_code == 200
+    assert "Networking" in response.get_data(as_text=True)
+    assert "2 من 2" in response.get_data(as_text=True)
+
+
+def test_result_not_saved_for_anonymous_user(client):
+    response = client.post("/chapters/1", data={"q1": "22", "q2": "443"})
+    assert response.status_code == 200
+    assert "عشان تنحفظ نتائجك" in response.get_data(as_text=True)
+
+    conn = db.get_connection()
+    count = conn.execute("SELECT COUNT(*) FROM results").fetchone()[0]
+    conn.close()
+    assert count == 0
+
+
+def test_user_cannot_see_other_users_results(client):
+    register_user(client, "alice")
+    login_user(client, "alice")
+    client.post("/chapters/1", data={"q1": "22", "q2": "443"})
+    client.post("/logout")
+
+    register_user(client, "bob")
+    login_user(client, "bob")
+    response = client.get("/results")
+
+    assert response.status_code == 200
+    assert "ما حليت أي اختبار للحين" in response.get_data(as_text=True)
+    assert "2 من 2" not in response.get_data(as_text=True)
+
+
+def test_results_requires_login(client):
+    response = client.get("/results")
+    assert response.status_code == 302
+    assert response.headers["Location"] == "/login"
+
+
 def test_old_quiz_page_removed(client):
     response = client.get("/quiz")
     assert response.status_code == 404
