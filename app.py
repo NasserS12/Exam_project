@@ -72,6 +72,7 @@ def chapter_quiz(chapter_id):
     error = None
     score = None
     total = None
+    saved = None
     if request.method == "POST":
         results = {}
         for question in questions:
@@ -88,6 +89,18 @@ def chapter_quiz(chapter_id):
             results[question["id"]] = selected == answers[question["id"]]
         score = sum(results.values())
         total = len(results)
+        user_id = session.get("user_id")
+        saved = user_id is not None
+        if saved:
+            conn = get_connection()
+            conn.execute(
+                "INSERT INTO results (user_id, chapter_id, score, total) "
+                "VALUES (?, ?, ?, ?)",
+                (user_id, chapter_id, score, total),
+            )
+            conn.commit()
+            conn.close()
+
     return render_template(
         "chapter_quiz.html",
         chapter=chapter,
@@ -96,6 +109,7 @@ def chapter_quiz(chapter_id):
         error=error,
         score=score,
         total=total,
+        saved=saved,
     )
 
 
@@ -159,3 +173,22 @@ def login():
 def logout():
     session.clear()
     return redirect("/")
+
+
+@app.route("/results")
+def results_page():
+    user_id = session.get("user_id")
+    if user_id is None:
+        return redirect("/login")
+
+    conn = get_connection()
+    rows = conn.execute(
+        "SELECT chapters.name, results.score, results.total, results.created_at "
+        "FROM results "
+        "JOIN chapters ON chapters.id = results.chapter_id "
+        "WHERE results.user_id = ? "
+        "ORDER BY results.created_at DESC",
+        (user_id,),
+    ).fetchall()
+    conn.close()
+    return render_template("results.html", results=rows)

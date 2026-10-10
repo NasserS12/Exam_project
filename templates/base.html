@@ -8,6 +8,7 @@
     <nav>
         {% if session.get("user_id") %}
             مرحباً {{ session["username"] }}
+            <a href="/results">نتائجي</a>
             <form method="post" action="/logout" style="display: inline;">
                 <button type="submit">تسجيل الخروج</button>
             </form>

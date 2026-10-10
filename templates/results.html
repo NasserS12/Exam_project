@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}نتائجي{% endblock %}
+
+{% block content %}
+    <h1>نتائجي</h1>
+
+    {% if results %}
+        <ul>
+            {% for result in results %}
+                <li>
+                    {{ result["name"] }}:
+                    {{ result["score"] }} من {{ result["total"] }}
+                    ({{ result["created_at"] }})
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>ما حليت أي اختبار للحين. <a href="/chapters">ابدأ من الفصول</a></p>
+    {% endif %}
+{% endblock %}
