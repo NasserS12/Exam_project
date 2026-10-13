@@ -22,6 +22,9 @@
     {% endif %}
 
     <form method="post">
+
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        
         {% for question in questions %}
             <h3>{{ question["text"] }}</h3>
 
