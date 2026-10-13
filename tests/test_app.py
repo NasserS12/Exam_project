@@ -9,11 +9,26 @@ def client(tmp_path, monkeypatch):
     monkeypatch.setattr(db, "DB_PATH", str(tmp_path / "test.db"))
     db.init_db()
     app.config["SECRET_KEY"] = "test-secret-key"
+    monkeypatch.setitem(app.config, "WTF_CSRF_ENABLED", False)
     return app.test_client()
 
 
 def register_user(client, username="nasser", password="mypassword123"):
     return client.post("/register", data={"username": username, "password": password})
+
+
+def test_csrf_blocks_forged_request(client, monkeypatch):
+    register_user(client)
+    login_user(client)
+
+    monkeypatch.setitem(app.config, "WTF_CSRF_ENABLED", True)
+    response = client.post("/chapters/1", data={"q1": "21", "q2": "80"})
+    assert response.status_code == 400
+
+    conn = db.get_connection()
+    count = conn.execute("SELECT COUNT(*) FROM results").fetchone()[0]
+    conn.close()
+    assert count == 0
 
 
 def test_login_success_shows_username(client):

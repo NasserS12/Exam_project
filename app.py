@@ -3,6 +3,7 @@ import re
 import sqlite3
 
 from flask import Flask, abort, redirect, render_template, request, session
+from flask_wtf.csrf import CSRFProtect
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from db import get_connection
@@ -10,6 +11,8 @@ from db import get_connection
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+csrf = CSRFProtect(app)
 
 USERNAME_PATTERN = re.compile(r"[A-Za-z][A-Za-z0-9_]{2,29}")
 

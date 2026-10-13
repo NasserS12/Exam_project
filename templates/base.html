@@ -10,6 +10,7 @@
             مرحباً {{ session["username"] }}
             <a href="/results">نتائجي</a>
             <form method="post" action="/logout" style="display: inline;">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <button type="submit">تسجيل الخروج</button>
             </form>
         {% else %}
