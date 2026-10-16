@@ -34,27 +34,40 @@ Each protection below was tested by attempting the attack first, then fixing it 
 
 ## Tech stack
 
-Python, Flask, Jinja, SQLite, pytest, GitHub Actions
+Python, Flask, Jinja, SQLite, pytest, GitHub Actions, Docker, Docker Compose, gunicorn
 
 ## Getting started
 
 ```bash
 git clone https://github.com/NasserS12/Exam_project.git
 cd Exam_project
+cp .env.example .env
+python3 -c "import secrets; print(secrets.token_hex(32))"
+# Paste the generated key into SECRET_KEY in .env
+```
 
+### Option 1: Docker Compose
+
+Fill in the PostgreSQL values in `.env`, then:
+
+```bash
+docker compose up -d --build
+```
+
+Open http://127.0.0.1:8000
+
+### Option 2: Local Python
+
+```bash
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-
-cp .env.example .env
-python -c "import secrets; print(secrets.token_hex(32))"
-# Paste the generated key into SECRET_KEY in .env
 
 python db.py
 flask --app app run
 ```
 
-Then open http://127.0.0.1:5000
+Open http://127.0.0.1:5000
 
 ## Running checks locally
 
@@ -73,7 +86,7 @@ pip-audit -r requirements.txt
 - [x] Quiz by chapter, scoring, accounts, results history
 - [x] Protection against SQL injection, XSS, CSRF, and access to other users' data
 - [x] Pre-commit hooks
-- [ ] Docker and Docker Compose with secrets management
+- [x] Docker and Docker Compose with secrets management
 - [ ] Container image scanning in CI
 - [ ] Hardened cloud server with automatic deployment
 - [ ] Dynamic security testing with OWASP ZAP
