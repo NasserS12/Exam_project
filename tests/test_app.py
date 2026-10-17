@@ -1,13 +1,19 @@
+import os
+
 import pytest
 
 import db
 from app import app
 
+TEST_DATABASE_URL = os.environ.get(
+    "TEST_DATABASE_URL", "postgresql://test:test@127.0.0.1:5433/test"
+)
+
 
 @pytest.fixture
-def client(tmp_path, monkeypatch):
-    monkeypatch.setattr(db, "DB_PATH", str(tmp_path / "test.db"))
-    db.init_db()
+def client(monkeypatch):
+    monkeypatch.setenv("DATABASE_URL", TEST_DATABASE_URL)
+    db.init_db(reset=True)
     app.config["SECRET_KEY"] = "test-secret-key"
     monkeypatch.setitem(app.config, "WTF_CSRF_ENABLED", False)
     return app.test_client()
@@ -26,7 +32,7 @@ def test_csrf_blocks_forged_request(client, monkeypatch):
     assert response.status_code == 400
 
     conn = db.get_connection()
-    count = conn.execute("SELECT COUNT(*) FROM results").fetchone()[0]
+    count = conn.execute("SELECT COUNT(*) AS n FROM results").fetchone()["n"]
     conn.close()
     assert count == 0
 
@@ -171,7 +177,7 @@ def test_register_stores_password_hash(client):
 
     conn = db.get_connection()
     user = conn.execute(
-        "SELECT password_hash FROM users WHERE username = ?", ("nasser",)
+        "SELECT password_hash FROM users WHERE username = %s", ("nasser",)
     ).fetchone()
     conn.close()
 
@@ -248,7 +254,7 @@ def test_result_not_saved_for_anonymous_user(client):
     assert "عشان تنحفظ نتائجك" in response.get_data(as_text=True)
 
     conn = db.get_connection()
-    count = conn.execute("SELECT COUNT(*) FROM results").fetchone()[0]
+    count = conn.execute("SELECT COUNT(*) AS n FROM results").fetchone()["n"]
     conn.close()
     assert count == 0
 

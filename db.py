@@ -1,23 +1,29 @@
-import sqlite3
+import os
+from pathlib import Path
 
-DB_PATH = "quiz.db"
+import psycopg
+from psycopg.rows import dict_row
+
+BASE_DIR = Path(__file__).parent
 
 
 def get_connection():
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA foreign_keys = ON")
-    return conn
+    return psycopg.connect(os.environ["DATABASE_URL"], row_factory=dict_row)
 
 
-def init_db():
-    conn = get_connection()
-    with open("schema.sql", encoding="utf-8") as f:
-        conn.executescript(f.read())
-    with open("seed.sql", encoding="utf-8") as f:
-        conn.executescript(f.read())
-    conn.commit()
-    conn.close()
+def run_sql_file(conn, filename):
+    sql = (BASE_DIR / filename).read_text(encoding="utf-8")
+    conn.execute(sql)
+
+
+def init_db(reset=False):
+    with get_connection() as conn:
+        if reset:
+            run_sql_file(conn, "reset.sql")
+        run_sql_file(conn, "schema.sql")
+        count = conn.execute("SELECT COUNT(*) AS n FROM chapters").fetchone()["n"]
+        if count == 0:
+            run_sql_file(conn, "seed.sql")
 
 
 if __name__ == "__main__":
