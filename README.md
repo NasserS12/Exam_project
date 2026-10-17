@@ -29,12 +29,12 @@ Each protection below was tested by attempting the attack first, then fixing it 
   - Quality: Ruff, pytest
   - Security: Bandit, pip-audit, Gitleaks (full history)
 - **Pre-commit hooks:** Ruff and Gitleaks run locally before every commit.
-- **Isolated tests:** each test runs on a fresh temporary database.
+- **Isolated tests:** each test runs on a freshly reset PostgreSQL database, in a local container and as a CI service container.
 - **Agile:** weekly sprints on a GitHub Projects board, each task linked to its pull request.
 
 ## Tech stack
 
-Python, Flask, Jinja, SQLite, pytest, GitHub Actions, Docker, Docker Compose, gunicorn
+Python, Flask, Jinja, PostgreSQL, pytest, GitHub Actions, Docker, Docker Compose, gunicorn
 
 ## Getting started
 
@@ -46,7 +46,7 @@ python3 -c "import secrets; print(secrets.token_hex(32))"
 # Paste the generated key into SECRET_KEY in .env
 ```
 
-### Option 1: Docker Compose
+### Run with Docker Compose
 
 Fill in the PostgreSQL values in `.env`, then:
 
@@ -56,23 +56,20 @@ docker compose up -d --build
 
 Open http://127.0.0.1:8000
 
-### Option 2: Local Python
+## Running checks locally
+
+Start a disposable PostgreSQL container for the tests:
+
+```bash
+docker run -d --name quiz-test-db -e POSTGRES_USER=test -e POSTGRES_PASSWORD=test -e POSTGRES_DB=test -p 127.0.0.1:5433:5432 postgres:17-alpine
+```
+
+Then set up the environment and run the checks:
 
 ```bash
 python3 -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt
-
-python db.py
-flask --app app run
-```
-
-Open http://127.0.0.1:5000
-
-## Running checks locally
-
-```bash
-pip install pytest ruff bandit pip-audit pre-commit
+pip install -r requirements.txt pytest ruff bandit pip-audit pre-commit
 pre-commit install
 
 python -m pytest tests/ -v
@@ -81,12 +78,14 @@ bandit -r . -c pyproject.toml
 pip-audit -r requirements.txt
 ```
 
+
 ## Roadmap
 
 - [x] Quiz by chapter, scoring, accounts, results history
 - [x] Protection against SQL injection, XSS, CSRF, and access to other users' data
 - [x] Pre-commit hooks
 - [x] Docker and Docker Compose with secrets management
+- [x] PostgreSQL with persistent storage
 - [ ] Container image scanning in CI
 - [ ] Hardened cloud server with automatic deployment
 - [ ] Dynamic security testing with OWASP ZAP

@@ -1,7 +1,7 @@
 import os
 import re
-import sqlite3
 
+import psycopg
 from flask import Flask, abort, redirect, render_template, request, session
 from flask_wtf.csrf import CSRFProtect
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -42,14 +42,14 @@ def chapters():
 def chapter_quiz(chapter_id):
     conn = get_connection()
     chapter = conn.execute(
-        "SELECT id, name FROM chapters WHERE id = ?", (chapter_id,)
+        "SELECT id, name FROM chapters WHERE id = %s", (chapter_id,)
     ).fetchone()
     if chapter is None:
         conn.close()
         abort(404)
     rows = conn.execute(
         "SELECT id, text, option_1, option_2, option_3, option_4, answer "
-        "FROM questions WHERE chapter_id = ? ORDER BY id",
+        "FROM questions WHERE chapter_id = %s ORDER BY id",
         (chapter_id,),
     ).fetchall()
     conn.close()
@@ -98,7 +98,7 @@ def chapter_quiz(chapter_id):
             conn = get_connection()
             conn.execute(
                 "INSERT INTO results (user_id, chapter_id, score, total) "
-                "VALUES (?, ?, ?, ?)",
+                "VALUES (%s, %s, %s, %s)",
                 (user_id, chapter_id, score, total),
             )
             conn.commit()
@@ -133,11 +133,11 @@ def register():
         conn = get_connection()
         try:
             conn.execute(
-                "INSERT INTO users (username, password_hash) VALUES (?, ?)",
+                "INSERT INTO users (username, password_hash) VALUES (%s, %s)",
                 (username, generate_password_hash(password)),
             )
             conn.commit()
-        except sqlite3.IntegrityError:
+        except psycopg.IntegrityError:
             error = "اسم المستخدم مستخدم، اختر اسم ثاني"
             return render_template("register.html", error=error), 400
         finally:
@@ -155,7 +155,7 @@ def login():
 
         conn = get_connection()
         user = conn.execute(
-            "SELECT id, username, password_hash FROM users WHERE username = ?",
+            "SELECT id, username, password_hash FROM users WHERE username = %s",
             (username,),
         ).fetchone()
         conn.close()
@@ -189,7 +189,7 @@ def results_page():
         "SELECT chapters.name, results.score, results.total, results.created_at "
         "FROM results "
         "JOIN chapters ON chapters.id = results.chapter_id "
-        "WHERE results.user_id = ? "
+        "WHERE results.user_id = %s "
         "ORDER BY results.created_at DESC",
         (user_id,),
     ).fetchall()
