@@ -13,6 +13,7 @@ Each protection below was tested by attempting the attack first, then fixing it 
 | Threat | Protection |
 |---|---|
 | SQL injection | Parameterized queries everywhere |
+| Damage after a compromised app | App connects with a least-privilege database user (read and insert only); schema changes run in a separate one-shot migrate container |
 | Cross-site scripting (XSS) | Jinja auto-escaping, strict username pattern |
 | Cross-site request forgery (CSRF) | Flask-WTF tokens on every form, SameSite cookies |
 | Accessing other users' data | User identity taken from the signed session only, never from the request |
@@ -48,8 +49,7 @@ python3 -c "import secrets; print(secrets.token_hex(32))"
 
 ### Run with Docker Compose
 
-Fill in the PostgreSQL values in `.env`, then:
-
+Fill in `.env` with two different strong passwords: one for the database admin (`POSTGRES_PASSWORD`) and one for the app user (`APP_DB_PASSWORD`). Then:
 ```bash
 docker compose up -d --build
 ```
