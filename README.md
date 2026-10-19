@@ -54,6 +54,33 @@ ssh ubuntu@SERVER_IP
 sudo bash ~/infra/harden-server.sh
 ```
 
+## Deployment
+
+On a hardened server:
+
+```bash
+git clone https://github.com/NasserS12/Exam_project.git
+cd Exam_project
+git switch dev
+sudo bash infra/install-docker.sh
+
+cp .env.example .env
+# Fill .env with new secrets, different from development
+chmod 600 .env
+
+sudo docker compose up -d --build
+```
+
+To deploy a new version:
+
+```bash
+git pull
+sudo docker compose up -d --build
+```
+
+The app listens on `127.0.0.1` only. It is not reachable from the internet until a reverse proxy with HTTPS is added.
+
+
 ## Engineering workflow
 
 - **Git Flow:** feature branches merged into `dev` through pull requests; `main` for releases.
