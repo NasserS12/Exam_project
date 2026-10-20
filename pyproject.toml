@@ -1,2 +1,5 @@
 [tool.bandit]
 exclude_dirs = ["tests", "venv", ".venv"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
