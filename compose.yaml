@@ -17,6 +17,7 @@ services:
     environment:
       SECRET_KEY: ${SECRET_KEY}
       DATABASE_URL: postgresql://${APP_DB_USER}:${APP_DB_PASSWORD}@db:5432/${POSTGRES_DB}
+      SESSION_COOKIE_SECURE: ${SESSION_COOKIE_SECURE:-0}
     ports:
       - "127.0.0.1:8000:8000"
     depends_on:
