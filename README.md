@@ -1,10 +1,12 @@
 # Quiz Platform
 
+**Live:** https://nasser-exam.duckdns.org
+
 A cybersecurity course quiz platform built from scratch with Flask, used to learn secure web development and a full DevSecOps workflow.
 
 Students can create an account, take chapter quizzes, see their score, and track their past results.
 
-> **Status:** The application is containerized and runs on a hardened AWS server. Public access over HTTPS and automatic deployment are in progress.
+> **Status:** The application is containerized and runs on a hardened AWS server, publicly available over HTTPS. Automatic deployment is in progress.
 
 ## Security
 
@@ -13,7 +15,6 @@ Each protection below was tested by attempting the attack first, then fixing it 
 | Threat | Protection |
 |---|---|
 | SQL injection | Parameterized queries everywhere |
-| Damage after a compromised app | App connects with a least-privilege database user (read and insert only); schema changes run in a separate one-shot migrate container |
 | Cross-site scripting (XSS) | Jinja auto-escaping, strict username pattern |
 | Cross-site request forgery (CSRF) | Flask-WTF tokens on every form, SameSite cookies |
 | Accessing other users' data | User identity taken from the signed session only, never from the request |
@@ -29,9 +30,9 @@ The app runs on an AWS EC2 instance (Ubuntu LTS, t3.micro). The server is harden
 
 | Layer | What it does |
 |---|---|
-| AWS security group | SSH reachable only from known IP ranges |
+| AWS security group | SSH reachable only from known IP ranges; HTTP and HTTPS open to all |
 | SSH | Key-only login, no root login, single allowed user, limited auth tries and sessions |
-| UFW | Deny all incoming except rate-limited SSH |
+| UFW | Deny all incoming except rate-limited SSH, HTTP and HTTPS |
 | Fail2ban | Bans IPs after repeated failed SSH logins |
 | Updates | Automatic security updates enabled |
 
@@ -78,8 +79,22 @@ git pull
 sudo docker compose up -d --build
 ```
 
-The app listens on `127.0.0.1` only. It is not reachable from the internet until a reverse proxy with HTTPS is added.
+### HTTPS
 
+Nginx sits in front of the app as a reverse proxy. The app listens on `127.0.0.1:8000` only, so it is not reachable from outside directly.
+
+- Domain: DuckDNS
+- Certificate: Let's Encrypt (certbot), renewed automatically
+- HTTP requests are redirected to HTTPS
+- Session cookie is sent over HTTPS only (`SESSION_COOKIE_SECURE=1` in the server `.env`)
+
+To apply the Nginx config:
+
+```bash
+sudo cp infra/nginx-quiz.conf /etc/nginx/sites-available/quiz
+sudo nginx -t
+sudo systemctl reload nginx
+```
 
 ## Engineering workflow
 
@@ -95,7 +110,7 @@ The app listens on `127.0.0.1` only. It is not reachable from the internet until
 
 ## Tech stack
 
-Python, Flask, Jinja, PostgreSQL, pytest, GitHub Actions, Docker, Docker Compose, gunicorn, Trivy, AWS EC2
+Python, Flask, Jinja, PostgreSQL, pytest, GitHub Actions, Docker, Docker Compose, gunicorn, Trivy, AWS EC2, Nginx, Let's Encrypt
 
 ## Getting started
 
@@ -110,6 +125,7 @@ python3 -c "import secrets; print(secrets.token_hex(32))"
 ### Run with Docker Compose
 
 Fill in `.env` with two different strong passwords: one for the database admin (`POSTGRES_PASSWORD`) and one for the app user (`APP_DB_PASSWORD`). Then:
+
 ```bash
 docker compose up -d --build
 ```
@@ -138,7 +154,6 @@ bandit -r . -c pyproject.toml
 pip-audit -r requirements.txt
 ```
 
-
 ## Roadmap
 
 - [x] Quiz by chapter, scoring, accounts, results history
@@ -147,6 +162,7 @@ pip-audit -r requirements.txt
 - [x] Docker and Docker Compose with secrets management
 - [x] PostgreSQL with persistent storage
 - [x] Hardened cloud server
+- [x] HTTPS with Nginx and Let's Encrypt
 - [x] Container image scanning in CI
 - [ ] Automatic deployment
 - [ ] Dynamic security testing with OWASP ZAP
