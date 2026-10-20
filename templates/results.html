@@ -3,19 +3,42 @@
 {% block title %}نتائجي{% endblock %}
 
 {% block content %}
-    <h1>نتائجي</h1>
+    <div class="page-head">
+        <h1>نتائجي</h1>
+        <p>كل الاختبارات اللي سويتها، من الأحدث للأقدم.</p>
+    </div>
 
     {% if results %}
-        <ul>
-            {% for result in results %}
-                <li>
-                    {{ result["name"] }}:
-                    {{ result["score"] }} من {{ result["total"] }}
-                    ({{ result["created_at"] }})
-                </li>
-            {% endfor %}
-        </ul>
+        <div class="table-wrap">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">الفصل</th>
+                        <th scope="col">النتيجة</th>
+                        <th scope="col">التاريخ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                        <tr>
+                            <td>{{ result["name"] }}</td>
+                            <td>
+                                {% if result["score"] == result["total"] %}
+                                    <span class="chip chip-ok">{{ result["score"] }} من {{ result["total"] }}</span>
+                                {% else %}
+                                    <span class="chip">{{ result["score"] }} من {{ result["total"] }}</span>
+                                {% endif %}
+                            </td>
+                            <td class="muted">{{ result["created_at"].strftime("%Y-%m-%d %H:%M") }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% else %}
-        <p>ما حليت أي اختبار للحين. <a href="/chapters">ابدأ من الفصول</a></p>
+        <section class="card empty">
+            <p>ما حليت أي اختبار للحين.</p>
+            <a class="btn btn-primary" href="/chapters">ابدأ من الفصول</a>
+        </section>
     {% endif %}
 {% endblock %}

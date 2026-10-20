@@ -2,15 +2,20 @@
 
 {% block title %}عن المنصة{% endblock %}
 
+{% block container_class %}container-narrow{% endblock %}
+
 {% block content %}
-    <h1>عن المنصة</h1>
-    <p>المنصة تقدر ترفع فيها ملفات PDF، ونستخرج لك الأسئلة وتراجع.</p>
+    <div class="page-head">
+        <h1>عن المنصة</h1>
+        <p>المنصة تقدر ترفع فيها ملفات PDF، ونستخرج لك الأسئلة وتراجع.</p>
+    </div>
 
-    <ul>
-        {% for chapter in chapters %}
-            <li>{{ chapter ["name"] }}</li>
-        {% endfor %}
-    </ul>
-
-    <a href="/">الرئيسية</a>
+    <div class="card">
+        <h2 class="eyebrow">الفصول المتوفرة</h2>
+        <ul>
+            {% for chapter in chapters %}
+                <li>{{ chapter["name"] }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}
