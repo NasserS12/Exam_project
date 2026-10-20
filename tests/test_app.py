@@ -1,4 +1,6 @@
+import json
 import os
+from pathlib import Path
 
 import pytest
 
@@ -8,12 +10,13 @@ from app import app
 TEST_DATABASE_URL = os.environ.get(
     "TEST_DATABASE_URL", "postgresql://test:test@127.0.0.1:5433/test"
 )
+TEST_CONTENT = Path(__file__).parent / "content"
 
 
 @pytest.fixture
 def client(monkeypatch):
     monkeypatch.setenv("DATABASE_URL", TEST_DATABASE_URL)
-    db.init_db(reset=True)
+    db.init_db(reset=True, content_dir=TEST_CONTENT)
     app.config["SECRET_KEY"] = "test-secret-key"
     monkeypatch.setitem(app.config, "WTF_CSRF_ENABLED", False)
     return app.test_client()
@@ -99,21 +102,32 @@ def test_unknown_route_returns_404(client):
 def test_about_returns_200(client):
     response = client.get("/about")
     assert response.status_code == 200
-    assert "المنصة تقدر ترفع فيها ملفات" in response.get_data(as_text=True)
-    assert "Networking" in response.get_data(as_text=True)
+    assert "منصة اختبارات لمراجعة المواد" in response.get_data(as_text=True)
+    assert "Test subject" in response.get_data(as_text=True)
 
 
-def test_chapters_page(client):
-    response = client.get("/chapters")
+def test_subject_page_lists_chapters(client):
+    response = client.get("/subjects/1")
     assert response.status_code == 200
     assert "اختر الفصل اللي تبي تذاكره" in response.get_data(as_text=True)
     assert "Cryptography" in response.get_data(as_text=True)
 
 
-def test_home_links_to_chapters(client):
+def test_missing_subject_returns_404(client):
+    response = client.get("/subjects/999")
+    assert response.status_code == 404
+
+
+def test_old_chapters_page_redirects_home(client):
+    response = client.get("/chapters")
+    assert response.status_code == 302
+    assert response.headers["Location"] == "/"
+
+
+def test_home_links_to_subject(client):
     response = client.get("/")
     assert response.status_code == 200
-    assert 'href="/chapters"' in response.get_data(as_text=True)
+    assert 'href="/subjects/1"' in response.get_data(as_text=True)
 
 
 def test_chapter_page_shows_questions(client):
@@ -127,8 +141,8 @@ def test_missing_chapter_returns_404(client):
     assert response.status_code == 404
 
 
-def test_chapters_page_links_to_chapter(client):
-    response = client.get("/chapters")
+def test_subject_page_links_to_chapter(client):
+    response = client.get("/subjects/1")
     assert response.status_code == 200
     assert 'href="/chapters/1"' in response.get_data(as_text=True)
 
@@ -283,3 +297,71 @@ def test_results_requires_login(client):
 def test_old_quiz_page_removed(client):
     response = client.get("/quiz")
     assert response.status_code == 404
+
+
+def test_answers_hidden_until_submitted(client):
+    response = client.get("/chapters/1")
+    assert "الصح:" not in response.get_data(as_text=True)
+
+
+def test_wrong_answer_shows_correct_one(client):
+    response = client.post("/chapters/1", data={"q1": "21", "q2": "443"})
+    page = response.get_data(as_text=True)
+    assert "الصح: <strong>22</strong>" in page
+    assert "صفحة 1 في الكتاب" in page
+
+
+def test_true_false_question(client):
+    page = client.get("/chapters/2").get_data(as_text=True)
+    assert page.count('type="radio"') == 2
+
+    response = client.post("/chapters/2", data={"q3": "صح"})
+    assert "نتيجتك: 1 من 1" in response.get_data(as_text=True)
+
+
+def test_loading_content_twice_adds_nothing(client):
+    db.init_db(content_dir=TEST_CONTENT)
+
+    conn = db.get_connection()
+    count = conn.execute("SELECT COUNT(*) AS n FROM questions").fetchone()["n"]
+    conn.close()
+    assert count == 3
+
+
+def good_question():
+    return {
+        "chapter": 1,
+        "chapter_title": "Chapter",
+        "question": "Q?",
+        "options": ["a", "b", "c", "d"],
+        "answer": 0,
+    }
+
+
+@pytest.mark.parametrize(
+    "change",
+    [
+        {"question": ""},
+        {"options": ["only one"]},
+        {"options": ["a", "b", "c", "d", "e"]},
+        {"options": ["a", "a", "c", "d"]},
+        {"answer": 4},
+        {"answer": "0"},
+        {"chapter": "1"},
+    ],
+)
+def test_bad_question_is_rejected(change):
+    question = {**good_question(), **change}
+    with pytest.raises(ValueError):
+        db.validate_question(question, "test")
+
+
+def test_real_content_is_valid():
+    folders = [p for p in db.CONTENT_DIR.iterdir() if p.is_dir()]
+    assert folders
+    for folder in folders:
+        info = json.loads((folder / "info.json").read_text(encoding="utf-8"))
+        assert info["name"].strip()
+        questions = json.loads((folder / "questions.json").read_text(encoding="utf-8"))
+        for question in questions:
+            db.validate_question(question, folder.name)

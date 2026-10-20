@@ -1,15 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <section class="card empty">
-        <span class="chapter-num">
-            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg>
-        </span>
+    <div class="page-head">
         <h1>أهلاً فيك في منصة الاختبارات</h1>
-        <p class="muted">اختر الفصل وابدأ الاختبار. تشوف نتيجتك مباشرة بعد ما تخلص.</p>
-        <div class="quiz-actions">
-            <a class="btn btn-primary" href="/chapters">ابدأ من الفصول</a>
-            <a class="btn btn-secondary" href="/about">عن المنصة</a>
+        <p>اختر المادة، بعدين اختر الفصل وابدأ الاختبار.</p>
+    </div>
+
+    {% if subjects %}
+        <div class="card-grid">
+            {% for subject in subjects %}
+                <article class="card chapter-card">
+                    <span class="chapter-num">{{ loop.index }}</span>
+                    <h2>{{ subject["name"] }}</h2>
+                    <p class="muted">{{ subject["chapters"] }} فصول · {{ subject["questions"] }} سؤال</p>
+                    <a class="btn btn-primary" href="/subjects/{{ subject['id'] }}">اعرض الفصول</a>
+                </article>
+            {% endfor %}
         </div>
-    </section>
+    {% else %}
+        <section class="card empty">
+            <p>ما فيه مواد للحين.</p>
+        </section>
+    {% endif %}
 {% endblock %}

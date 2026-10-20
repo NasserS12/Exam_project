@@ -5,10 +5,17 @@
 {% block container_class %}container-narrow{% endblock %}
 
 {% block content %}
-    <a class="back-link" href="/chapters">
-        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-        كل الفصول
-    </a>
+    {% if chapter["subject_id"] %}
+        <a class="back-link" href="/subjects/{{ chapter['subject_id'] }}">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+            {{ chapter["subject_name"] }}
+        </a>
+    {% else %}
+        <a class="back-link" href="/">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+            كل المواد
+        </a>
+    {% endif %}
 
     <div class="page-head">
         <h1>{{ chapter["name"] }}</h1>
@@ -52,6 +59,7 @@
                         <p class="feedback feedback-ok">إجابة صحيحة</p>
                     {% else %}
                         <p class="feedback feedback-wrong">إجابة خاطئة</p>
+                        <p class="muted">الصح: <strong>{{ answers[question["id"]] }}</strong>{% if question["source_page"] %} · صفحة {{ question["source_page"] }} في الكتاب{% endif %}</p>
                     {% endif %}
                 {% endif %}
             </fieldset>
