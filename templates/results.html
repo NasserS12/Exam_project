@@ -21,7 +21,10 @@
                 <tbody>
                     {% for result in results %}
                         <tr>
-                            <td>{{ result["name"] }}</td>
+                            <td>
+                                {% if result["subject"] %}<span class="muted">{{ result["subject"] }}</span><br>{% endif %}
+                                {{ result["name"] }}
+                            </td>
                             <td>
                                 {% if result["score"] == result["total"] %}
                                     <span class="chip chip-ok">{{ result["score"] }} من {{ result["total"] }}</span>
@@ -38,7 +41,7 @@
     {% else %}
         <section class="card empty">
             <p>ما حليت أي اختبار للحين.</p>
-            <a class="btn btn-primary" href="/chapters">ابدأ من الفصول</a>
+            <a class="btn btn-primary" href="/">ابدأ من المواد</a>
         </section>
     {% endif %}
 {% endblock %}

@@ -7,14 +7,14 @@
 {% block content %}
     <div class="page-head">
         <h1>عن المنصة</h1>
-        <p>المنصة تقدر ترفع فيها ملفات PDF، ونستخرج لك الأسئلة وتراجع.</p>
+        <p>منصة اختبارات لمراجعة المواد: تختار المادة والفصل، تجاوب، وتشوف نتيجتك والإجابات الصحيحة مع رقم الصفحة في الكتاب.</p>
     </div>
 
     <div class="card">
-        <h2 class="eyebrow">الفصول المتوفرة</h2>
+        <h2 class="eyebrow">المواد المتوفرة</h2>
         <ul>
-            {% for chapter in chapters %}
-                <li>{{ chapter["name"] }}</li>
+            {% for subject in subjects %}
+                <li>{{ subject["name"] }}</li>
             {% endfor %}
         </ul>
     </div>

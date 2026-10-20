@@ -18,7 +18,7 @@
             </a>
 
             <nav class="nav" aria-label="القائمة الرئيسية">
-                <a class="nav-link" href="/chapters" {% if request.endpoint in ("chapters", "chapter_quiz") %}aria-current="page"{% endif %}>الفصول</a>
+                <a class="nav-link" href="/" {% if request.endpoint in ("home", "subject", "chapter_quiz") %}aria-current="page"{% endif %}>المواد</a>
                 {% if session.get("user_id") %}
                     <a class="nav-link" href="/results" {% if request.endpoint == "results_page" %}aria-current="page"{% endif %}>نتائجي</a>
                 {% endif %}
