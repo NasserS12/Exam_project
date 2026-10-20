@@ -2,51 +2,64 @@
 
 {% block title %}{{ chapter["name"] }}{% endblock %}
 
+{% block container_class %}container-narrow{% endblock %}
+
 {% block content %}
-    <h1>{{ chapter["name"] }}</h1>
+    <a class="back-link" href="/chapters">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        كل الفصول
+    </a>
+
+    <div class="page-head">
+        <h1>{{ chapter["name"] }}</h1>
+    </div>
 
     {% if score is not none %}
-        <p>نتيجتك: {{ score }} من {{ total }}</p>
-    {% endif %}
-
-    {% if saved is not none %}
-        {% if saved %}
-            <p>تم حفظ نتيجتك.</p>
-        {% else %}
-            <p><a href="/login">سجل دخول</a> عشان تنحفظ نتائجك.</p>
-        {% endif %}
+        <section class="card score-card" aria-live="polite">
+            <p class="score-number">{{ score }}<span> / {{ total }}</span></p>
+            <progress class="score-bar" value="{{ score }}" max="{{ total }}">{{ score }} من {{ total }}</progress>
+            <p>نتيجتك: {{ score }} من {{ total }}</p>
+            {% if saved is not none %}
+                {% if saved %}
+                    <p class="muted">تم حفظ نتيجتك. تلقاها في <a href="/results">نتائجي</a>.</p>
+                {% else %}
+                    <p class="muted"><a href="/login">سجل دخول</a> عشان تنحفظ نتائجك.</p>
+                {% endif %}
+            {% endif %}
+        </section>
     {% endif %}
 
     {% if error %}
-        <p>{{ error }}</p>
+        <div class="alert alert-error" role="alert">{{ error }}</div>
     {% endif %}
 
-    <form method="post">
-
+    <form class="quiz-form" method="post">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        
+
         {% for question in questions %}
-            <h3>{{ question["text"] }}</h3>
+            <fieldset class="card question">
+                <legend>{{ question["text"] }}</legend>
 
-            {% for option in question["options"] %}
-                <label>
-                    <input type="radio" name="q{{ question['id'] }}" value="{{ option }}">
-                    {{ option }}
-                </label>
-                <br>
-            {% endfor %}
+                {% for option in question["options"] %}
+                    <label class="option">
+                        <input type="radio" name="q{{ question['id'] }}" value="{{ option }}" {% if request.form.get("q" ~ question["id"]) == option %}checked{% endif %}>
+                        <span>{{ option }}</span>
+                    </label>
+                {% endfor %}
 
-            {% if results is not none %}
-                {% if results[question["id"]] %}
-                    <p>إجابة صحيحة</p>
-                {% else %}
-                    <p>إجابة خاطئة</p>
+                {% if results is not none %}
+                    {% if results[question["id"]] %}
+                        <p class="feedback feedback-ok">إجابة صحيحة</p>
+                    {% else %}
+                        <p class="feedback feedback-wrong">إجابة خاطئة</p>
+                    {% endif %}
                 {% endif %}
-            {% endif %}
+            </fieldset>
         {% endfor %}
 
-        <button type="submit">إرسال</button>
+        <div class="quiz-actions">
+            <p class="muted">جاوب على كل الأسئلة قبل التسليم.</p>
+            <button type="submit" class="btn btn-primary">سلّم الإجابات</button>
+        </div>
     </form>
-
-    <a href="/chapters">الفصول</a>
 {% endblock %}

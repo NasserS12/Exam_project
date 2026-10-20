@@ -1,11 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>أهلاً فيك في منصة الاختبارات</h1>
-    <p>اختر الفصل وابدأ الاختبار.</p>
-    <a href="/about">عن المنصة</a>
-    <br>
-    <a href="/chapters">الفصول</a>
-    <br>
-    <a href="/register">إنشاء حساب</a>
+    <section class="card empty">
+        <span class="chapter-num">
+            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+        </span>
+        <h1>أهلاً فيك في منصة الاختبارات</h1>
+        <p class="muted">اختر الفصل وابدأ الاختبار. تشوف نتيجتك مباشرة بعد ما تخلص.</p>
+        <div class="quiz-actions">
+            <a class="btn btn-primary" href="/chapters">ابدأ من الفصول</a>
+            <a class="btn btn-secondary" href="/about">عن المنصة</a>
+        </div>
+    </section>
 {% endblock %}

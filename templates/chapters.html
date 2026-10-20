@@ -3,14 +3,18 @@
 {% block title %}الفصول{% endblock %}
 
 {% block content %}
-    <h1>الفصول</h1>
-    <p>اختر الفصل اللي تبي تذاكره.</p>
+    <div class="page-head">
+        <h1>الفصول</h1>
+        <p>اختر الفصل اللي تبي تذاكره.</p>
+    </div>
 
-    <ul>
+    <div class="card-grid">
         {% for chapter in chapters %}
-           <li><a href="/chapters/{{ chapter['id'] }}">{{ chapter["name"] }}</a></li>
+            <article class="card chapter-card">
+                <span class="chapter-num">{{ loop.index }}</span>
+                <h2>{{ chapter["name"] }}</h2>
+                <a class="btn btn-primary" href="/chapters/{{ chapter['id'] }}">ابدأ الاختبار</a>
+            </article>
         {% endfor %}
-    </ul>
-
-    <a href="/">الرئيسية</a>
+    </div>
 {% endblock %}

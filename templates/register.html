@@ -2,32 +2,39 @@
 
 {% block title %}إنشاء حساب{% endblock %}
 
+{% block container_class %}container-small{% endblock %}
+
 {% block content %}
-    <h1>إنشاء حساب</h1>
+    <section class="card form-card">
+        <div class="page-head">
+            <h1>إنشاء حساب</h1>
+            <p>سوّ حساب عشان تنحفظ نتائجك.</p>
+        </div>
 
-    {% if success %}
-        <p>تم إنشاء الحساب بنجاح.</p>
-    {% endif %}
+        {% if success %}
+            <div class="alert alert-success" role="status">تم إنشاء الحساب بنجاح. <a href="/login">سجل دخول</a></div>
+        {% endif %}
 
-    {% if error %}
-        <p>{{ error }}</p>
-    {% endif %}
+        {% if error %}
+            <div class="alert alert-error" role="alert">{{ error }}</div>
+        {% endif %}
 
-    <form method="post">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        
-        <label>
-            اسم المستخدم
-            <input type="text" name="username">
-        </label>
-        <br>
-        <label>
-            كلمة المرور
-            <input type="password" name="password">
-        </label>
-        <br>
-        <button type="submit">تسجيل</button>
-    </form>
+        <form class="form" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-    <a href="/">الرئيسية</a>
+            <div class="field">
+                <label for="username">اسم المستخدم</label>
+                <input class="input" id="username" type="text" name="username" autocomplete="username" required>
+                <span class="field-hint">حروف إنجليزية وأرقام و _ ، من 3 إلى 30 حرف.</span>
+            </div>
+            <div class="field">
+                <label for="password">كلمة المرور</label>
+                <input class="input" id="password" type="password" name="password" autocomplete="new-password" required>
+                <span class="field-hint">8 حروف على الأقل.</span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">تسجيل</button>
+        </form>
+
+        <p class="form-footer">عندك حساب؟ <a href="/login">سجل دخول</a></p>
+    </section>
 {% endblock %}
