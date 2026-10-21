@@ -118,7 +118,7 @@ sudo systemctl reload nginx
 - **Protected branches:** no merge without passing checks.
 - **CI on every pull request:**
   - Container image: Trivy (fails on fixable high and critical vulnerabilities)
-  - Running app: OWASP ZAP baseline scan (fails on any new warning)
+  - Running app: ZAP baseline scan (fails on any new warning)
   - Quality: Ruff, pytest
   - Security: Bandit, pip-audit, Gitleaks (full history)
 - **Continuous deployment:** the server deploys new commits on `dev` automatically.
@@ -183,5 +183,5 @@ pip-audit -r requirements.txt
 - [x] HTTPS with Nginx and Let's Encrypt
 - [x] Container image scanning in CI
 - [x] Automatic deployment
-- [x] Dynamic security testing with OWASP ZAP
+- [x] Dynamic security testing with ZAP
 - [ ] Monitoring with Grafana
