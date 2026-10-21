@@ -1,21 +1,56 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="page-head">
-        <h1>أهلاً فيك في منصة الاختبارات</h1>
-        <p>اختر المادة، بعدين اختر الفصل وابدأ الاختبار.</p>
-    </div>
+    <section class="hero">
+        <span class="badge rise">{{ subjects|length }} مواد · {{ total_questions }} سؤال</span>
+        <h1 class="grad-text rise rise-2">أهلاً فيك في منصة الاختبارات</h1>
+        <p class="rise rise-3">اختر المادة، بعدين اختر الفصل وابدأ الاختبار.</p>
+    </section>
 
     {% if subjects %}
-        <div class="card-grid">
+        <div class="bento stagger">
             {% for subject in subjects %}
-                <article class="card chapter-card">
-                    <span class="chapter-num">{{ loop.index }}</span>
-                    <h2>{{ subject["name"] }}</h2>
-                    <p class="muted">{{ subject["chapters"] }} فصول · {{ subject["questions"] }} سؤال</p>
-                    <a class="btn btn-primary" href="/subjects/{{ subject['id'] }}">اعرض الفصول</a>
-                </article>
+                <a class="card subject-card tone-{{ (loop.index0 % 3) + 1 }} {% if loop.first %}span-2{% endif %}" href="/subjects/{{ subject['id'] }}">
+                    <div class="card-top">
+                        <span class="tone-icon">
+                            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M8 7h6"/><path d="M8 11h6"/></svg>
+                        </span>
+                        <span class="card-meta">{{ subject["chapters"] }} فصول · {{ subject["questions"] }} سؤال</span>
+                    </div>
+                    <div>
+                        <h2 class="card-title">{{ subject["name"] }}</h2>
+                    </div>
+                    <div>
+                        <progress class="bar" value="{{ subject['done'] }}" max="{{ subject['chapters'] or 1 }}">{{ subject["done"] }} من {{ subject["chapters"] }}</progress>
+                        <p class="card-meta">خلصت {{ subject["done"] }} من {{ subject["chapters"] }} فصول</p>
+                    </div>
+                    <span class="card-go">
+                        اعرض الفصول
+                        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+                    </span>
+                </a>
             {% endfor %}
+
+            <div class="card stat-card {% if subjects|length % 3 == 0 %}span-2{% endif %}">
+                <div class="stat">
+                    <span class="stat-label">آخر اختبار</span>
+                    {% if last_result %}
+                        <span class="stat-title">{{ last_result["name"] }}</span>
+                    {% else %}
+                        <span class="stat-title">ما سويت اختبار للحين</span>
+                    {% endif %}
+                </div>
+                <div class="stat-group">
+                    <div class="stat">
+                        <span class="stat-label">النتيجة</span>
+                        <span class="stat-value">{% if last_result %}{{ last_result["score"] }}/{{ last_result["total"] }}{% else %}—{% endif %}</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">الاختبارات</span>
+                        <span class="stat-value">{{ attempts }}</span>
+                    </div>
+                </div>
+            </div>
         </div>
     {% else %}
         <section class="card empty">

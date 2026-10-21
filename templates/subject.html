@@ -4,28 +4,41 @@
 
 {% block content %}
     <a class="back-link" href="/">
-        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
         كل المواد
     </a>
 
-    <div class="page-head">
-        <h1>{{ subject["name"] }}</h1>
+    <div class="page-head rise">
+        <h1 class="grad-text">{{ subject["name"] }}</h1>
         <p>اختر الفصل اللي تبي تذاكره.</p>
     </div>
 
-    <div class="card-grid">
+    <div class="card-grid stagger">
         {% for chapter in chapters %}
-            <article class="card chapter-card">
-                <span class="chapter-num">{{ loop.index }}</span>
+            <a class="card tone-{{ ((subject['id'] - 1) % 3) + 1 }}" href="/chapters/{{ chapter['id'] }}">
+                <div class="card-top">
+                    <span class="tone-icon">{{ loop.index }}</span>
+                    {% if chapter["best"] is not none %}
+                        {% if chapter["best"] == chapter["questions"] %}
+                            <span class="chip chip-ok">{{ chapter["best"] }}/{{ chapter["questions"] }}</span>
+                        {% else %}
+                            <span class="chip">أفضل نتيجة {{ chapter["best"] }}/{{ chapter["questions"] }}</span>
+                        {% endif %}
+                    {% else %}
+                        <span class="card-meta">{{ chapter["questions"] }} أسئلة</span>
+                    {% endif %}
+                </div>
                 <div>
                     {% if chapter["label"] %}
                         <p class="eyebrow">{{ chapter["label"] }}</p>
                     {% endif %}
-                    <h2>{{ chapter["title"] }}</h2>
+                    <h2 class="card-title">{{ chapter["title"] }}</h2>
                 </div>
-                <p class="muted">{{ chapter["questions"] }} أسئلة</p>
-                <a class="btn btn-primary" href="/chapters/{{ chapter['id'] }}">ابدأ الاختبار</a>
-            </article>
+                <span class="card-go">
+                    {% if chapter["best"] is not none %}أعد الاختبار{% else %}ابدأ الاختبار{% endif %}
+                    <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+                </span>
+            </a>
         {% endfor %}
     </div>
 {% endblock %}
