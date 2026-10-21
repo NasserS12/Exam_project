@@ -383,3 +383,11 @@ def test_protected_pages_need_login(client, url):
     response = client.get(url)
     assert response.status_code == 302
     assert response.headers["Location"] == "/login"
+
+
+def test_security_headers_on_every_page(client):
+    response = client.get("/login")
+    headers = response.headers
+    assert "frame-ancestors 'none'" in headers["Content-Security-Policy"]
+    assert headers["X-Frame-Options"] == "DENY"
+    assert headers["X-Content-Type-Options"] == "nosniff"
