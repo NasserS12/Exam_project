@@ -22,6 +22,12 @@ def client(monkeypatch):
     return app.test_client()
 
 
+@pytest.fixture
+def logged_in(client):
+    register_user(client)
+    login_user(client)
+
+
 def register_user(client, username="nasser", password="mypassword123"):
     return client.post("/register", data={"username": username, "password": password})
 
@@ -62,8 +68,8 @@ def test_logout_clears_session(client):
 def test_tampered_session_is_ignored(client):
     client.set_cookie("session", "fake-session-value")
     response = client.get("/")
-    assert response.status_code == 200
-    assert 'href="/login"' in response.get_data(as_text=True)
+    assert response.status_code == 302
+    assert response.headers["Location"] == "/login"
 
 
 def test_login_wrong_password(client):
@@ -88,7 +94,7 @@ def test_logout_requires_post(client):
     assert response.status_code == 405
 
 
-def test_home_returns_200(client):
+def test_home_returns_200(client, logged_in):
     response = client.get("/")
     assert response.status_code == 200
     assert "اختر الفصل وابدأ الاختبار" in response.get_data(as_text=True)
@@ -106,14 +112,14 @@ def test_about_returns_200(client):
     assert "Test subject" in response.get_data(as_text=True)
 
 
-def test_subject_page_lists_chapters(client):
+def test_subject_page_lists_chapters(client, logged_in):
     response = client.get("/subjects/1")
     assert response.status_code == 200
     assert "اختر الفصل اللي تبي تذاكره" in response.get_data(as_text=True)
     assert "Cryptography" in response.get_data(as_text=True)
 
 
-def test_missing_subject_returns_404(client):
+def test_missing_subject_returns_404(client, logged_in):
     response = client.get("/subjects/999")
     assert response.status_code == 404
 
@@ -124,30 +130,30 @@ def test_old_chapters_page_redirects_home(client):
     assert response.headers["Location"] == "/"
 
 
-def test_home_links_to_subject(client):
+def test_home_links_to_subject(client, logged_in):
     response = client.get("/")
     assert response.status_code == 200
     assert 'href="/subjects/1"' in response.get_data(as_text=True)
 
 
-def test_chapter_page_shows_questions(client):
+def test_chapter_page_shows_questions(client, logged_in):
     response = client.get("/chapters/1")
     assert response.status_code == 200
     assert "وش المنفذ الافتراضي" in response.get_data(as_text=True)
 
 
-def test_missing_chapter_returns_404(client):
+def test_missing_chapter_returns_404(client, logged_in):
     response = client.get("/chapters/999")
     assert response.status_code == 404
 
 
-def test_subject_page_links_to_chapter(client):
+def test_subject_page_links_to_chapter(client, logged_in):
     response = client.get("/subjects/1")
     assert response.status_code == 200
     assert 'href="/chapters/1"' in response.get_data(as_text=True)
 
 
-def test_chapter_quiz_one_wrong_answer(client):
+def test_chapter_quiz_one_wrong_answer(client, logged_in):
     response = client.post("/chapters/1", data={"q1": "21", "q2": "443"})
     assert response.status_code == 200
     assert "إجابة خاطئة" in response.get_data(as_text=True)
@@ -155,7 +161,7 @@ def test_chapter_quiz_one_wrong_answer(client):
     assert "نتيجتك: 1 من 2" in response.get_data(as_text=True)
 
 
-def test_chapter_quiz_all_answers_correct(client):
+def test_chapter_quiz_all_answers_correct(client, logged_in):
     response = client.post("/chapters/1", data={"q1": "22", "q2": "443"})
     assert response.status_code == 200
     assert "إجابة صحيحة" in response.get_data(as_text=True)
@@ -163,19 +169,19 @@ def test_chapter_quiz_all_answers_correct(client):
     assert "نتيجتك: 2 من 2" in response.get_data(as_text=True)
 
 
-def test_chapter_quiz_missing_answer(client):
+def test_chapter_quiz_missing_answer(client, logged_in):
     response = client.post("/chapters/1", data={"q1": "22"})
     assert response.status_code == 400
     assert "جاوب على كل الأسئلة من الخيارات" in response.get_data(as_text=True)
 
 
-def test_chapter_quiz_invalid_answer(client):
+def test_chapter_quiz_invalid_answer(client, logged_in):
     response = client.post("/chapters/1", data={"q1": "22222222", "q2": "443"})
     assert response.status_code == 400
     assert "جاوب على كل الأسئلة من الخيارات" in response.get_data(as_text=True)
 
 
-def test_chapter_quiz_all_answers_wrong_shows_zero(client):
+def test_chapter_quiz_all_answers_wrong_shows_zero(client, logged_in):
     response = client.post("/chapters/1", data={"q1": "21", "q2": "80"})
     assert response.status_code == 200
     assert "نتيجتك: 0 من 2" in response.get_data(as_text=True)
@@ -240,8 +246,8 @@ def test_register_password_only_spaces(client):
     assert "كلمة المرور لازم تكون 8 حروف" in response.get_data(as_text=True)
 
 
-def test_home_links_to_register(client):
-    response = client.get("/")
+def test_login_page_links_to_register(client):
+    response = client.get("/login")
     assert response.status_code == 200
     assert 'href="/register"' in response.get_data(as_text=True)
 
@@ -262,10 +268,15 @@ def test_result_saved_for_logged_in_user(client):
     assert "2 من 2" in response.get_data(as_text=True)
 
 
-def test_result_not_saved_for_anonymous_user(client):
+def test_anonymous_user_cannot_submit_quiz(client):
     response = client.post("/chapters/1", data={"q1": "22", "q2": "443"})
-    assert response.status_code == 200
-    assert "عشان تنحفظ نتائجك" in response.get_data(as_text=True)
+    assert response.status_code == 302
+    assert response.headers["Location"] == "/login"
+
+    conn = db.get_connection()
+    count = conn.execute("SELECT COUNT(*) AS n FROM results").fetchone()["n"]
+    conn.close()
+    assert count == 0
 
     conn = db.get_connection()
     count = conn.execute("SELECT COUNT(*) AS n FROM results").fetchone()["n"]
@@ -304,14 +315,14 @@ def test_answers_hidden_until_submitted(client):
     assert "الصح:" not in response.get_data(as_text=True)
 
 
-def test_wrong_answer_shows_correct_one(client):
+def test_wrong_answer_shows_correct_one(client, logged_in):
     response = client.post("/chapters/1", data={"q1": "21", "q2": "443"})
     page = response.get_data(as_text=True)
     assert "الصح: <strong>22</strong>" in page
     assert "صفحة 1 في الكتاب" in page
 
 
-def test_true_false_question(client):
+def test_true_false_question(client, logged_in):
     page = client.get("/chapters/2").get_data(as_text=True)
     assert page.count('type="radio"') == 2
 
@@ -365,3 +376,10 @@ def test_real_content_is_valid():
         questions = json.loads((folder / "questions.json").read_text(encoding="utf-8"))
         for question in questions:
             db.validate_question(question, folder.name)
+
+
+@pytest.mark.parametrize("url", ["/", "/subjects/1", "/chapters/1", "/results"])
+def test_protected_pages_need_login(client, url):
+    response = client.get(url)
+    assert response.status_code == 302
+    assert response.headers["Location"] == "/login"
