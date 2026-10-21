@@ -2,50 +2,58 @@
 
 {% block title %}{{ chapter["name"] }}{% endblock %}
 
+{% block head %}
+    <script src="{{ url_for('static', filename='js/quiz.js') }}" defer></script>
+{% endblock %}
+
 {% block container_class %}container-narrow{% endblock %}
 
 {% block content %}
     {% if chapter["subject_id"] %}
         <a class="back-link" href="/subjects/{{ chapter['subject_id'] }}">
-            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
             {{ chapter["subject_name"] }}
         </a>
     {% else %}
         <a class="back-link" href="/">
-            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
             كل المواد
         </a>
     {% endif %}
 
-    <div class="page-head">
+    <div class="page-head rise">
         <h1>{{ chapter["name"] }}</h1>
     </div>
 
     {% if score is not none %}
-        <section class="card score-card" aria-live="polite">
-            <p class="score-number">{{ score }}<span> / {{ total }}</span></p>
-            <progress class="score-bar" value="{{ score }}" max="{{ total }}">{{ score }} من {{ total }}</progress>
+        <section class="card score-card rise" aria-live="polite">
+            <p class="score-number grad-text">{{ score }}<span> / {{ total }}</span></p>
+            <progress class="bar" value="{{ score }}" max="{{ total }}">{{ score }} من {{ total }}</progress>
             <p>نتيجتك: {{ score }} من {{ total }}</p>
-            {% if saved is not none %}
-                {% if saved %}
-                    <p class="muted">تم حفظ نتيجتك. تلقاها في <a href="/results">نتائجي</a>.</p>
-                {% else %}
-                    <p class="muted"><a href="/login">سجل دخول</a> عشان تنحفظ نتائجك.</p>
-                {% endif %}
+            {% if saved %}
+                <p class="muted">تم حفظ نتيجتك. تلقاها في <a href="/results">نتائجي</a>.</p>
             {% endif %}
         </section>
+    {% else %}
+        <div class="quiz-progress">
+            <span>أجبت <span id="quiz-progress-label">0</span> من {{ questions|length }}</span>
+            <progress class="bar" id="quiz-progress" value="0" max="{{ questions|length }}"></progress>
+        </div>
     {% endif %}
 
     {% if error %}
         <div class="alert alert-error" role="alert">{{ error }}</div>
     {% endif %}
 
-    <form class="quiz-form" method="post">
+    <form class="quiz-form stagger" method="post">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
         {% for question in questions %}
             <fieldset class="card question">
-                <legend>{{ question["text"] }}</legend>
+                <legend>
+                    <span class="question-num">سؤال {{ loop.index }}</span>
+                    <span class="question-text">{{ question["text"] }}</span>
+                </legend>
 
                 {% for option in question["options"] %}
                     <label class="option">
@@ -56,10 +64,16 @@
 
                 {% if results is not none %}
                     {% if results[question["id"]] %}
-                        <p class="feedback feedback-ok">إجابة صحيحة</p>
+                        <p class="feedback feedback-ok">
+                            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>
+                            إجابة صحيحة
+                        </p>
                     {% else %}
-                        <p class="feedback feedback-wrong">إجابة خاطئة</p>
-                        <p class="muted">الصح: <strong>{{ answers[question["id"]] }}</strong>{% if question["source_page"] %} · صفحة {{ question["source_page"] }} في الكتاب{% endif %}</p>
+                        <p class="feedback feedback-wrong">
+                            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+                            إجابة خاطئة
+                        </p>
+                        <p class="correct-answer">الصح: <strong>{{ answers[question["id"]] }}</strong>{% if question["source_page"] %} · صفحة {{ question["source_page"] }} في الكتاب{% endif %}</p>
                     {% endif %}
                 {% endif %}
             </fieldset>

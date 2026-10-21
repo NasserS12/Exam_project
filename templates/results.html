@@ -3,13 +3,13 @@
 {% block title %}نتائجي{% endblock %}
 
 {% block content %}
-    <div class="page-head">
-        <h1>نتائجي</h1>
+    <div class="page-head rise">
+        <h1 class="grad-text">نتائجي</h1>
         <p>كل الاختبارات اللي سويتها، من الأحدث للأقدم.</p>
     </div>
 
     {% if results %}
-        <div class="table-wrap">
+        <div class="table-wrap rise rise-2">
             <table class="table">
                 <thead>
                     <tr>
@@ -22,7 +22,7 @@
                     {% for result in results %}
                         <tr>
                             <td>
-                                {% if result["subject"] %}<span class="muted">{{ result["subject"] }}</span><br>{% endif %}
+                                {% if result["subject"] %}<span class="table-sub">{{ result["subject"] }}</span>{% endif %}
                                 {{ result["name"] }}
                             </td>
                             <td>
@@ -39,7 +39,7 @@
             </table>
         </div>
     {% else %}
-        <section class="card empty">
+        <section class="card empty rise rise-2">
             <p>ما حليت أي اختبار للحين.</p>
             <a class="btn btn-primary" href="/">ابدأ من المواد</a>
         </section>

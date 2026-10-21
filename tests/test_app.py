@@ -391,3 +391,17 @@ def test_security_headers_on_every_page(client):
     assert "frame-ancestors 'none'" in headers["Content-Security-Policy"]
     assert headers["X-Frame-Options"] == "DENY"
     assert headers["X-Content-Type-Options"] == "nosniff"
+
+
+def test_home_shows_progress_and_last_result(client, logged_in):
+    client.post("/chapters/1", data={"q1": "22", "q2": "80"})
+    page = client.get("/").get_data(as_text=True)
+    assert "خلصت 1 من 2 فصول" in page
+    assert "1/2" in page
+
+
+def test_subject_page_shows_best_score(client, logged_in):
+    client.post("/chapters/1", data={"q1": "22", "q2": "80"})
+    client.post("/chapters/1", data={"q1": "21", "q2": "80"})
+    page = client.get("/subjects/1").get_data(as_text=True)
+    assert "أفضل نتيجة 1/2" in page

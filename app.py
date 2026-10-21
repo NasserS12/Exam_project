@@ -74,8 +74,35 @@ def home():
         "LEFT JOIN questions ON questions.chapter_id = chapters.id "
         "GROUP BY subjects.id ORDER BY subjects.id"
     ).fetchall()
+
+    user_id = session["user_id"]
+    done_rows = conn.execute(
+        "SELECT chapters.subject_id, COUNT(DISTINCT results.chapter_id) AS done "
+        "FROM results JOIN chapters ON chapters.id = results.chapter_id "
+        "WHERE results.user_id = %s GROUP BY chapters.subject_id",
+        (user_id,),
+    ).fetchall()
+    last_result = conn.execute(
+        "SELECT chapters.name, results.score, results.total "
+        "FROM results JOIN chapters ON chapters.id = results.chapter_id "
+        "WHERE results.user_id = %s ORDER BY results.created_at DESC LIMIT 1",
+        (user_id,),
+    ).fetchone()
+    attempts = conn.execute(
+        "SELECT COUNT(*) AS n FROM results WHERE user_id = %s", (user_id,)
+    ).fetchone()["n"]
     conn.close()
-    return render_template("home.html", subjects=subjects)
+
+    done = {row["subject_id"]: row["done"] for row in done_rows}
+    subject_list = [{**row, "done": done.get(row["id"], 0)} for row in subjects]
+    total_questions = sum(row["questions"] for row in subjects)
+    return render_template(
+        "home.html",
+        subjects=subject_list,
+        total_questions=total_questions,
+        last_result=last_result,
+        attempts=attempts,
+    )
 
 
 @app.route("/about")
@@ -108,8 +135,14 @@ def subject(subject_id):
         "GROUP BY chapters.id ORDER BY chapters.position, chapters.id",
         (subject_id,),
     ).fetchall()
+    best_rows = conn.execute(
+        "SELECT chapter_id, MAX(score) AS best FROM results "
+        "WHERE user_id = %s GROUP BY chapter_id",
+        (session["user_id"],),
+    ).fetchall()
     conn.close()
 
+    best = {r["chapter_id"]: r["best"] for r in best_rows}
     chapter_list = []
     for chapter in rows:
         label, title = split_title(chapter["name"])
@@ -119,6 +152,7 @@ def subject(subject_id):
                 "label": label,
                 "title": title,
                 "questions": chapter["questions"],
+                "best": best.get(chapter["id"]),
             }
         )
     return render_template("subject.html", subject=row, chapters=chapter_list)
