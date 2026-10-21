@@ -23,6 +23,7 @@ Each protection below was tested by attempting the attack first, then fixing it 
 | Leaked secrets | Secrets in `.env` (ignored), Gitleaks before every commit and in CI |
 | Bad data | Input allow-lists in the app, plus `NOT NULL`, `UNIQUE`, `CHECK`, and foreign keys in the database |
 | Damage after a compromised app | App connects with a least-privilege database user (read and insert only); schema changes run in a separate one-shot migrate container |
+| Clickjacking and injected scripts | Security headers on every response (CSP, frame-ancestors, nosniff), verified by ZAP in CI |
 
 ## Server hardening
 
@@ -117,6 +118,7 @@ sudo systemctl reload nginx
 - **Protected branches:** no merge without passing checks.
 - **CI on every pull request:**
   - Container image: Trivy (fails on fixable high and critical vulnerabilities)
+  - Running app: ZAP baseline scan (fails on any new warning)
   - Quality: Ruff, pytest
   - Security: Bandit, pip-audit, Gitleaks (full history)
 - **Continuous deployment:** the server deploys new commits on `dev` automatically.
@@ -181,5 +183,5 @@ pip-audit -r requirements.txt
 - [x] HTTPS with Nginx and Let's Encrypt
 - [x] Container image scanning in CI
 - [x] Automatic deployment
-- [ ] Dynamic security testing with OWASP ZAP
+- [x] Dynamic security testing with ZAP
 - [ ] Monitoring with Grafana
