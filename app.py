@@ -1,5 +1,6 @@
 import os
 import re
+from functools import wraps
 
 import psycopg
 from flask import Flask, abort, redirect, render_template, request, session
@@ -20,6 +21,16 @@ csrf = CSRFProtect(app)
 USERNAME_PATTERN = re.compile(r"[A-Za-z][A-Za-z0-9_]{2,29}")
 
 
+def login_required(view):
+    @wraps(view)
+    def wrapped(*args, **kwargs):
+        if session.get("user_id") is None:
+            return redirect("/login")
+        return view(*args, **kwargs)
+
+    return wrapped
+
+
 def split_title(name):
     """'الفصل الأول: مقدمة' -> ('الفصل الأول', 'مقدمة')."""
     label, sep, title = name.partition(": ")
@@ -27,6 +38,7 @@ def split_title(name):
 
 
 @app.route("/")
+@login_required
 def home():
     conn = get_connection()
     subjects = conn.execute(
@@ -55,6 +67,7 @@ def chapters():
 
 
 @app.route("/subjects/<int:subject_id>")
+@login_required
 def subject(subject_id):
     conn = get_connection()
     row = conn.execute(
@@ -87,6 +100,7 @@ def subject(subject_id):
 
 
 @app.route("/chapters/<int:chapter_id>", methods=["GET", "POST"])
+@login_required
 def chapter_quiz(chapter_id):
     conn = get_connection()
     chapter = conn.execute(
@@ -237,10 +251,9 @@ def logout():
 
 
 @app.route("/results")
+@login_required
 def results_page():
     user_id = session.get("user_id")
-    if user_id is None:
-        return redirect("/login")
 
     conn = get_connection()
     rows = conn.execute(
