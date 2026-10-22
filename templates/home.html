@@ -10,7 +10,7 @@
     {% if subjects %}
         <div class="bento stagger">
             {% for subject in subjects %}
-                <a class="card subject-card tone-{{ (loop.index0 % 3) + 1 }} {% if loop.first %}span-2{% endif %}" href="/subjects/{{ subject['id'] }}">
+                <a class="card subject-card spotlight tone-{{ (loop.index0 % 3) + 1 }} {% if loop.first %}span-2{% endif %}" href="/subjects/{{ subject['id'] }}">
                     <div class="card-top">
                         <span class="tone-icon">
                             <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M8 7h6"/><path d="M8 11h6"/></svg>
@@ -31,7 +31,7 @@
                 </a>
             {% endfor %}
 
-            <div class="card stat-card {% if subjects|length % 3 == 0 %}span-2{% endif %}">
+            <div class="card stat-card spotlight {% if subjects|length % 3 == 0 %}span-2{% endif %}">
                 <div class="stat">
                     <span class="stat-label">آخر اختبار</span>
                     {% if last_result %}
@@ -47,7 +47,7 @@
                     </div>
                     <div class="stat">
                         <span class="stat-label">الاختبارات</span>
-                        <span class="stat-value">{{ attempts }}</span>
+                        <span class="stat-value" data-count="{{ attempts }}">{{ attempts }}</span>
                     </div>
                 </div>
             </div>

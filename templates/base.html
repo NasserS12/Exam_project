@@ -6,11 +6,13 @@
     <title>{% block title %}منصة الاختبارات{% endblock %}</title>
     <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/effects.js') }}" defer></script>
     {% block head %}{% endblock %}
 </head>
 <body>
     <div class="page-glow" aria-hidden="true"></div>
     <div class="page-grid" aria-hidden="true"></div>
+    <div class="page-noise" aria-hidden="true"></div>
 
     <header class="site-header">
         <div class="container header-inner">
