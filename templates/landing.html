@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="hero landing-hero">
+        <span class="badge rise">منصة مراجعة للمواد</span>
+        <h1 class="grad-text rise rise-2">ذاكر موادك، واعرف وين تراجع</h1>
+        <p class="rise rise-3">أسئلة من الكتاب نفسه، وبعد كل اختبار تشوف الإجابة الصحيحة ورقم الصفحة اللي فيها.</p>
+        <div class="hero-actions rise rise-3">
+            <a class="btn btn-primary" href="/register">إنشاء حساب</a>
+            <a class="btn btn-secondary" href="/login">تسجيل الدخول</a>
+        </div>
+    </section>
+
+    <div class="stat-strip rise rise-3">
+        <div>
+            <strong data-count="{{ counts['subjects'] }}">{{ counts["subjects"] }}</strong>
+            <span>مواد</span>
+        </div>
+        <div>
+            <strong data-count="{{ counts['chapters'] }}">{{ counts["chapters"] }}</strong>
+            <span>فصل</span>
+        </div>
+        <div>
+            <strong data-count="{{ counts['questions'] }}">{{ counts["questions"] }}</strong>
+            <span>سؤال</span>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <h2>كيف تشتغل المنصة</h2>
+        <p>ثلاث خطوات، وكل وحدة تقربك من العلامة الكاملة.</p>
+    </div>
+
+    <div class="feature-grid stagger">
+        <article class="card feature-card spotlight tone-1">
+            <span class="tone-icon">
+                <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M8 7h6"/><path d="M8 11h6"/></svg>
+            </span>
+            <h3>اختر المادة والفصل</h3>
+            <p>كل مادة مقسمة لفصولها، وكل فصل فيه أسئلة وحداته.</p>
+        </article>
+        <article class="card feature-card spotlight tone-2">
+            <span class="tone-icon">
+                <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>
+            </span>
+            <h3>جاوب وشوف الصح</h3>
+            <p>بعد التسليم تعرف وش غلطت فيه، والإجابة الصحيحة مع رقم الصفحة في الكتاب.</p>
+        </article>
+        <article class="card feature-card spotlight tone-3">
+            <span class="tone-icon">
+                <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l4-4 3 3 5-6"/></svg>
+            </span>
+            <h3>تابع تقدّمك</h3>
+            <p>كم فصل خلصت في كل مادة، وأفضل نتيجة لك في كل فصل.</p>
+        </article>
+    </div>
+
+    <div class="section-title">
+        <h2>شكل الاختبار</h2>
+        <p>مثال من مادة الأمن السيبراني.</p>
+    </div>
+
+    <div class="card preview" aria-hidden="true">
+        <span class="question-num">سؤال 2</span>
+        <p class="question-text">........... هو احتمالية حدوث أي أمر يمكن أن يكون له تأثير غير مرغوب فيه على النظام.</p>
+        <div class="option is-picked"><span class="preview-dot"></span><span>التهديد</span></div>
+        <div class="option"><span class="preview-dot"></span><span>نقاط الضعف</span></div>
+        <div class="option"><span class="preview-dot"></span><span>السرية</span></div>
+        <div class="option"><span class="preview-dot"></span><span>النزاهة</span></div>
+    </div>
+
+    <section class="card cta-band">
+        <h2>جاهز تبدأ؟</h2>
+        <p class="muted">سوّ حساب وتنحفظ نتائجك وتقدّمك.</p>
+        <a class="btn btn-primary" href="/register">إنشاء حساب</a>
+    </section>
+{% endblock %}

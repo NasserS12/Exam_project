@@ -26,10 +26,23 @@
     </div>
 
     {% if score is not none %}
+        {% set ratio = score / total if total else 0 %}
         <section class="card score-card rise" aria-live="polite">
-            <p class="score-number grad-text">{{ score }}<span> / {{ total }}</span></p>
-            <progress class="bar" value="{{ score }}" max="{{ total }}">{{ score }} من {{ total }}</progress>
-            <p>نتيجتك: {{ score }} من {{ total }}</p>
+            <div class="score-ring" data-score="{{ score }}" data-total="{{ total }}">
+                <div class="score-ring-inner">
+                    <strong>{{ score }}<span> / {{ total }}</span></strong>
+                </div>
+            </div>
+            {% if ratio == 1 %}
+                <p class="score-title">علامة كاملة</p>
+            {% elif ratio >= 0.7 %}
+                <p class="score-title">أداء ممتاز</p>
+            {% elif ratio >= 0.5 %}
+                <p class="score-title">قريب، كمّل</p>
+            {% else %}
+                <p class="score-title">يحتاج مراجعة</p>
+            {% endif %}
+            <p class="score-text">نتيجتك: {{ score }} من {{ total }}</p>
             {% if saved %}
                 <p class="muted">تم حفظ نتيجتك. تلقاها في <a href="/results">نتائجي</a>.</p>
             {% endif %}
@@ -49,7 +62,7 @@
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
         {% for question in questions %}
-            <fieldset class="card question">
+            <fieldset class="card question spotlight">
                 <legend>
                     <span class="question-num">سؤال {{ loop.index }}</span>
                     <span class="question-text">{{ question["text"] }}</span>

@@ -63,8 +63,10 @@ def split_title(name):
 
 
 @app.route("/")
-@login_required
 def home():
+    if session.get("user_id") is None:
+        return landing()
+
     conn = get_connection()
     subjects = conn.execute(
         "SELECT subjects.id, subjects.name, "
@@ -103,6 +105,17 @@ def home():
         last_result=last_result,
         attempts=attempts,
     )
+
+
+def landing():
+    conn = get_connection()
+    counts = conn.execute(
+        "SELECT (SELECT COUNT(*) FROM subjects) AS subjects, "
+        "(SELECT COUNT(*) FROM chapters WHERE subject_id IS NOT NULL) AS chapters, "
+        "(SELECT COUNT(*) FROM questions) AS questions"
+    ).fetchone()
+    conn.close()
+    return render_template("landing.html", counts=counts)
 
 
 @app.route("/about")

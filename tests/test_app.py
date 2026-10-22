@@ -68,8 +68,10 @@ def test_logout_clears_session(client):
 def test_tampered_session_is_ignored(client):
     client.set_cookie("session", "fake-session-value")
     response = client.get("/")
-    assert response.status_code == 302
-    assert response.headers["Location"] == "/login"
+    page = response.get_data(as_text=True)
+    assert response.status_code == 200
+    assert "ذاكر موادك" in page
+    assert "مرحباً" not in page
 
 
 def test_login_wrong_password(client):
@@ -378,7 +380,7 @@ def test_real_content_is_valid():
             db.validate_question(question, folder.name)
 
 
-@pytest.mark.parametrize("url", ["/", "/subjects/1", "/chapters/1", "/results"])
+@pytest.mark.parametrize("url", ["/subjects/1", "/chapters/1", "/results"])
 def test_protected_pages_need_login(client, url):
     response = client.get(url)
     assert response.status_code == 302
@@ -405,3 +407,10 @@ def test_subject_page_shows_best_score(client, logged_in):
     client.post("/chapters/1", data={"q1": "21", "q2": "80"})
     page = client.get("/subjects/1").get_data(as_text=True)
     assert "أفضل نتيجة 1/2" in page
+
+
+def test_visitor_sees_landing_page(client):
+    page = client.get("/").get_data(as_text=True)
+    assert "ذاكر موادك" in page
+    assert 'href="/register"' in page
+    assert "Test subject" not in page
