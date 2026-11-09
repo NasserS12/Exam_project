@@ -9,7 +9,7 @@
     </a>
 
     <div class="page-head rise">
-        <h1 class="grad-text">{{ subject["name"] }}</h1>
+        <h1 class="grad-text" dir="auto">{{ subject["name"] }}</h1>
         <p>اختر الفصل اللي تبي تذاكره.</p>
     </div>
 
@@ -30,9 +30,9 @@
                 </div>
                 <div>
                     {% if chapter["label"] %}
-                        <p class="eyebrow">{{ chapter["label"] }}</p>
+                        <p class="eyebrow" dir="auto">{{ chapter["label"] }}</p>
                     {% endif %}
-                    <h2 class="card-title">{{ chapter["title"] }}</h2>
+                    <h2 class="card-title" dir="auto">{{ chapter["title"] }}</h2>
                 </div>
                 <span class="card-go">
                     {% if chapter["best"] is not none %}أعد الاختبار{% else %}ابدأ الاختبار{% endif %}

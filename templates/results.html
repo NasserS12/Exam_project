@@ -22,8 +22,8 @@
                     {% for result in results %}
                         <tr>
                             <td>
-                                {% if result["subject"] %}<span class="table-sub">{{ result["subject"] }}</span>{% endif %}
-                                {{ result["name"] }}
+                                {% if result["subject"] %}<span class="table-sub" dir="auto">{{ result["subject"] }}</span>{% endif %}
+                                <span dir="auto">{{ result["name"] }}</span>
                             </td>
                             <td>
                                 {% if result["score"] == result["total"] %}

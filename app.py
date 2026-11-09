@@ -56,6 +56,15 @@ def add_security_headers(response):
     return response
 
 
+ARABIC_LETTER = re.compile(r"[\u0600-\u06FF]")
+
+
+@app.template_global()
+def is_ltr(text):
+    """True for text with no Arabic letters, like English questions."""
+    return not ARABIC_LETTER.search(text or "")
+
+
 def split_title(name):
     """'الفصل الأول: مقدمة' -> ('الفصل الأول', 'مقدمة')."""
     label, sep, title = name.partition(": ")
