@@ -1,0 +1,1682 @@
+[
+  {
+    "chapter": 1,
+    "chapter_title": "Chapter One: Leisure and Sport",
+    "unit": 1,
+    "question": "_____ do you live?",
+    "options": [
+      "where",
+      "when"
+    ],
+    "answer": 0,
+    "pdf_page": 13
+  },
+  {
+    "chapter": 1,
+    "chapter_title": "Chapter One: Leisure and Sport",
+    "unit": 1,
+    "question": "________ do you live with?",
+    "options": [
+      "where",
+      "who"
+    ],
+    "answer": 1,
+    "pdf_page": 13
+  },
+  {
+    "chapter": 1,
+    "chapter_title": "Chapter One: Leisure and Sport",
+    "unit": 1,
+    "question": "When you will ____ to the school?",
+    "options": [
+      "go",
+      "eat"
+    ],
+    "answer": 0,
+    "pdf_page": 13
+  },
+  {
+    "chapter": 1,
+    "chapter_title": "Chapter One: Leisure and Sport",
+    "unit": 1,
+    "question": "When you __________ TV?",
+    "options": [
+      "play",
+      "watch"
+    ],
+    "answer": 1,
+    "pdf_page": 13
+  },
+  {
+    "chapter": 1,
+    "chapter_title": "Chapter One: Leisure and Sport",
+    "unit": 2,
+    "question": "(Saad is a business management student. Studying at KFU. He is 19 years old. He is smart. And he is living in Dammam.) Where is Saad from?",
+    "options": [
+      "He is from Dammam.",
+      "He is from Abha."
+    ],
+    "answer": 0,
+    "pdf_page": 23
+  },
+  {
+    "chapter": 1,
+    "chapter_title": "Chapter One: Leisure and Sport",
+    "unit": 2,
+    "question": "(Saad is a business management student. Studying at KFU. He is 19 years old. He is smart. And he is living in Dammam.) How old is he?",
+    "options": [
+      "He is fifteen years old.",
+      "He is nineteen years old."
+    ],
+    "answer": 1,
+    "pdf_page": 23
+  },
+  {
+    "chapter": 1,
+    "chapter_title": "Chapter One: Leisure and Sport",
+    "unit": 2,
+    "question": "(Saad is a business management student. Studying at KFU. He is 19 years old. He is smart. And he is living in Dammam.) Where does he studying?",
+    "options": [
+      "King Faisal University",
+      "King Khalid University"
+    ],
+    "answer": 0,
+    "pdf_page": 23
+  },
+  {
+    "chapter": 1,
+    "chapter_title": "Chapter One: Leisure and Sport",
+    "unit": 3,
+    "question": "I ______ a book.",
+    "options": [
+      "read",
+      "reads"
+    ],
+    "answer": 0,
+    "pdf_page": 35
+  },
+  {
+    "chapter": 1,
+    "chapter_title": "Chapter One: Leisure and Sport",
+    "unit": 3,
+    "question": "The supermarket _______ at 7 AM.",
+    "options": [
+      "start",
+      "starts"
+    ],
+    "answer": 1,
+    "pdf_page": 35
+  },
+  {
+    "chapter": 1,
+    "chapter_title": "Chapter One: Leisure and Sport",
+    "unit": 3,
+    "question": "_________ Abdullah like eggs?",
+    "options": [
+      "does",
+      "do"
+    ],
+    "answer": 0,
+    "pdf_page": 35
+  },
+  {
+    "chapter": 1,
+    "chapter_title": "Chapter One: Leisure and Sport",
+    "unit": 3,
+    "question": "I _______ go to work early.",
+    "options": [
+      "always",
+      "am"
+    ],
+    "answer": 0,
+    "pdf_page": 35
+  },
+  {
+    "chapter": 2,
+    "chapter_title": "Chapter Two: Firsts and Lasts",
+    "unit": 1,
+    "question": "Vladimir Zworykin invented the TV.",
+    "options": [
+      "true",
+      "false"
+    ],
+    "answer": 0,
+    "pdf_page": 45
+  },
+  {
+    "chapter": 2,
+    "chapter_title": "Chapter Two: Firsts and Lasts",
+    "unit": 1,
+    "question": "The first TV chef program was in 1938.",
+    "options": [
+      "true",
+      "false"
+    ],
+    "answer": 1,
+    "pdf_page": 45
+  },
+  {
+    "chapter": 2,
+    "chapter_title": "Chapter Two: Firsts and Lasts",
+    "unit": 1,
+    "question": "\"His friend don't sets the alarm.\" Is the sentence correct or not?",
+    "options": [
+      "true",
+      "false"
+    ],
+    "answer": 1,
+    "pdf_page": 45
+  },
+  {
+    "chapter": 2,
+    "chapter_title": "Chapter Two: Firsts and Lasts",
+    "unit": 2,
+    "question": "_____ Ahmed playing video games?",
+    "options": [
+      "was",
+      "is"
+    ],
+    "answer": 0,
+    "pdf_page": 58
+  },
+  {
+    "chapter": 2,
+    "chapter_title": "Chapter Two: Firsts and Lasts",
+    "unit": 2,
+    "question": "There _____ many cars.",
+    "options": [
+      "is",
+      "are"
+    ],
+    "answer": 1,
+    "pdf_page": 58
+  },
+  {
+    "chapter": 2,
+    "chapter_title": "Chapter Two: Firsts and Lasts",
+    "unit": 2,
+    "question": "Ali ______ to the mosque a few minutes ago.",
+    "options": [
+      "went",
+      "walk"
+    ],
+    "answer": 0,
+    "pdf_page": 58
+  },
+  {
+    "chapter": 2,
+    "chapter_title": "Chapter Two: Firsts and Lasts",
+    "unit": 2,
+    "question": "Mohammed ________ as a teacher for two years.",
+    "options": [
+      "is",
+      "worked"
+    ],
+    "answer": 1,
+    "pdf_page": 58
+  },
+  {
+    "chapter": 2,
+    "chapter_title": "Chapter Two: Firsts and Lasts",
+    "unit": 3,
+    "question": "I will meet you tomorrow ___ noon.",
+    "options": [
+      "in",
+      "at"
+    ],
+    "answer": 1,
+    "pdf_page": 67
+  },
+  {
+    "chapter": 2,
+    "chapter_title": "Chapter Two: Firsts and Lasts",
+    "unit": 3,
+    "question": "Our graduation will be ___ May.",
+    "options": [
+      "on",
+      "in"
+    ],
+    "answer": 1,
+    "pdf_page": 67
+  },
+  {
+    "chapter": 2,
+    "chapter_title": "Chapter Two: Firsts and Lasts",
+    "unit": 3,
+    "question": "I went to Riyadh four years ___ .",
+    "options": [
+      "ago",
+      "at"
+    ],
+    "answer": 0,
+    "pdf_page": 67
+  },
+  {
+    "chapter": 2,
+    "chapter_title": "Chapter Two: Firsts and Lasts",
+    "unit": 3,
+    "question": "When ____ you get your result?",
+    "options": [
+      "ago",
+      "did"
+    ],
+    "answer": 1,
+    "pdf_page": 67
+  },
+  {
+    "chapter": 3,
+    "chapter_title": "Chapter Three: Work and Rest",
+    "unit": 1,
+    "question": "I fall _______.",
+    "options": [
+      "asleep",
+      "have"
+    ],
+    "answer": 0,
+    "pdf_page": 76
+  },
+  {
+    "chapter": 3,
+    "chapter_title": "Chapter Three: Work and Rest",
+    "unit": 1,
+    "question": "I relax at _____.",
+    "options": [
+      "home",
+      "bath"
+    ],
+    "answer": 0,
+    "pdf_page": 76
+  },
+  {
+    "chapter": 3,
+    "chapter_title": "Chapter Three: Work and Rest",
+    "unit": 1,
+    "question": "I have a cup of ______.",
+    "options": [
+      "burger",
+      "tea"
+    ],
+    "answer": 1,
+    "pdf_page": 76
+  },
+  {
+    "chapter": 3,
+    "chapter_title": "Chapter Three: Work and Rest",
+    "unit": 2,
+    "question": "I ________ to sleep now.",
+    "options": [
+      "can",
+      "have"
+    ],
+    "answer": 1,
+    "pdf_page": 87
+  },
+  {
+    "chapter": 3,
+    "chapter_title": "Chapter Three: Work and Rest",
+    "unit": 2,
+    "question": "Can you meet me today?",
+    "options": [
+      "No, I can't.",
+      "I shouldn't meet you."
+    ],
+    "answer": 0,
+    "pdf_page": 87
+  },
+  {
+    "chapter": 3,
+    "chapter_title": "Chapter Three: Work and Rest",
+    "unit": 2,
+    "question": "You ______ eat good food.",
+    "options": [
+      "should",
+      "can"
+    ],
+    "answer": 0,
+    "pdf_page": 87
+  },
+  {
+    "chapter": 3,
+    "chapter_title": "Chapter Three: Work and Rest",
+    "unit": 2,
+    "question": "He doesn't ______ to go to university when he has online classes.",
+    "options": [
+      "can",
+      "have"
+    ],
+    "answer": 1,
+    "pdf_page": 87
+  },
+  {
+    "chapter": 3,
+    "chapter_title": "Chapter Three: Work and Rest",
+    "unit": 3,
+    "question": "He can save people's life.",
+    "options": [
+      "The doctor",
+      "The engineer"
+    ],
+    "answer": 0,
+    "pdf_page": 97
+  },
+  {
+    "chapter": 3,
+    "chapter_title": "Chapter Three: Work and Rest",
+    "unit": 3,
+    "question": "This job is a practical job.",
+    "options": [
+      "plumber",
+      "accountant"
+    ],
+    "answer": 0,
+    "pdf_page": 97
+  },
+  {
+    "chapter": 3,
+    "chapter_title": "Chapter Three: Work and Rest",
+    "unit": 3,
+    "question": "The person who gives lessons at school.",
+    "options": [
+      "engineer",
+      "teacher"
+    ],
+    "answer": 1,
+    "pdf_page": 97
+  },
+  {
+    "chapter": 4,
+    "chapter_title": "Chapter Four: Special Days",
+    "unit": 1,
+    "question": "Mohammed is _____ the sandwich right now.",
+    "options": [
+      "eating",
+      "eat"
+    ],
+    "answer": 0,
+    "pdf_page": 106
+  },
+  {
+    "chapter": 4,
+    "chapter_title": "Chapter Four: Special Days",
+    "unit": 1,
+    "question": "The fourth month in the year is called:",
+    "options": [
+      "May",
+      "April"
+    ],
+    "answer": 1,
+    "pdf_page": 106
+  },
+  {
+    "chapter": 4,
+    "chapter_title": "Chapter Four: Special Days",
+    "unit": 1,
+    "question": "The first month in the year is:",
+    "options": [
+      "February",
+      "January"
+    ],
+    "answer": 1,
+    "pdf_page": 106
+  },
+  {
+    "chapter": 4,
+    "chapter_title": "Chapter Four: Special Days",
+    "unit": 1,
+    "question": "They ______ playing video games.",
+    "options": [
+      "is",
+      "are"
+    ],
+    "answer": 1,
+    "pdf_page": 106
+  },
+  {
+    "chapter": 4,
+    "chapter_title": "Chapter Four: Special Days",
+    "unit": 2,
+    "question": "People in many countries celebrate World Teachers' Day on ______",
+    "options": [
+      "6th August",
+      "5th October"
+    ],
+    "answer": 1,
+    "pdf_page": 115
+  },
+  {
+    "chapter": 4,
+    "chapter_title": "Chapter Four: Special Days",
+    "unit": 2,
+    "question": "World Book Day is on _________.",
+    "options": [
+      "25th December",
+      "23rd April"
+    ],
+    "answer": 1,
+    "pdf_page": 115
+  },
+  {
+    "chapter": 4,
+    "chapter_title": "Chapter Four: Special Days",
+    "unit": 2,
+    "question": "make a _____",
+    "options": [
+      "cake",
+      "write"
+    ],
+    "answer": 0,
+    "pdf_page": 115
+  },
+  {
+    "chapter": 4,
+    "chapter_title": "Chapter Four: Special Days",
+    "unit": 2,
+    "question": "dress _____",
+    "options": [
+      "where",
+      "up"
+    ],
+    "answer": 1,
+    "pdf_page": 115
+  },
+  {
+    "chapter": 4,
+    "chapter_title": "Chapter Four: Special Days",
+    "unit": 3,
+    "question": "The celebration is too _______",
+    "options": [
+      "delicious",
+      "noisy"
+    ],
+    "answer": 1,
+    "pdf_page": 123
+  },
+  {
+    "chapter": 4,
+    "chapter_title": "Chapter Four: Special Days",
+    "unit": 3,
+    "question": "The food is _______",
+    "options": [
+      "tasty",
+      "sad"
+    ],
+    "answer": 0,
+    "pdf_page": 123
+  },
+  {
+    "chapter": 4,
+    "chapter_title": "Chapter Four: Special Days",
+    "unit": 3,
+    "question": "I am ________ a poem next month.",
+    "options": [
+      "writing",
+      "eating"
+    ],
+    "answer": 0,
+    "pdf_page": 123
+  },
+  {
+    "chapter": 4,
+    "chapter_title": "Chapter Four: Special Days",
+    "unit": 3,
+    "question": "We are _______ our friends at 2 o'clock.",
+    "options": [
+      "exciting",
+      "meeting"
+    ],
+    "answer": 1,
+    "pdf_page": 123
+  },
+  {
+    "chapter": 5,
+    "chapter_title": "Chapter Five: Your Look",
+    "unit": 1,
+    "question": "The book Leo Africanus is written by?",
+    "options": [
+      "Ghazi Amin",
+      "Amin Malouf"
+    ],
+    "answer": 1,
+    "pdf_page": 133
+  },
+  {
+    "chapter": 5,
+    "chapter_title": "Chapter Five: Your Look",
+    "unit": 1,
+    "question": "Lionel Messi is one of the most ________ .",
+    "options": [
+      "artists",
+      "footballer"
+    ],
+    "answer": 1,
+    "pdf_page": 133
+  },
+  {
+    "chapter": 5,
+    "chapter_title": "Chapter Five: Your Look",
+    "unit": 1,
+    "question": "The nose is located on the _______ part of the body.",
+    "options": [
+      "face",
+      "lower"
+    ],
+    "answer": 0,
+    "pdf_page": 133
+  },
+  {
+    "chapter": 5,
+    "chapter_title": "Chapter Five: Your Look",
+    "unit": 1,
+    "question": "The upper and lower lips are located on the ________ .",
+    "options": [
+      "mouth",
+      "legs"
+    ],
+    "answer": 0,
+    "pdf_page": 133
+  },
+  {
+    "chapter": 5,
+    "chapter_title": "Chapter Five: Your Look",
+    "unit": 2,
+    "question": "Ahmed is ______ (old) than Khaled.",
+    "options": [
+      "oldest",
+      "older"
+    ],
+    "answer": 1,
+    "pdf_page": 144
+  },
+  {
+    "chapter": 5,
+    "chapter_title": "Chapter Five: Your Look",
+    "unit": 2,
+    "question": "He is _______ (good) than Ali.",
+    "options": [
+      "better",
+      "good"
+    ],
+    "answer": 0,
+    "pdf_page": 144
+  },
+  {
+    "chapter": 5,
+    "chapter_title": "Chapter Five: Your Look",
+    "unit": 2,
+    "question": "My father is _______ (great) person in the world.",
+    "options": [
+      "the greatest",
+      "greater"
+    ],
+    "answer": 0,
+    "pdf_page": 144
+  },
+  {
+    "chapter": 5,
+    "chapter_title": "Chapter Five: Your Look",
+    "unit": 2,
+    "question": "COVID-19 is ________ (bad) disease ever.",
+    "options": [
+      "worse",
+      "the worst"
+    ],
+    "answer": 1,
+    "pdf_page": 144
+  },
+  {
+    "chapter": 5,
+    "chapter_title": "Chapter Five: Your Look",
+    "unit": 3,
+    "question": "You can touch your mouth with your elbow.",
+    "options": [
+      "False",
+      "True"
+    ],
+    "answer": 0,
+    "pdf_page": 155
+  },
+  {
+    "chapter": 5,
+    "chapter_title": "Chapter Five: Your Look",
+    "unit": 3,
+    "question": "What is he like?",
+    "options": [
+      "He is hungry.",
+      "He is tall."
+    ],
+    "answer": 0,
+    "pdf_page": 155
+  },
+  {
+    "chapter": 5,
+    "chapter_title": "Chapter Five: Your Look",
+    "unit": 3,
+    "question": "What does he look like?",
+    "options": [
+      "He is busy.",
+      "He is short."
+    ],
+    "answer": 1,
+    "pdf_page": 155
+  },
+  {
+    "chapter": 5,
+    "chapter_title": "Chapter Five: Your Look",
+    "unit": 3,
+    "question": "Which question is correct?",
+    "options": [
+      "Has he got long hair?",
+      "He has got long hair?"
+    ],
+    "answer": 0,
+    "pdf_page": 155
+  },
+  {
+    "chapter": 6,
+    "chapter_title": "Chapter Six: Going Away",
+    "unit": 1,
+    "question": "I ________ to take my son to school.",
+    "options": [
+      "intend",
+      "will"
+    ],
+    "answer": 0,
+    "pdf_page": 168
+  },
+  {
+    "chapter": 6,
+    "chapter_title": "Chapter Six: Going Away",
+    "unit": 2,
+    "question": "The adjective \"crowded\" means:",
+    "options": [
+      "too many people",
+      "no one there"
+    ],
+    "answer": 0,
+    "pdf_page": 179
+  },
+  {
+    "chapter": 6,
+    "chapter_title": "Chapter Six: Going Away",
+    "unit": 2,
+    "question": "The adjective \"peaceful\" means:",
+    "options": [
+      "quiet",
+      "noisy"
+    ],
+    "answer": 0,
+    "pdf_page": 179
+  },
+  {
+    "chapter": 6,
+    "chapter_title": "Chapter Six: Going Away",
+    "unit": 2,
+    "question": "According to the text, holiday journeys can be _____",
+    "options": [
+      "good",
+      "a nightmare"
+    ],
+    "answer": 1,
+    "pdf_page": 179
+  },
+  {
+    "chapter": 6,
+    "chapter_title": "Chapter Six: Going Away",
+    "unit": 3,
+    "question": "I think it ______ fly tomorrow.",
+    "options": [
+      "go",
+      "will"
+    ],
+    "answer": 1,
+    "pdf_page": 192
+  },
+  {
+    "chapter": 6,
+    "chapter_title": "Chapter Six: Going Away",
+    "unit": 3,
+    "question": "Ali ______ go to the school next week.",
+    "options": [
+      "won't",
+      "want"
+    ],
+    "answer": 0,
+    "pdf_page": 192
+  },
+  {
+    "chapter": 6,
+    "chapter_title": "Chapter Six: Going Away",
+    "unit": 3,
+    "question": "\"May I borrow your car?\" This sentence is a ________ .",
+    "options": [
+      "request",
+      "permission"
+    ],
+    "answer": 1,
+    "pdf_page": 192
+  },
+  {
+    "chapter": 6,
+    "chapter_title": "Chapter Six: Going Away",
+    "unit": 3,
+    "question": "\"Could you give me your phone?\" This question is a __________ .",
+    "options": [
+      "request",
+      "permission"
+    ],
+    "answer": 0,
+    "pdf_page": 192
+  },
+  {
+    "chapter": 7,
+    "chapter_title": "Chapter Seven: Success",
+    "unit": 1,
+    "question": "If you want to write _______ you need to be a writer.",
+    "options": [
+      "a book",
+      "message"
+    ],
+    "answer": 0,
+    "pdf_page": 203
+  },
+  {
+    "chapter": 7,
+    "chapter_title": "Chapter Seven: Success",
+    "unit": 1,
+    "question": "Does success need hard workers to be fulfilled?",
+    "options": [
+      "Yes, it is.",
+      "No, it isn't."
+    ],
+    "answer": 0,
+    "pdf_page": 203
+  },
+  {
+    "chapter": 7,
+    "chapter_title": "Chapter Seven: Success",
+    "unit": 1,
+    "question": "Rory McIlroy started playing when he was 10 years old.",
+    "options": [
+      "True",
+      "False"
+    ],
+    "answer": 1,
+    "pdf_page": 203
+  },
+  {
+    "chapter": 7,
+    "chapter_title": "Chapter Seven: Success",
+    "unit": 2,
+    "question": "Mansoor _______ a police officer before he retired.",
+    "options": [
+      "were",
+      "was"
+    ],
+    "answer": 1,
+    "pdf_page": 215
+  },
+  {
+    "chapter": 7,
+    "chapter_title": "Chapter Seven: Success",
+    "unit": 2,
+    "question": "There _____ any active volcanoes in the past years.",
+    "options": [
+      "were not",
+      "are not"
+    ],
+    "answer": 0,
+    "pdf_page": 215
+  },
+  {
+    "chapter": 7,
+    "chapter_title": "Chapter Seven: Success",
+    "unit": 2,
+    "question": "He _______ four kilometers yesterday.",
+    "options": [
+      "walk",
+      "walked"
+    ],
+    "answer": 1,
+    "pdf_page": 215
+  },
+  {
+    "chapter": 7,
+    "chapter_title": "Chapter Seven: Success",
+    "unit": 3,
+    "question": "______ you ever been in the UK?",
+    "options": [
+      "has",
+      "have"
+    ],
+    "answer": 1,
+    "pdf_page": 227
+  },
+  {
+    "chapter": 7,
+    "chapter_title": "Chapter Seven: Success",
+    "unit": 3,
+    "question": "He ______ been in Riyadh ever.",
+    "options": [
+      "isn't",
+      "hasn't"
+    ],
+    "answer": 1,
+    "pdf_page": 227
+  },
+  {
+    "chapter": 7,
+    "chapter_title": "Chapter Seven: Success",
+    "unit": 3,
+    "question": "According to the audio, Ameet has the ambition to become ________.",
+    "options": [
+      "rich",
+      "a writer"
+    ],
+    "answer": 0,
+    "pdf_page": 227
+  },
+  {
+    "chapter": 8,
+    "chapter_title": "Chapter Eight: Places to Live",
+    "unit": 1,
+    "question": "_____ is the city of Damascus?",
+    "options": [
+      "How much",
+      "How old"
+    ],
+    "answer": 1,
+    "pdf_page": 238
+  },
+  {
+    "chapter": 8,
+    "chapter_title": "Chapter Eight: Places to Live",
+    "unit": 1,
+    "question": "There _____ any active volcanoes in South Africa.",
+    "options": [
+      "isn't",
+      "aren't"
+    ],
+    "answer": 1,
+    "pdf_page": 238
+  },
+  {
+    "chapter": 8,
+    "chapter_title": "Chapter Eight: Places to Live",
+    "unit": 1,
+    "question": "_____ does a male African elephant weigh on average?",
+    "options": [
+      "How much",
+      "How many"
+    ],
+    "answer": 0,
+    "pdf_page": 238
+  },
+  {
+    "chapter": 8,
+    "chapter_title": "Chapter Eight: Places to Live",
+    "unit": 1,
+    "question": "There _____ a few volcanoes; for example, the Salpeterkop volcano.",
+    "options": [
+      "is",
+      "are"
+    ],
+    "answer": 1,
+    "pdf_page": 238
+  },
+  {
+    "chapter": 8,
+    "chapter_title": "Chapter Eight: Places to Live",
+    "unit": 2,
+    "question": "Khaled is ___ engineer.",
+    "options": [
+      "a",
+      "an"
+    ],
+    "answer": 1,
+    "pdf_page": 250
+  },
+  {
+    "chapter": 8,
+    "chapter_title": "Chapter Eight: Places to Live",
+    "unit": 2,
+    "question": "A traffic light has three different colors: red, yellow and ____.",
+    "options": [
+      "blue",
+      "green"
+    ],
+    "answer": 1,
+    "pdf_page": 250
+  },
+  {
+    "chapter": 8,
+    "chapter_title": "Chapter Eight: Places to Live",
+    "unit": 2,
+    "question": "Ali is ___ smartest student in this class.",
+    "options": [
+      "the",
+      "are"
+    ],
+    "answer": 0,
+    "pdf_page": 250
+  },
+  {
+    "chapter": 8,
+    "chapter_title": "Chapter Eight: Places to Live",
+    "unit": 3,
+    "question": "_____ cities in Saudi Arabia?",
+    "options": [
+      "How much",
+      "How many"
+    ],
+    "answer": 1,
+    "pdf_page": 261
+  },
+  {
+    "chapter": 8,
+    "chapter_title": "Chapter Eight: Places to Live",
+    "unit": 3,
+    "question": "There are _____ shops.",
+    "options": [
+      "a lot",
+      "a few"
+    ],
+    "answer": 1,
+    "pdf_page": 261
+  },
+  {
+    "chapter": 8,
+    "chapter_title": "Chapter Eight: Places to Live",
+    "unit": 3,
+    "question": "__________ money do you have?",
+    "options": [
+      "How much",
+      "How many"
+    ],
+    "answer": 0,
+    "pdf_page": 261
+  },
+  {
+    "chapter": 8,
+    "chapter_title": "Chapter Eight: Places to Live",
+    "unit": 3,
+    "question": "There is _____ of rain.",
+    "options": [
+      "a lot",
+      "a few"
+    ],
+    "answer": 0,
+    "pdf_page": 261
+  },
+  {
+    "chapter": 9,
+    "chapter_title": "Chapter Nine: Old and New",
+    "unit": 1,
+    "question": "In the UK, how did people heat water to wash their clothes?",
+    "options": [
+      "They heated it in an oven.",
+      "They heated it on a wood fire in the kitchen."
+    ],
+    "answer": 1,
+    "pdf_page": 271
+  },
+  {
+    "chapter": 9,
+    "chapter_title": "Chapter Nine: Old and New",
+    "unit": 1,
+    "question": "In the Middle East, why did houses have 'wind towers'?",
+    "options": [
+      "to keep the air moving",
+      "to make the water flow"
+    ],
+    "answer": 0,
+    "pdf_page": 271
+  },
+  {
+    "chapter": 9,
+    "chapter_title": "Chapter Nine: Old and New",
+    "unit": 1,
+    "question": "What is the most popular entertainment nowadays?",
+    "options": [
+      "TVs and computers",
+      "football"
+    ],
+    "answer": 0,
+    "pdf_page": 271
+  },
+  {
+    "chapter": 9,
+    "chapter_title": "Chapter Nine: Old and New",
+    "unit": 2,
+    "question": "It _______ rain until January.",
+    "options": [
+      "will",
+      "won't"
+    ],
+    "answer": 1,
+    "pdf_page": 283
+  },
+  {
+    "chapter": 9,
+    "chapter_title": "Chapter Nine: Old and New",
+    "unit": 2,
+    "question": "You _____ hurt yourself. (possibility)",
+    "options": [
+      "might",
+      "will"
+    ],
+    "answer": 0,
+    "pdf_page": 283
+  },
+  {
+    "chapter": 9,
+    "chapter_title": "Chapter Nine: Old and New",
+    "unit": 2,
+    "question": "You _____ go to the university after graduation.",
+    "options": [
+      "will",
+      "are"
+    ],
+    "answer": 0,
+    "pdf_page": 283
+  },
+  {
+    "chapter": 9,
+    "chapter_title": "Chapter Nine: Old and New",
+    "unit": 3,
+    "question": "The opposite of the word \"difficult\" is _____ .",
+    "options": [
+      "hard",
+      "easy"
+    ],
+    "answer": 1,
+    "pdf_page": 292
+  },
+  {
+    "chapter": 9,
+    "chapter_title": "Chapter Nine: Old and New",
+    "unit": 3,
+    "question": "___ you pass the exam, you ___ get the certificate.",
+    "options": [
+      "if, will",
+      "will, if"
+    ],
+    "answer": 0,
+    "pdf_page": 292
+  },
+  {
+    "chapter": 9,
+    "chapter_title": "Chapter Nine: Old and New",
+    "unit": 3,
+    "question": "____ I get a better job, I _____ buy a house.",
+    "options": [
+      "when, will",
+      "will, when"
+    ],
+    "answer": 0,
+    "pdf_page": 292
+  },
+  {
+    "chapter": 10,
+    "chapter_title": "Chapter Ten: Take Care!",
+    "unit": 1,
+    "question": "As I _____ (drive) to a friend's house last week.",
+    "options": [
+      "were driving",
+      "was driving"
+    ],
+    "answer": 1,
+    "pdf_page": 302
+  },
+  {
+    "chapter": 10,
+    "chapter_title": "Chapter Ten: Take Care!",
+    "unit": 1,
+    "question": "I think the animals _____ (escape) without any injuries.",
+    "options": [
+      "were escaping",
+      "was escape"
+    ],
+    "answer": 0,
+    "pdf_page": 302
+  },
+  {
+    "chapter": 10,
+    "chapter_title": "Chapter Ten: Take Care!",
+    "unit": 1,
+    "question": "Ali and Saad _____ watching TV yesterday.",
+    "options": [
+      "was",
+      "were"
+    ],
+    "answer": 1,
+    "pdf_page": 302
+  },
+  {
+    "chapter": 10,
+    "chapter_title": "Chapter Ten: Take Care!",
+    "unit": 1,
+    "question": "Sara was _______ the house two hours ago.",
+    "options": [
+      "cleaning",
+      "clean"
+    ],
+    "answer": 0,
+    "pdf_page": 302
+  },
+  {
+    "chapter": 10,
+    "chapter_title": "Chapter Ten: Take Care!",
+    "unit": 2,
+    "question": "\"Painful\" is describing the word ____.",
+    "options": [
+      "Money",
+      "Hurt"
+    ],
+    "answer": 1,
+    "pdf_page": 312
+  },
+  {
+    "chapter": 10,
+    "chapter_title": "Chapter Ten: Take Care!",
+    "unit": 2,
+    "question": "________ is something that hurts in your head.",
+    "options": [
+      "Headache",
+      "Stomachache"
+    ],
+    "answer": 0,
+    "pdf_page": 312
+  },
+  {
+    "chapter": 10,
+    "chapter_title": "Chapter Ten: Take Care!",
+    "unit": 2,
+    "question": "When your body is hot, that means you've got a ______.",
+    "options": [
+      "Cough",
+      "Fever"
+    ],
+    "answer": 1,
+    "pdf_page": 312
+  },
+  {
+    "chapter": 10,
+    "chapter_title": "Chapter Ten: Take Care!",
+    "unit": 3,
+    "question": "____ they ______ to work together?",
+    "options": [
+      "Does – used to",
+      "Do – use to"
+    ],
+    "answer": 1,
+    "pdf_page": 321
+  },
+  {
+    "chapter": 10,
+    "chapter_title": "Chapter Ten: Take Care!",
+    "unit": 3,
+    "question": "Saad ________ drive the car without a driving license.",
+    "options": [
+      "never used to",
+      "use to"
+    ],
+    "answer": 0,
+    "pdf_page": 321
+  },
+  {
+    "chapter": 10,
+    "chapter_title": "Chapter Ten: Take Care!",
+    "unit": 3,
+    "question": "Ali _________ eat eggs for breakfast.",
+    "options": [
+      "used to",
+      "use to"
+    ],
+    "answer": 0,
+    "pdf_page": 321
+  },
+  {
+    "chapter": 11,
+    "chapter_title": "Chapter Eleven: The Best Things",
+    "unit": 1,
+    "question": "The opposite of the word \"useful\" is _____",
+    "options": [
+      "Useless",
+      "Use"
+    ],
+    "answer": 0,
+    "pdf_page": 330
+  },
+  {
+    "chapter": 11,
+    "chapter_title": "Chapter Eleven: The Best Things",
+    "unit": 1,
+    "question": "________ means the interests which you love.",
+    "options": [
+      "Job",
+      "Hobbies"
+    ],
+    "answer": 1,
+    "pdf_page": 330
+  },
+  {
+    "chapter": 11,
+    "chapter_title": "Chapter Eleven: The Best Things",
+    "unit": 1,
+    "question": "A hairdresser is the person who fixes the ______",
+    "options": [
+      "Face",
+      "Hair"
+    ],
+    "answer": 1,
+    "pdf_page": 330
+  },
+  {
+    "chapter": 11,
+    "chapter_title": "Chapter Eleven: The Best Things",
+    "unit": 2,
+    "question": "_____ you _____ some water?",
+    "options": [
+      "will - like",
+      "would - like"
+    ],
+    "answer": 1,
+    "pdf_page": 342
+  },
+  {
+    "chapter": 11,
+    "chapter_title": "Chapter Eleven: The Best Things",
+    "unit": 2,
+    "question": "I ______ going to the swimming pool.",
+    "options": [
+      "love",
+      "will"
+    ],
+    "answer": 0,
+    "pdf_page": 342
+  },
+  {
+    "chapter": 11,
+    "chapter_title": "Chapter Eleven: The Best Things",
+    "unit": 2,
+    "question": "________ to watch TV.",
+    "options": [
+      "I like",
+      "I'd like"
+    ],
+    "answer": 1,
+    "pdf_page": 342
+  },
+  {
+    "chapter": 11,
+    "chapter_title": "Chapter Eleven: The Best Things",
+    "unit": 3,
+    "question": "I ______ go to the moon, if I ______ the chance.",
+    "options": [
+      "would – had",
+      "went – had"
+    ],
+    "answer": 0,
+    "pdf_page": 353
+  },
+  {
+    "chapter": 11,
+    "chapter_title": "Chapter Eleven: The Best Things",
+    "unit": 3,
+    "question": "____ he went to England, he ______ learn English.",
+    "options": [
+      "when – give",
+      "if – would"
+    ],
+    "answer": 1,
+    "pdf_page": 353
+  },
+  {
+    "chapter": 11,
+    "chapter_title": "Chapter Eleven: The Best Things",
+    "unit": 3,
+    "question": "____ you got the chance to go to the island, what ______ you take with you?",
+    "options": [
+      "when – give",
+      "if – would"
+    ],
+    "answer": 1,
+    "pdf_page": 353
+  },
+  {
+    "chapter": 12,
+    "chapter_title": "Chapter Twelve: Brand New",
+    "unit": 1,
+    "question": "KFC fast food restaurant _____ (find) in more than 100 countries worldwide.",
+    "options": [
+      "found",
+      "finds"
+    ],
+    "answer": 0,
+    "pdf_page": 366
+  },
+  {
+    "chapter": 12,
+    "chapter_title": "Chapter Twelve: Brand New",
+    "unit": 1,
+    "question": "The sportswear company Puma is _________ (name) 1998.",
+    "options": [
+      "name",
+      "named"
+    ],
+    "answer": 1,
+    "pdf_page": 366
+  },
+  {
+    "chapter": 12,
+    "chapter_title": "Chapter Twelve: Brand New",
+    "unit": 1,
+    "question": "Hershey's _______ (describe) as the greatest American chocolate bar.",
+    "options": [
+      "describes",
+      "described"
+    ],
+    "answer": 1,
+    "pdf_page": 366
+  },
+  {
+    "chapter": 12,
+    "chapter_title": "Chapter Twelve: Brand New",
+    "unit": 1,
+    "question": "Millions of iPods _____ (sell) every year around the world.",
+    "options": [
+      "sold",
+      "sell"
+    ],
+    "answer": 0,
+    "pdf_page": 366
+  },
+  {
+    "chapter": 12,
+    "chapter_title": "Chapter Twelve: Brand New",
+    "unit": 2,
+    "question": "(Dragons' Den is a TV series in the UK. In each programme, several people present their new products and business ideas to five rich and successful businesspeople, called the 'dragons'. A man called Roots developed a sauce from a traditional Jamaican recipe and called it Reggae Reggae Sauce. He desperately needed investment, as he only had £20 left. The 'dragons' invested in his product and now his business is worth over £30 million.) The name of the series is ________",
+    "options": [
+      "Dragons' Den",
+      "Reggae"
+    ],
+    "answer": 0,
+    "pdf_page": 377
+  },
+  {
+    "chapter": 12,
+    "chapter_title": "Chapter Twelve: Brand New",
+    "unit": 2,
+    "question": "(Dragons' Den is a TV series in the UK. In each programme, several people present their new products and business ideas to five rich and successful businesspeople, called the 'dragons'. A man called Roots developed a sauce from a traditional Jamaican recipe and called it Reggae Reggae Sauce. He desperately needed investment, as he only had £20 left. The 'dragons' invested in his product and now his business is worth over £30 million.) How much money did Roots have left?",
+    "options": [
+      "£30 million",
+      "£20"
+    ],
+    "answer": 1,
+    "pdf_page": 377
+  },
+  {
+    "chapter": 12,
+    "chapter_title": "Chapter Twelve: Brand New",
+    "unit": 2,
+    "question": "(Dragons' Den is a TV series in the UK. In each programme, several people present their new products and business ideas to five rich and successful businesspeople, called the 'dragons'. A man called Roots developed a sauce from a traditional Jamaican recipe and called it Reggae Reggae Sauce. He desperately needed investment, as he only had £20 left. The 'dragons' invested in his product and now his business is worth over £30 million.) What is the nationality of the sauce's inventor?",
+    "options": [
+      "British",
+      "Jamaican"
+    ],
+    "answer": 1,
+    "pdf_page": 377
+  },
+  {
+    "chapter": 12,
+    "chapter_title": "Chapter Twelve: Brand New",
+    "unit": 2,
+    "question": "(Dragons' Den is a TV series in the UK. In each programme, several people present their new products and business ideas to five rich and successful businesspeople, called the 'dragons'. A man called Roots developed a sauce from a traditional Jamaican recipe and called it Reggae Reggae Sauce. He desperately needed investment, as he only had £20 left. The 'dragons' invested in his product and now his business is worth over £30 million.) What is the nationality of the series?",
+    "options": [
+      "British",
+      "Jamaican"
+    ],
+    "answer": 0,
+    "pdf_page": 377
+  },
+  {
+    "chapter": 12,
+    "chapter_title": "Chapter Twelve: Brand New",
+    "unit": 3,
+    "question": "The disposable razor ___________ 100 years ago.",
+    "options": [
+      "invented",
+      "was invented"
+    ],
+    "answer": 1,
+    "pdf_page": 388
+  },
+  {
+    "chapter": 12,
+    "chapter_title": "Chapter Twelve: Brand New",
+    "unit": 3,
+    "question": "The window _____________ by Fatima yesterday.",
+    "options": [
+      "is broken",
+      "was broken"
+    ],
+    "answer": 1,
+    "pdf_page": 388
+  },
+  {
+    "chapter": 12,
+    "chapter_title": "Chapter Twelve: Brand New",
+    "unit": 3,
+    "question": "The TVs ____________ invented years ago.",
+    "options": [
+      "was",
+      "were"
+    ],
+    "answer": 1,
+    "pdf_page": 388
+  },
+  {
+    "chapter": 13,
+    "chapter_title": "Chapter Thirteen: The Right Person",
+    "unit": 1,
+    "question": "(Saif: 'People spend more and more time online now, and for some people it's a big part of their lives. I have friends who I see in real life, and I have friends who I only talk to online. I think it's healthy to have both.') People spend hours using ________.",
+    "options": [
+      "the internet",
+      "books"
+    ],
+    "answer": 0,
+    "pdf_page": 400
+  },
+  {
+    "chapter": 13,
+    "chapter_title": "Chapter Thirteen: The Right Person",
+    "unit": 1,
+    "question": "(Saif: 'People spend more and more time online now, and for some people it's a big part of their lives. I have friends who I see in real life, and I have friends who I only talk to online. I think it's healthy to have both.') Saif has no friends online.",
+    "options": [
+      "true",
+      "false"
+    ],
+    "answer": 1,
+    "pdf_page": 400
+  },
+  {
+    "chapter": 13,
+    "chapter_title": "Chapter Thirteen: The Right Person",
+    "unit": 2,
+    "question": "_________ has Faisal been working with us?",
+    "options": [
+      "How long",
+      "Since"
+    ],
+    "answer": 0,
+    "pdf_page": 410
+  },
+  {
+    "chapter": 13,
+    "chapter_title": "Chapter Thirteen: The Right Person",
+    "unit": 2,
+    "question": "He has been living with Ahmed ________ he came to Abha.",
+    "options": [
+      "for",
+      "since"
+    ],
+    "answer": 1,
+    "pdf_page": 410
+  },
+  {
+    "chapter": 13,
+    "chapter_title": "Chapter Thirteen: The Right Person",
+    "unit": 2,
+    "question": "I have been living here ____ about three weeks.",
+    "options": [
+      "for",
+      "since"
+    ],
+    "answer": 0,
+    "pdf_page": 410
+  },
+  {
+    "chapter": 13,
+    "chapter_title": "Chapter Thirteen: The Right Person",
+    "unit": 3,
+    "question": "We ____________ for more than two hours.",
+    "options": [
+      "have been waiting",
+      "have waited"
+    ],
+    "answer": 0,
+    "pdf_page": 421
+  },
+  {
+    "chapter": 13,
+    "chapter_title": "Chapter Thirteen: The Right Person",
+    "unit": 3,
+    "question": "I _________________ for hundreds of jobs.",
+    "options": [
+      "have been applied",
+      "have applied"
+    ],
+    "answer": 1,
+    "pdf_page": 421
+  },
+  {
+    "chapter": 13,
+    "chapter_title": "Chapter Thirteen: The Right Person",
+    "unit": 3,
+    "question": "I ____________ to work in a restaurant all my life.",
+    "options": [
+      "have wanted",
+      "have been wanting"
+    ],
+    "answer": 0,
+    "pdf_page": 421
+  },
+  {
+    "chapter": 14,
+    "chapter_title": "Chapter Fourteen: Money",
+    "unit": 1,
+    "question": "He only answered the exam because he _________ the book.",
+    "options": [
+      "had read",
+      "read"
+    ],
+    "answer": 0,
+    "pdf_page": 432
+  },
+  {
+    "chapter": 14,
+    "chapter_title": "Chapter Fourteen: Money",
+    "unit": 1,
+    "question": "I ___________ my phone 3 years before it finally died.",
+    "options": [
+      "had owned",
+      "have owned"
+    ],
+    "answer": 0,
+    "pdf_page": 432
+  },
+  {
+    "chapter": 14,
+    "chapter_title": "Chapter Fourteen: Money",
+    "unit": 1,
+    "question": "He __________ the book in 2019 before he moved to the UK in 2022.",
+    "options": [
+      "had written",
+      "have written"
+    ],
+    "answer": 0,
+    "pdf_page": 432
+  },
+  {
+    "chapter": 14,
+    "chapter_title": "Chapter Fourteen: Money",
+    "unit": 2,
+    "question": "For thousands of years people from China to _____ and Africa were using shells.",
+    "options": [
+      "Saudi Arabia",
+      "Arabia"
+    ],
+    "answer": 1,
+    "pdf_page": 444
+  },
+  {
+    "chapter": 14,
+    "chapter_title": "Chapter Fourteen: Money",
+    "unit": 2,
+    "question": "Which money is made of silver and gold?",
+    "options": [
+      "coins",
+      "cash"
+    ],
+    "answer": 0,
+    "pdf_page": 444
+  },
+  {
+    "chapter": 14,
+    "chapter_title": "Chapter Fourteen: Money",
+    "unit": 2,
+    "question": "The idea of bank notes comes from ________ in the 14th century.",
+    "options": [
+      "America",
+      "China"
+    ],
+    "answer": 1,
+    "pdf_page": 444
+  },
+  {
+    "chapter": 14,
+    "chapter_title": "Chapter Fourteen: Money",
+    "unit": 3,
+    "question": "A man in Germany _________ a horrible surprise when...",
+    "options": [
+      "had",
+      "was having"
+    ],
+    "answer": 0,
+    "pdf_page": 455
+  },
+  {
+    "chapter": 14,
+    "chapter_title": "Chapter Fourteen: Money",
+    "unit": 3,
+    "question": "When he ___________ his email one morning...",
+    "options": [
+      "had checked",
+      "was checking"
+    ],
+    "answer": 1,
+    "pdf_page": 455
+  },
+  {
+    "chapter": 14,
+    "chapter_title": "Chapter Fourteen: Money",
+    "unit": 3,
+    "question": "Thomas, aged 22, found he ________ items worth nearly $1 million in his bank account.",
+    "options": [
+      "had bought",
+      "was buying"
+    ],
+    "answer": 0,
+    "pdf_page": 455
+  }
+]

@@ -18,7 +18,7 @@
                         <span class="card-meta">{{ subject["chapters"] }} فصول · {{ subject["questions"] }} سؤال</span>
                     </div>
                     <div>
-                        <h2 class="card-title">{{ subject["name"] }}</h2>
+                        <h2 class="card-title" dir="auto">{{ subject["name"] }}</h2>
                     </div>
                     <div>
                         <progress class="bar" value="{{ subject['done'] }}" max="{{ subject['chapters'] or 1 }}">{{ subject["done"] }} من {{ subject["chapters"] }}</progress>
@@ -35,7 +35,7 @@
                 <div class="stat">
                     <span class="stat-label">آخر اختبار</span>
                     {% if last_result %}
-                        <span class="stat-title">{{ last_result["name"] }}</span>
+                        <span class="stat-title" dir="auto">{{ last_result["name"] }}</span>
                     {% else %}
                         <span class="stat-title">ما سويت اختبار للحين</span>
                     {% endif %}

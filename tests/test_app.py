@@ -320,7 +320,7 @@ def test_answers_hidden_until_submitted(client):
 def test_wrong_answer_shows_correct_one(client, logged_in):
     response = client.post("/chapters/1", data={"q1": "21", "q2": "443"})
     page = response.get_data(as_text=True)
-    assert "الصح: <strong>22</strong>" in page
+    assert 'الصح: <strong dir="auto">22</strong>' in page
     assert "صفحة 1 في الكتاب" in page
 
 
@@ -414,3 +414,11 @@ def test_visitor_sees_landing_page(client):
     assert "ذاكر موادك" in page
     assert 'href="/register"' in page
     assert "Test subject" not in page
+
+
+def test_english_text_is_left_to_right():
+    from app import is_ltr
+
+    assert is_ltr("I ______ a book.")
+    assert not is_ltr("ما هو أمن البرمجيات؟")
+    assert not is_ltr("Firefox متصفح")
