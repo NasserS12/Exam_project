@@ -7,8 +7,12 @@
     <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="{{ url_for('static', filename='js/effects.js') }}" defer></script>
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon-32.png') }}" sizes="32x32" type="image/png">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.svg') }}" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
     {% block head %}{% endblock %}
 </head>
+
 <body>
     <div class="page-glow" aria-hidden="true"></div>
     <div class="page-grid" aria-hidden="true"></div>
