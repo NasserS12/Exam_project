@@ -1,6 +1,8 @@
 import json
 import os
+import time
 from pathlib import Path
+from unittest.mock import patch
 
 import pytest
 
@@ -72,6 +74,31 @@ def test_tampered_session_is_ignored(client):
     assert response.status_code == 200
     assert "ذاكر موادك" in page
     assert "مرحباً" not in page
+
+
+def test_session_expires_after_two_hours_idle(client):
+    register_user(client)
+    login_user(client)
+    cookie = client.get_cookie("session")
+    assert cookie.expires is not None
+
+    future = time.time() + 2 * 60 * 60 + 60
+    with patch("itsdangerous.timed.time.time", return_value=future):
+        client.set_cookie("session", cookie.value)
+        page = client.get("/").get_data(as_text=True)
+    assert "مرحباً" not in page
+
+
+def test_session_stays_active_before_timeout(client):
+    register_user(client)
+    login_user(client)
+    cookie = client.get_cookie("session")
+
+    future = time.time() + 60 * 60
+    with patch("itsdangerous.timed.time.time", return_value=future):
+        client.set_cookie("session", cookie.value)
+        page = client.get("/").get_data(as_text=True)
+    assert "مرحباً nasser" in page
 
 
 def test_login_wrong_password(client):

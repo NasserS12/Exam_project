@@ -20,6 +20,7 @@ Each protection below was tested by attempting the attack first, then fixing it 
 | Accessing other users' data | User identity taken from the signed session only, never from the request |
 | Password theft | Passwords stored as salted scrypt hashes |
 | Password guessing (brute force) | Nginx rate limit on login and register: 10 attempts per minute per IP (burst of 20), then `429 Too Many Requests` |
+| Forgotten or stolen sessions | Sessions expire after 2 hours of inactivity, checked by the server from the signed cookie; old session data is cleared on login (prevents session fixation) |
 | User enumeration | One generic error message for failed logins |
 | Leaked secrets | Secrets in `.env` (ignored), Gitleaks before every commit and in CI |
 | Bad data | Input allow-lists in the app, plus `NOT NULL`, `UNIQUE`, `CHECK`, and foreign keys in the database |
@@ -211,5 +212,6 @@ pip-audit -r requirements.txt
 - [x] Daily database backups
 - [x] Backup restore test
 - [x] Login rate limiting
+- [x] Session expiry
 - [x] Dynamic security testing with ZAP
 - [ ] Monitoring with Grafana
