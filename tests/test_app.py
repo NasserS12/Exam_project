@@ -449,3 +449,11 @@ def test_english_text_is_left_to_right():
     assert is_ltr("I ______ a book.")
     assert not is_ltr("ما هو أمن البرمجيات؟")
     assert not is_ltr("Firefox متصفح")
+
+
+def test_page_title_includes_site_name(client):
+    page = client.get("/login").get_data(as_text=True)
+    assert "<title>تسجيل الدخول · منصة الاختبارات</title>" in page
+
+    page = client.get("/").get_data(as_text=True)
+    assert "<title>منصة الاختبارات</title>" in page
