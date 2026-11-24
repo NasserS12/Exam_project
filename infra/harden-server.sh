@@ -15,7 +15,7 @@ if ! id ubuntu >/dev/null 2>&1; then
 fi
 
 apt-get update && apt-get upgrade -y
-ْapt-get install -y lynis fail2ban
+apt-get install -y lynis fail2ban
 
 cp "$SCRIPT_DIR/sshd-hardening.conf" /etc/ssh/sshd_config.d/00-hardening.conf
 sshd -t
