@@ -207,6 +207,6 @@ pip-audit -r requirements.txt
 - [x] Container image scanning in CI
 - [x] Automatic deployment
 - [x] Daily database backups
-- [ ] Backup restore test
+- [x] Backup restore test
 - [x] Dynamic security testing with ZAP
 - [ ] Monitoring with Grafana
