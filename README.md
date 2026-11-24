@@ -19,6 +19,7 @@ Each protection below was tested by attempting the attack first, then fixing it 
 | Cross-site request forgery (CSRF) | Flask-WTF tokens on every form, SameSite cookies |
 | Accessing other users' data | User identity taken from the signed session only, never from the request |
 | Password theft | Passwords stored as salted scrypt hashes |
+| Password guessing (brute force) | Nginx rate limit on login and register: 10 attempts per minute per IP (burst of 20), then `429 Too Many Requests` |
 | User enumeration | One generic error message for failed logins |
 | Leaked secrets | Secrets in `.env` (ignored), Gitleaks before every commit and in CI |
 | Bad data | Input allow-lists in the app, plus `NOT NULL`, `UNIQUE`, `CHECK`, and foreign keys in the database |
@@ -125,6 +126,7 @@ Nginx sits in front of the app as a reverse proxy. The app listens on `127.0.0.1
 - Domain: DuckDNS
 - Certificate: Let's Encrypt (certbot), renewed automatically
 - HTTP requests are redirected to HTTPS
+- Login and register submissions are rate limited per IP, before they reach the app. Only submissions count, not page views. The burst allows a class on one shared network to log in together
 - Session cookie is sent over HTTPS only (`SESSION_COOKIE_SECURE=1` in the server `.env`)
 
 To apply the Nginx config:
@@ -208,5 +210,6 @@ pip-audit -r requirements.txt
 - [x] Automatic deployment
 - [x] Daily database backups
 - [x] Backup restore test
+- [x] Login rate limiting
 - [x] Dynamic security testing with ZAP
 - [ ] Monitoring with Grafana
