@@ -65,7 +65,7 @@ On a hardened server:
 ```bash
 git clone https://github.com/NasserS12/Exam_project.git
 cd Exam_project
-git switch dev
+git switch main
 sudo bash infra/install-docker.sh
 
 cp .env.example .env
@@ -77,10 +77,10 @@ sudo docker compose up -d --build
 
 ### Automatic deployment
 
-The server pulls updates itself instead of GitHub pushing to it. A systemd timer runs `infra/deploy.sh` every 2 minutes. The script checks if `dev` has new commits, and if so, pulls them and rebuilds the containers.
+The server pulls updates itself instead of GitHub pushing to it. A systemd timer runs `infra/deploy.sh` every 2 minutes. The script checks if `main` has new commits, and if so, pulls them and rebuilds the containers. Day-to-day work is merged into `dev`, so the live site changes only when a release is merged into `main`.
 
 - No inbound access is opened for deployment, and no server credentials are stored in GitHub.
-- Only tested code is deployed, since `dev` is protected and accepts merges only after all checks pass.
+- Only tested code is deployed, since `main` is protected and accepts merges only after all checks pass.
 - The script refuses to deploy if the server has local changes (`git merge --ff-only`).
 
 To enable it:
@@ -147,7 +147,7 @@ sudo systemctl reload nginx
   - Running app: ZAP baseline scan (fails on any new warning)
   - Quality: Ruff, pytest
   - Security: Bandit, pip-audit, Gitleaks (full history)
-- **Continuous deployment:** the server deploys new commits on `dev` automatically.
+- **Continuous deployment:** the server deploys new releases on `main` automatically.
 - **Pre-commit hooks:** Ruff and Gitleaks run locally before every commit.
 - **Isolated tests:** each test runs on a freshly reset PostgreSQL database, in a local container and as a CI service container.
 - **Agile:** weekly sprints on a GitHub Projects board, each task linked to its pull request.

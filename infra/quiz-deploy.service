@@ -1,5 +1,5 @@
 [Unit]
-Description=Deploy the quiz platform when dev has new commits
+Description=Deploy the quiz platform when main has a new release
 After=network-online.target docker.service
 
 [Service]
