@@ -95,6 +95,29 @@ To see deployment logs:
 journalctl -u quiz-deploy.service
 ```
 
+### Database backups
+
+A systemd timer runs `infra/backup.sh` every night. The script dumps the PostgreSQL database with `pg_dump`, compresses it, and keeps the last 7 days.
+
+- The script uses `set -o pipefail`, so a failed dump stops the backup instead of saving an empty file.
+- The dump is written to a temporary file first, and renamed only after it succeeds.
+- Backups are stored outside the repository and readable only by the owner (`chmod 600`).
+- A copy is pulled daily to an off-server machine with `rsync`, so backups survive if the server is lost.
+
+To enable it:
+
+```bash
+sudo cp infra/quiz-backup.service infra/quiz-backup.timer /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now quiz-backup.timer
+```
+
+To see backup logs:
+
+```bash
+journalctl -u quiz-backup.service
+```
+
 ### HTTPS
 
 Nginx sits in front of the app as a reverse proxy. The app listens on `127.0.0.1:8000` only, so it is not reachable from outside directly.
@@ -183,5 +206,7 @@ pip-audit -r requirements.txt
 - [x] HTTPS with Nginx and Let's Encrypt
 - [x] Container image scanning in CI
 - [x] Automatic deployment
+- [x] Daily database backups
+- [ ] Backup restore test
 - [x] Dynamic security testing with ZAP
 - [ ] Monitoring with Grafana
