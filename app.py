@@ -1,5 +1,6 @@
 import os
 import re
+from datetime import timedelta
 from functools import wraps
 
 import psycopg
@@ -16,6 +17,9 @@ app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 app.config["SESSION_COOKIE_SECURE"] = os.environ.get("SESSION_COOKIE_SECURE") == "1"
+
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(hours=2)
+
 csrf = CSRFProtect(app)
 
 USERNAME_PATTERN = re.compile(r"[A-Za-z][A-Za-z0-9_]{2,29}")
@@ -318,6 +322,7 @@ def login():
             return render_template("login.html", error=error), 401
 
         session.clear()
+        session.permanent = True
         session["user_id"] = user["id"]
         session["username"] = user["username"]
         return redirect("/")
