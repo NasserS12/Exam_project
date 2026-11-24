@@ -1,0 +1,8 @@
+[Unit]
+Description=Back up the quiz database
+After=docker.service
+
+[Service]
+Type=oneshot
+User=ubuntu
+ExecStart=/usr/bin/bash /home/ubuntu/Exam_project/infra/backup.sh
