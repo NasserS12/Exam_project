@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}نتائجي{% endblock %}
+
+{% block content %}
+    <div class="page-head rise">
+        <h1 class="grad-text">نتائجي</h1>
+        <p>كل الاختبارات اللي سويتها، من الأحدث للأقدم.</p>
+    </div>
+
+    {% if results %}
+        <div class="table-wrap rise rise-2">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">الفصل</th>
+                        <th scope="col">النتيجة</th>
+                        <th scope="col">التاريخ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                        <tr>
+                            <td>
+                                {% if result["subject"] %}<span class="table-sub" dir="auto">{{ result["subject"] }}</span>{% endif %}
+                                <span dir="auto">{{ result["name"] }}</span>
+                            </td>
+                            <td>
+                                {% if result["score"] == result["total"] %}
+                                    <span class="chip chip-ok">{{ result["score"] }} من {{ result["total"] }}</span>
+                                {% else %}
+                                    <span class="chip">{{ result["score"] }} من {{ result["total"] }}</span>
+                                {% endif %}
+                            </td>
+                            <td class="muted">{{ result["created_at"].strftime("%Y-%m-%d %H:%M") }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <section class="card empty rise rise-2">
+            <p>ما حليت أي اختبار للحين.</p>
+            <a class="btn btn-primary" href="/">ابدأ من المواد</a>
+        </section>
+    {% endif %}
+{% endblock %}

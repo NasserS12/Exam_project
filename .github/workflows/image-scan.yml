@@ -1,0 +1,28 @@
+name: Image Scan
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  image-scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build image
+        run: docker build -t quiz-app:ci .
+
+      - name: Scan image with Trivy
+        run: >-
+          docker run --rm
+          -v /var/run/docker.sock:/var/run/docker.sock
+          aquasec/trivy:0.76.0
+          image
+          --severity HIGH,CRITICAL
+          --ignore-unfixed
+          --exit-code 1
+          quiz-app:ci

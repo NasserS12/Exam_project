@@ -1,0 +1,356 @@
+import os
+import re
+from datetime import timedelta
+from functools import wraps
+
+import psycopg
+from flask import Flask, abort, redirect, render_template, request, session
+from flask_wtf.csrf import CSRFProtect
+from werkzeug.middleware.proxy_fix import ProxyFix
+from werkzeug.security import check_password_hash, generate_password_hash
+
+from db import get_connection
+
+app = Flask(__name__)
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
+
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+app.config["SESSION_COOKIE_SECURE"] = os.environ.get("SESSION_COOKIE_SECURE") == "1"
+
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(hours=2)
+
+csrf = CSRFProtect(app)
+
+USERNAME_PATTERN = re.compile(r"[A-Za-z][A-Za-z0-9_]{2,29}")
+
+
+def login_required(view):
+    @wraps(view)
+    def wrapped(*args, **kwargs):
+        if session.get("user_id") is None:
+            return redirect("/login")
+        return view(*args, **kwargs)
+
+    return wrapped
+
+
+SECURITY_HEADERS = {
+    "Content-Security-Policy": (
+        "default-src 'self'; "
+        "object-src 'none'; "
+        "base-uri 'self'; "
+        "form-action 'self'; "
+        "frame-ancestors 'none'"
+    ),
+    "X-Frame-Options": "DENY",
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+    "Cross-Origin-Opener-Policy": "same-origin",
+    "Cross-Origin-Resource-Policy": "same-origin",
+    "Cross-Origin-Embedder-Policy": "require-corp",
+}
+
+
+@app.after_request
+def add_security_headers(response):
+    for name, value in SECURITY_HEADERS.items():
+        response.headers[name] = value
+    return response
+
+
+ARABIC_LETTER = re.compile(r"[\u0600-\u06FF]")
+
+
+@app.template_global()
+def is_ltr(text):
+    """True for text with no Arabic letters, like English questions."""
+    return not ARABIC_LETTER.search(text or "")
+
+
+def split_title(name):
+    """'الفصل الأول: مقدمة' -> ('الفصل الأول', 'مقدمة')."""
+    label, sep, title = name.partition(": ")
+    return (label, title) if sep else ("", name)
+
+
+@app.route("/")
+def home():
+    if session.get("user_id") is None:
+        return landing()
+
+    conn = get_connection()
+    subjects = conn.execute(
+        "SELECT subjects.id, subjects.name, "
+        "COUNT(DISTINCT chapters.id) AS chapters, COUNT(questions.id) AS questions "
+        "FROM subjects "
+        "LEFT JOIN chapters ON chapters.subject_id = subjects.id "
+        "LEFT JOIN questions ON questions.chapter_id = chapters.id "
+        "GROUP BY subjects.id ORDER BY subjects.id"
+    ).fetchall()
+
+    user_id = session["user_id"]
+    done_rows = conn.execute(
+        "SELECT chapters.subject_id, COUNT(DISTINCT results.chapter_id) AS done "
+        "FROM results JOIN chapters ON chapters.id = results.chapter_id "
+        "WHERE results.user_id = %s GROUP BY chapters.subject_id",
+        (user_id,),
+    ).fetchall()
+    last_result = conn.execute(
+        "SELECT chapters.name, results.score, results.total "
+        "FROM results JOIN chapters ON chapters.id = results.chapter_id "
+        "WHERE results.user_id = %s ORDER BY results.created_at DESC LIMIT 1",
+        (user_id,),
+    ).fetchone()
+    attempts = conn.execute(
+        "SELECT COUNT(*) AS n FROM results WHERE user_id = %s", (user_id,)
+    ).fetchone()["n"]
+    conn.close()
+
+    done = {row["subject_id"]: row["done"] for row in done_rows}
+    subject_list = [{**row, "done": done.get(row["id"], 0)} for row in subjects]
+    total_questions = sum(row["questions"] for row in subjects)
+    return render_template(
+        "home.html",
+        subjects=subject_list,
+        total_questions=total_questions,
+        last_result=last_result,
+        attempts=attempts,
+    )
+
+
+def landing():
+    conn = get_connection()
+    counts = conn.execute(
+        "SELECT (SELECT COUNT(*) FROM subjects) AS subjects, "
+        "(SELECT COUNT(*) FROM chapters WHERE subject_id IS NOT NULL) AS chapters, "
+        "(SELECT COUNT(*) FROM questions) AS questions"
+    ).fetchone()
+    conn.close()
+    return render_template("landing.html", counts=counts)
+
+
+@app.route("/about")
+def about():
+    conn = get_connection()
+    subjects = conn.execute("SELECT name FROM subjects ORDER BY id").fetchall()
+    conn.close()
+    return render_template("about.html", subjects=subjects)
+
+
+@app.route("/chapters")
+def chapters():
+    return redirect("/")
+
+
+@app.route("/subjects/<int:subject_id>")
+@login_required
+def subject(subject_id):
+    conn = get_connection()
+    row = conn.execute(
+        "SELECT id, name FROM subjects WHERE id = %s", (subject_id,)
+    ).fetchone()
+    if row is None:
+        conn.close()
+        abort(404)
+    rows = conn.execute(
+        "SELECT chapters.id, chapters.name, COUNT(questions.id) AS questions "
+        "FROM chapters LEFT JOIN questions ON questions.chapter_id = chapters.id "
+        "WHERE chapters.subject_id = %s "
+        "GROUP BY chapters.id ORDER BY chapters.position, chapters.id",
+        (subject_id,),
+    ).fetchall()
+    best_rows = conn.execute(
+        "SELECT chapter_id, MAX(score) AS best FROM results "
+        "WHERE user_id = %s GROUP BY chapter_id",
+        (session["user_id"],),
+    ).fetchall()
+    conn.close()
+
+    best = {r["chapter_id"]: r["best"] for r in best_rows}
+    chapter_list = []
+    for chapter in rows:
+        label, title = split_title(chapter["name"])
+        chapter_list.append(
+            {
+                "id": chapter["id"],
+                "label": label,
+                "title": title,
+                "questions": chapter["questions"],
+                "best": best.get(chapter["id"]),
+            }
+        )
+    return render_template("subject.html", subject=row, chapters=chapter_list)
+
+
+@app.route("/chapters/<int:chapter_id>", methods=["GET", "POST"])
+@login_required
+def chapter_quiz(chapter_id):
+    conn = get_connection()
+    chapter = conn.execute(
+        "SELECT chapters.id, chapters.name, chapters.subject_id, "
+        "subjects.name AS subject_name "
+        "FROM chapters LEFT JOIN subjects ON subjects.id = chapters.subject_id "
+        "WHERE chapters.id = %s",
+        (chapter_id,),
+    ).fetchone()
+    if chapter is None:
+        conn.close()
+        abort(404)
+    rows = conn.execute(
+        "SELECT id, text, option_1, option_2, option_3, option_4, answer, source_page "
+        "FROM questions WHERE chapter_id = %s ORDER BY id",
+        (chapter_id,),
+    ).fetchall()
+    conn.close()
+
+    questions = []
+    answers = {}
+    for row in rows:
+        questions.append(
+            {
+                "id": row["id"],
+                "text": row["text"],
+                "options": [
+                    option
+                    for option in (
+                        row["option_1"],
+                        row["option_2"],
+                        row["option_3"],
+                        row["option_4"],
+                    )
+                    if option is not None
+                ],
+                "source_page": row["source_page"],
+            }
+        )
+        answers[row["id"]] = row["answer"]
+
+    results = None
+    error = None
+    score = None
+    total = None
+    saved = None
+    if request.method == "POST":
+        results = {}
+        for question in questions:
+            selected = request.form.get(f"q{question['id']}")
+            if selected not in question["options"]:
+                error = "جاوب على كل الأسئلة من الخيارات"
+                return render_template(
+                    "chapter_quiz.html",
+                    chapter=chapter,
+                    questions=questions,
+                    results=None,
+                    error=error,
+                ), 400
+            results[question["id"]] = selected == answers[question["id"]]
+        score = sum(results.values())
+        total = len(results)
+        user_id = session.get("user_id")
+        saved = user_id is not None
+        if saved:
+            conn = get_connection()
+            conn.execute(
+                "INSERT INTO results (user_id, chapter_id, score, total) "
+                "VALUES (%s, %s, %s, %s)",
+                (user_id, chapter_id, score, total),
+            )
+            conn.commit()
+            conn.close()
+
+    return render_template(
+        "chapter_quiz.html",
+        chapter=chapter,
+        questions=questions,
+        results=results,
+        answers=answers if results is not None else None,
+        error=error,
+        score=score,
+        total=total,
+        saved=saved,
+    )
+
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        username = request.form.get("username", "")
+        password = request.form.get("password", "")
+
+        if not USERNAME_PATTERN.fullmatch(username):
+            error = "اسم المستخدم لازم يبدأ بحرف إنجليزي، ومن 3 إلى 30 حرف، حروف وأرقام و _ بس"
+            return render_template("register.html", error=error), 400
+
+        if len(password) < 8 or not password.strip():
+            error = "كلمة المرور لازم تكون 8 حروف على الأقل"
+            return render_template("register.html", error=error), 400
+
+        conn = get_connection()
+        try:
+            conn.execute(
+                "INSERT INTO users (username, password_hash) VALUES (%s, %s)",
+                (username, generate_password_hash(password)),
+            )
+            conn.commit()
+        except psycopg.IntegrityError:
+            error = "اسم المستخدم مستخدم، اختر اسم ثاني"
+            return render_template("register.html", error=error), 400
+        finally:
+            conn.close()
+
+        return render_template("register.html", success=True)
+    return render_template("register.html")
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form.get("username", "")
+        password = request.form.get("password", "")
+
+        conn = get_connection()
+        user = conn.execute(
+            "SELECT id, username, password_hash FROM users WHERE username = %s",
+            (username,),
+        ).fetchone()
+        conn.close()
+
+        if user is None or not check_password_hash(user["password_hash"], password):
+            error = "اسم المستخدم أو كلمة المرور غير صحيحة"
+            return render_template("login.html", error=error), 401
+
+        session.clear()
+        session.permanent = True
+        session["user_id"] = user["id"]
+        session["username"] = user["username"]
+        return redirect("/")
+
+    return render_template("login.html")
+
+
+@app.route("/logout", methods=["POST"])
+def logout():
+    session.clear()
+    return redirect("/")
+
+
+@app.route("/results")
+@login_required
+def results_page():
+    user_id = session.get("user_id")
+
+    conn = get_connection()
+    rows = conn.execute(
+        "SELECT subjects.name AS subject, chapters.name, "
+        "results.score, results.total, results.created_at "
+        "FROM results "
+        "JOIN chapters ON chapters.id = results.chapter_id "
+        "LEFT JOIN subjects ON subjects.id = chapters.subject_id "
+        "WHERE results.user_id = %s "
+        "ORDER BY results.created_at DESC",
+        (user_id,),
+    ).fetchall()
+    conn.close()
+    return render_template("results.html", results=rows)

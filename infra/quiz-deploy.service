@@ -1,0 +1,8 @@
+[Unit]
+Description=Deploy the quiz platform when dev has new commits
+After=network-online.target docker.service
+
+[Service]
+Type=oneshot
+User=ubuntu
+ExecStart=/usr/bin/bash /home/ubuntu/Exam_project/infra/deploy.sh
