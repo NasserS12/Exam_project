@@ -352,7 +352,8 @@ def test_wrong_answer_shows_correct_one(client, logged_in):
 
 
 def test_submitted_quiz_marks_right_and_wrong_options(client, logged_in):
-    page = client.post("/chapters/1", data={"q1": "21", "q2": "443"}).get_data(as_text=True)
+    response = client.post("/chapters/1", data={"q1": "21", "q2": "443"})
+    page = response.get_data(as_text=True)
     # q1: picked 21 (wrong), the right one is 22. q2: picked 443 (right).
     assert page.count("is-correct") == 2
     assert page.count("is-wrong") == 1
