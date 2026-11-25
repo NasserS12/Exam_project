@@ -719,27 +719,18 @@ a.subject-tile:active { box-shadow: 0 2px 0 var(--edge); }
 .landing-hero h1 { font-size: 64px; }
 .landing-hero p { font-size: 21px; }
 
-.stat-strip {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
-    margin-bottom: 72px;
-}
-.stat-strip > div {
-    padding: 22px;
+/* Tagline between the hero and the steps: big quiet line, no card */
+.tagline {
+    max-width: 760px;
+    margin: 16px auto 84px;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    border-radius: var(--radius-lg);
-    color: #FFFFFF;
-    background: var(--s1);
-    box-shadow: 0 6px 0 var(--tile-edge);
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1.5;
+    text-wrap: balance;
+    color: var(--soft);
 }
-.stat-strip > div:nth-child(2) { background: var(--s2); }
-.stat-strip > div:nth-child(3) { background: var(--s3); }
-.stat-strip strong { font-size: 44px; font-weight: 800; line-height: 1.2; font-variant-numeric: tabular-nums; }
-.stat-strip span { font-size: 17px; font-weight: 600; opacity: 0.9; }
+.tagline-ok { color: var(--ok); white-space: nowrap; }
 
 .section-title { text-align: center; display: flex; flex-direction: column; gap: 8px; margin-bottom: 30px; }
 .section-title h2 { font-size: 36px; font-weight: 800; }
@@ -868,9 +859,7 @@ a.subject-tile:active { box-shadow: 0 2px 0 var(--edge); }
     .nav-sep { display: none; }
     .nav-user { display: none; }
     .quiz-progress { top: 0; position: relative; }
-    .stat-strip { gap: 10px; }
-    .stat-strip > div { padding: 16px 8px; }
-    .stat-strip strong { font-size: 30px; }
+    .tagline { font-size: 27px; margin-bottom: 56px; }
     .section-title h2, .cta-band h2 { font-size: 28px; }
     .shape-plus, .shape-dot, .shape-square, .shape-check, .shape-ring { display: none; }
 }
