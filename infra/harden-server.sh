@@ -15,7 +15,25 @@ if ! id ubuntu >/dev/null 2>&1; then
 fi
 
 apt-get update && apt-get upgrade -y
-apt-get install -y lynis fail2ban
+apt-get install -y lynis fail2ban libpam-tmpdir apt-listchanges debsums apt-show-versions
+
+# Remove leftover config files of packages that were already removed
+dpkg -l | awk '/^rc/ {print $2}' | xargs -r dpkg --purge
+
+# Legal warning shown before login
+cp "$SCRIPT_DIR/issue-banner.txt" /etc/issue
+cp "$SCRIPT_DIR/issue-banner.txt" /etc/issue.net
+
+# Block network protocols and USB storage this server never uses
+cp "$SCRIPT_DIR/modprobe-hardening.conf" /etc/modprobe.d/hardening.conf
+
+# Only root can run compilers (the app is built inside Docker, not on the host)
+for compiler in as cc gcc g++; do
+    path="$(command -v "$compiler" || true)"
+    if [ -n "$path" ]; then
+        chmod o-rx "$(readlink -f "$path")"
+    fi
+done
 
 cp "$SCRIPT_DIR/sshd-hardening.conf" /etc/ssh/sshd_config.d/00-hardening.conf
 sshd -t
@@ -28,6 +46,7 @@ systemctl restart fail2ban
 ufw default deny incoming
 ufw default allow outgoing
 ufw limit OpenSSH
+ufw allow 80,443/tcp
 ufw --force enable
 
 if [ ! -f /swapfile ]; then
