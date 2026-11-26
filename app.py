@@ -1,5 +1,6 @@
 import os
 import re
+import secrets
 from datetime import timedelta
 from functools import wraps
 
@@ -23,6 +24,9 @@ app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(hours=2)
 csrf = CSRFProtect(app)
 
 USERNAME_PATTERN = re.compile(r"[A-Za-z][A-Za-z0-9_]{2,29}")
+
+# How many quiz attempts a user can have open at once (for example in two tabs).
+MAX_OPEN_ATTEMPTS = 5
 
 
 def login_required(view):
@@ -220,6 +224,27 @@ def load_chapter(chapter_id):
     return chapter, questions, answers
 
 
+def start_attempt(chapter_id):
+    """Give the quiz page a one-time ticket. A result is saved only once per ticket."""
+    ticket = f"{chapter_id}:{secrets.token_urlsafe(16)}"
+    open_attempts = session.get("open_attempts", [])
+    session["open_attempts"] = (open_attempts + [ticket])[-MAX_OPEN_ATTEMPTS:]
+    return ticket
+
+
+def attempt_is_open(chapter_id, ticket):
+    """False if the ticket is unknown, already used, or for another chapter."""
+    return ticket in session.get("open_attempts", []) and ticket.startswith(
+        f"{chapter_id}:"
+    )
+
+
+def close_attempt(ticket):
+    session["open_attempts"] = [
+        t for t in session.get("open_attempts", []) if t != ticket
+    ]
+
+
 @app.route("/chapters/<int:chapter_id>", methods=["GET", "POST"])
 @login_required
 def chapter_quiz(chapter_id):
@@ -227,8 +252,20 @@ def chapter_quiz(chapter_id):
 
     if request.method == "GET":
         return render_template(
-            "chapter_quiz.html", chapter=chapter, questions=questions, selected={}
+            "chapter_quiz.html",
+            chapter=chapter,
+            questions=questions,
+            selected={},
+            attempt=start_attempt(chapter_id),
         )
+
+    ticket = request.form.get("attempt", "")
+    if not attempt_is_open(chapter_id, ticket):
+        # This attempt was already saved (or is not valid): never save it again.
+        last_quiz = session.get("last_quiz")
+        if last_quiz and last_quiz.get("chapter_id") == chapter_id:
+            return redirect(f"/chapters/{chapter_id}/result")
+        return redirect(f"/chapters/{chapter_id}")
 
     selected = {}
     picks = {}
@@ -243,9 +280,11 @@ def chapter_quiz(chapter_id):
             chapter=chapter,
             questions=questions,
             selected=selected,
+            attempt=ticket,
             error="جاوب على كل الأسئلة من الخيارات",
         ), 400
 
+    close_attempt(ticket)
     score = sum(selected[qid] == answer for qid, answer in answers.items())
     conn = get_connection()
     conn.execute(

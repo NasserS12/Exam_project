@@ -58,8 +58,14 @@
         <div class="alert alert-error" role="alert">{{ error }}</div>
     {% endif %}
 
+    {% set review = results is defined %}
+    {% if review %}
+    <div class="quiz-form quiz-review stagger">
+    {% else %}
     <form class="quiz-form stagger" method="post" action="/chapters/{{ chapter['id'] }}">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="attempt" value="{{ attempt }}">
+    {% endif %}
 
         {% for question in questions %}
             <fieldset class="card question spotlight"{% if is_ltr(question["text"]) %} dir="ltr"{% endif %}>
@@ -70,8 +76,8 @@
 
                 {% for option in question["options"] %}
                     {% set picked = selected.get(question["id"]) %}
-                    <label class="option{% if results is defined %}{% if option == answers[question['id']] %} is-correct{% elif picked == option %} is-wrong{% endif %}{% endif %}">
-                        <input type="radio" name="q{{ question['id'] }}" value="{{ option }}" {% if picked == option %}checked{% endif %}>
+                    <label class="option{% if review %}{% if option == answers[question['id']] %} is-correct{% elif picked == option %} is-wrong{% endif %}{% endif %}">
+                        <input type="radio" name="q{{ question['id'] }}" value="{{ option }}" {% if picked == option %}checked{% endif %}{% if review %} disabled{% endif %}>
                         <span dir="auto">{{ option }}</span>
                     </label>
                 {% endfor %}
@@ -93,9 +99,17 @@
             </fieldset>
         {% endfor %}
 
+        {% if review %}
+        <div class="quiz-actions">
+            <a class="btn btn-secondary" href="/results">نتائجي</a>
+            <a class="btn btn-primary" href="/chapters/{{ chapter['id'] }}">أعد الاختبار</a>
+        </div>
+    </div>
+        {% else %}
         <div class="quiz-actions">
             <p class="muted">جاوب على كل الأسئلة قبل التسليم.</p>
             <button type="submit" class="btn btn-primary">سلّم الإجابات</button>
         </div>
     </form>
+        {% endif %}
 {% endblock %}
