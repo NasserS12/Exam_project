@@ -158,6 +158,27 @@ def test_subject_page_lists_chapters(client, logged_in):
     assert "Cryptography" in response.get_data(as_text=True)
 
 
+def test_subject_page_shows_real_chapter_numbers(client, logged_in):
+    # Subject 1 has chapters 1 and 2. Add chapter 5, so chapters 3 and 4 are missing.
+    conn = db.get_connection()
+    chapter_id = conn.execute(
+        "INSERT INTO chapters (subject_id, name, position) VALUES (1, %s, 5) "
+        "RETURNING id",
+        ("Chapter Five",),
+    ).fetchone()["id"]
+    conn.execute(
+        "INSERT INTO questions (chapter_id, text, option_1, option_2, answer) "
+        "VALUES (%s, 'Test question five', 'a', 'b', 'a')",
+        (chapter_id,),
+    )
+    conn.commit()
+    conn.close()
+
+    page = client.get("/subjects/1").get_data(as_text=True)
+    badges = re.findall(r'<span class="tone-icon">(\d+)</span>', page)
+    assert badges == ["1", "2", "5"]
+
+
 def test_missing_subject_returns_404(client, logged_in):
     response = client.get("/subjects/999")
     assert response.status_code == 404

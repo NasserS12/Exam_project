@@ -152,7 +152,8 @@ def subject(subject_id):
         conn.close()
         abort(404)
     rows = conn.execute(
-        "SELECT chapters.id, chapters.name, COUNT(questions.id) AS questions "
+        "SELECT chapters.id, chapters.name, chapters.position, "
+        "COUNT(questions.id) AS questions "
         "FROM chapters LEFT JOIN questions ON questions.chapter_id = chapters.id "
         "WHERE chapters.subject_id = %s "
         "GROUP BY chapters.id ORDER BY chapters.position, chapters.id",
@@ -172,6 +173,7 @@ def subject(subject_id):
         chapter_list.append(
             {
                 "id": chapter["id"],
+                "number": chapter["position"],
                 "label": label,
                 "title": title,
                 "questions": chapter["questions"],
