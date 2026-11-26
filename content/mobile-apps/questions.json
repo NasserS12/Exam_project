@@ -1,0 +1,1360 @@
+[
+  {
+    "chapter": 1,
+    "chapter_title": "الفصل الأول: أساسيات لغة الكوتلن Kotlin",
+    "unit": 1,
+    "question": "نتيجة العملية 3.0 * 4.0 هي ............ .",
+    "options": [
+      "⇒ kotlin.Int = 12.0",
+      "⇒ kotlin.Double = 12.0",
+      "⇒ kotlin.Float = 12.0",
+      "⇒ error"
+    ],
+    "answer": 1,
+    "pdf_page": 22
+  },
+  {
+    "chapter": 1,
+    "chapter_title": "الفصل الأول: أساسيات لغة الكوتلن Kotlin",
+    "unit": 1,
+    "question": "إذا كان val s = “XY” فأن نتيجة العملية println(\"$s.length is ${s.length}\") هي ......... .",
+    "options": [
+      "XY.length is 2 ⇒",
+      "XY.length is 3 ⇒",
+      "XY.length is 4 ⇒",
+      "error ⇒"
+    ],
+    "answer": 0,
+    "pdf_page": 22
+  },
+  {
+    "chapter": 1,
+    "chapter_title": "الفصل الأول: أساسيات لغة الكوتلن Kotlin",
+    "unit": 1,
+    "question": "إذا كان val P1 = 3 و val P2 = 20 فإن نتيجة العملية P2 % P1 هي ............ .",
+    "options": [
+      "⇒ 1",
+      "⇒ 2",
+      "⇒ 3",
+      "⇒ 4"
+    ],
+    "answer": 1,
+    "pdf_page": 22
+  },
+  {
+    "chapter": 1,
+    "chapter_title": "الفصل الأول: أساسيات لغة الكوتلن Kotlin",
+    "unit": 2,
+    "question": "إذا كانت العبارة الأولى var X = 6 والعبارة الثانية X = 7 فأن قيمة X الأخيرة هي ............ .",
+    "options": [
+      "5",
+      "6",
+      "7",
+      "Error"
+    ],
+    "answer": 2,
+    "pdf_page": 40
+  },
+  {
+    "chapter": 1,
+    "chapter_title": "الفصل الأول: أساسيات لغة الكوتلن Kotlin",
+    "unit": 2,
+    "question": "إذا كانت العبارة الأولى val X = 6 والعبارة الثانية X = 7 فأن قيمة X الأخيرة هي ............ .",
+    "options": [
+      "5",
+      "6",
+      "7",
+      "Error"
+    ],
+    "answer": 3,
+    "pdf_page": 40
+  },
+  {
+    "chapter": 1,
+    "chapter_title": "الفصل الأول: أساسيات لغة الكوتلن Kotlin",
+    "unit": 2,
+    "question": "......... هو ناتج جملة التحكم في التدفق التالية: for (i in 4 downTo 1) print(i)",
+    "options": [
+      "⇒ 1234",
+      "⇒ 4321",
+      "⇒ 1324",
+      "⇒ 4123"
+    ],
+    "answer": 1,
+    "pdf_page": 40
+  },
+  {
+    "chapter": 1,
+    "chapter_title": "الفصل الأول: أساسيات لغة الكوتلن Kotlin",
+    "unit": 3,
+    "question": "يتم إنشاء قائمة غير قابلة للتغيير باستخدام طريقة ............ .",
+    "options": [
+      "muttableListOf()",
+      "arrayOf()",
+      "intarrayOf()",
+      "listOf()"
+    ],
+    "answer": 3,
+    "pdf_page": 56
+  },
+  {
+    "chapter": 1,
+    "chapter_title": "الفصل الأول: أساسيات لغة الكوتلن Kotlin",
+    "unit": 3,
+    "question": "يتم إنشاء قائمة قابلة للتغيير باستخدام طريقة ............ .",
+    "options": [
+      "muttableListOf()",
+      "arrayOf()",
+      "intarrayOf()",
+      "listOf()"
+    ],
+    "answer": 0,
+    "pdf_page": 56
+  },
+  {
+    "chapter": 1,
+    "chapter_title": "الفصل الأول: أساسيات لغة الكوتلن Kotlin",
+    "unit": 3,
+    "question": "يتم إنشاء مصفوفة تحتوي على أنواع مختلطة باستخدام طريقة ............ .",
+    "options": [
+      "muttableListOf()",
+      "arrayOf()",
+      "intarrayOf()",
+      "listOf()"
+    ],
+    "answer": 1,
+    "pdf_page": 56
+  },
+  {
+    "chapter": 2,
+    "chapter_title": "الفصل الثاني: الدوال في لغة الكوتلن 1",
+    "unit": 1,
+    "question": "إذا كان هناك متغير val x = ”80” ومتغير آخر val y = “60” فأن ناتج تنفيذ الجملة: println(x + y) هو ............ .",
+    "options": [
+      "140",
+      "80 + 60",
+      "8060",
+      "80 60"
+    ],
+    "answer": 2,
+    "pdf_page": 68
+  },
+  {
+    "chapter": 2,
+    "chapter_title": "الفصل الثاني: الدوال في لغة الكوتلن 1",
+    "unit": 1,
+    "question": "إذا كان هناك متغير val x = 100 ومتغير آخر val y = 50 فأن ناتج تنفيذ الجملة: println(x + y) هو ............ .",
+    "options": [
+      "150",
+      "100 + 50",
+      "10050",
+      "100 50"
+    ],
+    "answer": 0,
+    "pdf_page": 68
+  },
+  {
+    "chapter": 2,
+    "chapter_title": "الفصل الثاني: الدوال في لغة الكوتلن 1",
+    "unit": 1,
+    "question": "إذا كان هناك متغير val x = 80 ومتغير آخر val y = 60 فأن ناتج تنفيذ الجملة: println(“$x + $y”) هو ............ .",
+    "options": [
+      "140",
+      "80 + 60",
+      "8060",
+      "x + y"
+    ],
+    "answer": 1,
+    "pdf_page": 68
+  },
+  {
+    "chapter": 2,
+    "chapter_title": "الفصل الثاني: الدوال في لغة الكوتلن 1",
+    "unit": 2,
+    "question": "إذا تم تمرير الوسيطات (arguments) التالية: 66 100. ثم تم استدعاء الوسيطات داخل متغيرات كالتالي: val x = args[0] ومتغير آخر val y = args[1] فأن ناتج تنفيذ الجملة: println(x + y) هو .............",
+    "options": [
+      "166",
+      "66 100",
+      "66 + 100",
+      "66100"
+    ],
+    "answer": 3,
+    "pdf_page": 80
+  },
+  {
+    "chapter": 2,
+    "chapter_title": "الفصل الثاني: الدوال في لغة الكوتلن 1",
+    "unit": 2,
+    "question": "إذا تم تمرير الوسيطات (arguments) التالية: 55 77. ثم تم استدعاء الوسيطات داخل متغيرات كالتالي: val x = args[0] ومتغير آخر val y = args[1] فأن ناتج تنفيذ الجملة: println(“$x + $y”) هو .............",
+    "options": [
+      "132",
+      "55 77",
+      "55 + 77",
+      "5577"
+    ],
+    "answer": 2,
+    "pdf_page": 80
+  },
+  {
+    "chapter": 3,
+    "chapter_title": "الفصل الثالث: الدوال في لغة الكوتلن 2",
+    "unit": 3,
+    "question": "إذا كان هناك المتغير val test = listOf(”Mobile\", ”English\", ”Betony\") فأن الجملة ............ تستخدم لاختيار العناصر التي حرفها الرابع هو حرف الـ ’o’.",
+    "options": [
+      "test.filter { it[1] == ‘o’ }",
+      "test.filter { it[2] == ‘o’ }",
+      "test.filter { it[3] == ‘o’ }",
+      "test.filter { it[4] == ‘o’ }"
+    ],
+    "answer": 2,
+    "pdf_page": 137
+  },
+  {
+    "chapter": 3,
+    "chapter_title": "الفصل الثالث: الدوال في لغة الكوتلن 2",
+    "unit": 3,
+    "question": "............ هي الدالة التي تستخدم لتحويل المرشح من النوع Eager الى النوع Lazy .",
+    "options": [
+      "eagrToLazy( )",
+      "toLazy( )",
+      "asSequence()",
+      "لا يوجد اجابة صحيحة"
+    ],
+    "answer": 2,
+    "pdf_page": 137
+  },
+  {
+    "chapter": 3,
+    "chapter_title": "الفصل الثالث: الدوال في لغة الكوتلن 2",
+    "unit": 3,
+    "question": "............ هو التحويل الذي يقوم بإجراء نفس التحويل/العملية على كل عنصر من عناصر القائمة ويعيد القائمة.",
+    "options": [
+      "map( )",
+      "sameOper( )",
+      "convert( )",
+      "د- لا يوجد اجابة صحيحة"
+    ],
+    "answer": 0,
+    "pdf_page": 137
+  },
+  {
+    "chapter": 6,
+    "chapter_title": "الفصل السادس: بناء أول تطبيق Android",
+    "unit": 1,
+    "question": "Android Studio هو بيئة التطوير المتكاملة الرسمية لتطوير تطبيقات الـ Android وهو مبني على ............... .",
+    "options": [
+      "Visual Studio",
+      "C++",
+      "Python",
+      "IntelliJ IDEA"
+    ],
+    "answer": 3,
+    "pdf_page": 231
+  },
+  {
+    "chapter": 6,
+    "chapter_title": "الفصل السادس: بناء أول تطبيق Android",
+    "unit": 1,
+    "question": "تستخدم/يستخدم ............. لضمان تقديم التطبيقات أفضل تجربة على أكبر عدد ممكن من الأجهزة.",
+    "options": [
+      "API Text",
+      "API level",
+      "API Window",
+      "API App"
+    ],
+    "answer": 1,
+    "pdf_page": 231
+  },
+  {
+    "chapter": 6,
+    "chapter_title": "الفصل السادس: بناء أول تطبيق Android",
+    "unit": 1,
+    "question": "قبل تشغيل التطبيق لابد من التأكد من وجود ................... والتأكد انه يعمل.",
+    "options": [
+      "جهاز Windows وهمي",
+      "جهاز MacBook وهمي",
+      "جهاز Android وهمي",
+      "جهاز Windows فعلي"
+    ],
+    "answer": 2,
+    "pdf_page": 231
+  },
+  {
+    "chapter": 6,
+    "chapter_title": "الفصل السادس: بناء أول تطبيق Android",
+    "unit": 2,
+    "question": "........... يعالج إدخال المستخدم وينشئ نافذة على الشاشة لعرض واجهة المستخدم.",
+    "options": [
+      "الموارد (Resources (res))",
+      "Gradle Files",
+      "النشاط (Activity)",
+      "AndroidManifest.xml"
+    ],
+    "answer": 2,
+    "pdf_page": 244
+  },
+  {
+    "chapter": 6,
+    "chapter_title": "الفصل السادس: بناء أول تطبيق Android",
+    "unit": 2,
+    "question": "........... هو/هي ملفات إضافية تستخدمها التعليمات البرمجية الخاصة بك، مثل ملفات التخطيط والصور وملفات الصوت والنسق والألوان والمزيد.",
+    "options": [
+      "الموارد (Resources (res))",
+      "Gradle Files",
+      "النشاط (Activity)",
+      "AndroidManifest.xml"
+    ],
+    "answer": 0,
+    "pdf_page": 244
+  },
+  {
+    "chapter": 6,
+    "chapter_title": "الفصل السادس: بناء أول تطبيق Android",
+    "unit": 2,
+    "question": "........... يستخدم للإعلان عن المعلومات الأساسية عن التطبيق مثل الإصدار والترميز المستخدم.",
+    "options": [
+      "الموارد (Resources (res))",
+      "Gradle Files",
+      "النشاط (Activity)",
+      "AndroidManifest.xml"
+    ],
+    "answer": 3,
+    "pdf_page": 244
+  },
+  {
+    "chapter": 6,
+    "chapter_title": "الفصل السادس: بناء أول تطبيق Android",
+    "unit": 3,
+    "question": "يحتوي/تحتوي ............ على جميع العناصر التي تم اضافتها للتطبيق وموجودة حاليا. ويوضح ترتيب ظهور العناصر ووضعها بالنسبة لبعضها البعض.",
+    "options": [
+      "اللوحة (Palette)",
+      "شجرة المكونات (Component Tree)",
+      "المكون الثاني في محرر التخطيط",
+      "المكون الرابع في محرر التخطيط"
+    ],
+    "answer": 1,
+    "pdf_page": 255
+  },
+  {
+    "chapter": 6,
+    "chapter_title": "الفصل السادس: بناء أول تطبيق Android",
+    "unit": 3,
+    "question": "يحتوي/تحتوي ............ على الخصائص التي يمكن التحكم فيها بالنسبة للعنصر المحدد.",
+    "options": [
+      "اللوحة (Palette)",
+      "شجرة المكونات (Component Tree)",
+      "المكون الثاني في محرر التخطيط",
+      "المكون الرابع في محرر التخطيط"
+    ],
+    "answer": 3,
+    "pdf_page": 255
+  },
+  {
+    "chapter": 6,
+    "chapter_title": "الفصل السادس: بناء أول تطبيق Android",
+    "unit": 3,
+    "question": "يحتوي/تحتوي ............ على جميع العناصر التي يمكن اضافتها للتطبيق. وتنقسم العناصر داخلها الى مجموعات.",
+    "options": [
+      "اللوحة (Palette)",
+      "شجرة المكونات (Component Tree)",
+      "المكون الثاني في محرر التخطيط",
+      "المكون الرابع في محرر التخطيط"
+    ],
+    "answer": 0,
+    "pdf_page": 255
+  },
+  {
+    "chapter": 7,
+    "chapter_title": "الفصل السابع: تخطيطات XML والأنشطة",
+    "unit": 1,
+    "question": "يستخدم ............ لجعل حجم العنصر يتلاءم تلقائيا مع المحتوى (النص) الموجود بداخله.",
+    "options": [
+      "wrap_content",
+      "match_parent",
+      "fixed_size",
+      "TextView"
+    ],
+    "answer": 0,
+    "pdf_page": 269
+  },
+  {
+    "chapter": 7,
+    "chapter_title": "الفصل السابع: تخطيطات XML والأنشطة",
+    "unit": 1,
+    "question": "يحتوي ............ على أكثر من عنصر داخلي كأطفال له ويمكن عرضهم في صف أو عمود>",
+    "options": [
+      "FrameLayout",
+      "ConstraintLayout",
+      "LinearLayout",
+      "Widgets"
+    ],
+    "answer": 2,
+    "pdf_page": 269
+  },
+  {
+    "chapter": 7,
+    "chapter_title": "الفصل السابع: تخطيطات XML والأنشطة",
+    "unit": 1,
+    "question": "يحتوي ............ على عنصر واحد داخلي فقط كطفل له.",
+    "options": [
+      "FrameLayout",
+      "ConstraintLayout",
+      "LinearLayout",
+      "Widgets"
+    ],
+    "answer": 0,
+    "pdf_page": 269
+  },
+  {
+    "chapter": 7,
+    "chapter_title": "الفصل السابع: تخطيطات XML والأنشطة",
+    "unit": 2,
+    "question": "يعتبر ............ من دلائل/مجلدات الموارد الشائعة ويخزن جميع الملفات المتعلقة برسم الصور والأصول ذات الصلة.",
+    "options": [
+      "drawable",
+      "layout",
+      "mipmap",
+      "values"
+    ],
+    "answer": 0,
+    "pdf_page": 284
+  },
+  {
+    "chapter": 7,
+    "chapter_title": "الفصل السابع: تخطيطات XML والأنشطة",
+    "unit": 2,
+    "question": "يعتبر ............ من دلائل/مجلدات الموارد الشائعة يحتوي على ملفات لأيقونة التطبيق (المعروفة باسم رمز المشغل) بكثافات شاشة مختلفة/ بدقة مختلفة.",
+    "options": [
+      "drawable",
+      "layout",
+      "mipmap",
+      "values"
+    ],
+    "answer": 2,
+    "pdf_page": 284
+  },
+  {
+    "chapter": 7,
+    "chapter_title": "الفصل السابع: تخطيطات XML والأنشطة",
+    "unit": 2,
+    "question": "يعتبر ............ من دلائل/مجلدات الموارد الشائعة على ملفات متعلقة بمجموعات بسيطة من السلاسل والألوان والأعداد الصحيحة والأنماط.",
+    "options": [
+      "drawable",
+      "layout",
+      "mipmap",
+      "values"
+    ],
+    "answer": 3,
+    "pdf_page": 284
+  },
+  {
+    "chapter": 7,
+    "chapter_title": "الفصل السابع: تخطيطات XML والأنشطة",
+    "unit": 3,
+    "question": "............ هو/هي وسيلة للمستخدم لتحقيق هدف رئيسي واحد.",
+    "options": [
+      "طريقة العرض",
+      "النشاط",
+      "الـ AppCompatActivity",
+      "الـ AndroidManifest.xml"
+    ],
+    "answer": 1,
+    "pdf_page": 296
+  },
+  {
+    "chapter": 7,
+    "chapter_title": "الفصل السابع: تخطيطات XML والأنشطة",
+    "unit": 3,
+    "question": "............ يستخدم/تستخدم لوصف المعلومات الأساسية عن التطبيق لأدوات بناء الـ Android، ولنظام تشغيل الـ Android، وكذلك لـ Google Play.",
+    "options": [
+      "طريقة العرض",
+      "النشاط",
+      "الـ AppCompatActivity",
+      "الـ AndroidManifest.xml"
+    ],
+    "answer": 3,
+    "pdf_page": 296
+  },
+  {
+    "chapter": 7,
+    "chapter_title": "الفصل السابع: تخطيطات XML والأنشطة",
+    "unit": 3,
+    "question": "يضمن/تضمن ........... توافق التطبيقات وتوفير الميزات الأحدث للإصدارات القديمة من Android.",
+    "options": [
+      "طريقة العرض",
+      "النشاط",
+      "الـ AppCompatActivity",
+      "الـ AndroidManifest.xml"
+    ],
+    "answer": 2,
+    "pdf_page": 296
+  },
+  {
+    "chapter": 8,
+    "chapter_title": "الفصل الثامن: جعل التطبيق تفاعلياً",
+    "unit": 1,
+    "question": "يتم استدعاء ............ عندما يلمس المستخدم العنصر (عندما يكون في وضع اللمس)، أو يركز على العنصر باستخدام مفاتيح التنقل.",
+    "options": [
+      "View.onClickListener",
+      "View.onLongClickListener",
+      "View.OnFocusChangeListener",
+      "View.OnKeyListener"
+    ],
+    "answer": 0,
+    "pdf_page": 308
+  },
+  {
+    "chapter": 8,
+    "chapter_title": "الفصل الثامن: جعل التطبيق تفاعلياً",
+    "unit": 1,
+    "question": "يتم استدعاء ............ عندما عندما ينتقل المستخدم إلى العنصر أو بعيدًا عنه، باستخدام مفاتيح التنقل أو كرة التتبع.",
+    "options": [
+      "View.onClickListener",
+      "View.onLongClickListener",
+      "View.OnFocusChangeListener",
+      "View.OnKeyListener"
+    ],
+    "answer": 2,
+    "pdf_page": 308
+  },
+  {
+    "chapter": 8,
+    "chapter_title": "الفصل الثامن: جعل التطبيق تفاعلياً",
+    "unit": 1,
+    "question": "يتم استدعاء ............ عندما يركز المستخدم على العنصر ويضغط على مفتاح الجهاز الموجود على الجهاز أو يطلقه.",
+    "options": [
+      "View.onClickListener",
+      "View.onLongClickListener",
+      "View.OnFocusChangeListener",
+      "View.OnKeyListener"
+    ],
+    "answer": 3,
+    "pdf_page": 308
+  },
+  {
+    "chapter": 8,
+    "chapter_title": "الفصل الثامن: جعل التطبيق تفاعلياً",
+    "unit": 2,
+    "question": "عند إضافة قيمة للخاصية onClick لمفتاح معين فأنه سوف يظهر ............ قبل إضافة الكود الخاص بهذه الدالة الى الـ MainActivity.kt.",
+    "options": [
+      "NewActivity",
+      "EventHandler",
+      "NewActivity.xml",
+      "Error"
+    ],
+    "answer": 3,
+    "pdf_page": 323
+  },
+  {
+    "chapter": 8,
+    "chapter_title": "الفصل الثامن: جعل التطبيق تفاعلياً",
+    "unit": 2,
+    "question": "نستخدم الدالة ............ للحصول على مرجع لـ طريقة عرض أو عنصر بحيث يمكننا تغيير النص بداخله وذلك من خلال الـ ID الخاص به.",
+    "options": [
+      "findViewById()",
+      "findElement()",
+      "find()",
+      "finish()"
+    ],
+    "answer": 0,
+    "pdf_page": 323
+  },
+  {
+    "chapter": 8,
+    "chapter_title": "الفصل الثامن: جعل التطبيق تفاعلياً",
+    "unit": 2,
+    "question": "نستخدم الدالة ............ داخل دالة callback وذلك لإغلاق النشاط.",
+    "options": [
+      "findViewById()",
+      "findElement()",
+      "find()",
+      "finish()"
+    ],
+    "answer": 3,
+    "pdf_page": 323
+  },
+  {
+    "chapter": 8,
+    "chapter_title": "الفصل الثامن: جعل التطبيق تفاعلياً",
+    "unit": 3,
+    "question": "نقوم بترجمة جميع السلاسل داخل محرر الترجمة في العمود المسمى ............ .",
+    "options": [
+      "Key",
+      "Resource Folder",
+      "Untranslatable",
+      "Default Value"
+    ],
+    "answer": 3,
+    "pdf_page": 338
+  },
+  {
+    "chapter": 8,
+    "chapter_title": "الفصل الثامن: جعل التطبيق تفاعلياً",
+    "unit": 3,
+    "question": "نستخدم الملف strings.xml للغة العربية الموجود داخل ............ لإضافة ترجمة جميع السلاسل الحرفية في التطبيق.",
+    "options": [
+      "drawable",
+      "layout",
+      "mipmap",
+      "values"
+    ],
+    "answer": 3,
+    "pdf_page": 338
+  },
+  {
+    "chapter": 8,
+    "chapter_title": "الفصل الثامن: جعل التطبيق تفاعلياً",
+    "unit": 3,
+    "question": "لابد من اجراء ............ للعناصر المضافة حديثا للتطبيق وظهر عليها تحذير Hardcoded Text، وذلك لكي تظهر في ملف الـ strings.xml ونتمكن من اضافة الترجمة الخاصة.",
+    "options": [
+      "Extract String text",
+      "Extract String Value",
+      "Extract String Only",
+      "Extract String Resource"
+    ],
+    "answer": 3,
+    "pdf_page": 338
+  },
+  {
+    "chapter": 9,
+    "chapter_title": "الفصل التاسع: أنواع التخطيطات في Android",
+    "unit": 1,
+    "question": "لتغيير نوع التخطيط نختار ............ بعد الضغط بيمين الماوس على main في شجرة المكونات.",
+    "options": [
+      "Convert layout",
+      "Convert view",
+      "Convert now",
+      "Convert without"
+    ],
+    "answer": 1,
+    "pdf_page": 354
+  },
+  {
+    "chapter": 9,
+    "chapter_title": "الفصل التاسع: أنواع التخطيطات في Android",
+    "unit": 1,
+    "question": "الخاصية ............ تجعل العنصر يظهر في منتصف التخطيط افقياً ورأسياً.",
+    "options": [
+      "android:layout_below=\"@id/editText\"",
+      "android:layout_centerInParent=\"true\"",
+      "android:layout_alignParentRight=\"true\"",
+      "android:layout_alignParentStart=\"true\""
+    ],
+    "answer": 1,
+    "pdf_page": 354
+  },
+  {
+    "chapter": 9,
+    "chapter_title": "الفصل التاسع: أنواع التخطيطات في Android",
+    "unit": 1,
+    "question": "الخاصية ............ تجعل العنصر يوازي بداية الأب من اليسار، أي انه سوف يبدأ مع بداية التخطيط النسبي من اليسار.",
+    "options": [
+      "android:layout_below=\"@id/editText\"",
+      "android:layout_centerInParent=\"true\"",
+      "android:layout_alignParentRight=\"true\"",
+      "android:layout_alignParentStart=\"true\""
+    ],
+    "answer": 3,
+    "pdf_page": 354
+  },
+  {
+    "chapter": 9,
+    "chapter_title": "الفصل التاسع: أنواع التخطيطات في Android",
+    "unit": 2,
+    "question": "يعتبر ............ هو التخطيط الافتراضي لتطبيقات Android.",
+    "options": [
+      "التخطيط النسبي (Relative Layout)",
+      "تخطيط القيود (Constraint Layout)",
+      "التخطيط الخطي (Linear Layout)",
+      "التخطيط الحر (Free Layout)"
+    ],
+    "answer": 1,
+    "pdf_page": 366
+  },
+  {
+    "chapter": 9,
+    "chapter_title": "الفصل التاسع: أنواع التخطيطات في Android",
+    "unit": 2,
+    "question": "إذا تم إضافة مفتاح في تخطيط القيود، ولكن لم يتم إضافة أي قيود رأسية أو افقية فإن هذا المفتاح سيظهر ............ على جهاز الـ Android.",
+    "options": [
+      "أعلى يمين التطبيق",
+      "أعلى يسار التطبيق",
+      "أسفل يمين التطبيق",
+      "أسفل يسار التطبيق"
+    ],
+    "answer": 1,
+    "pdf_page": 366
+  },
+  {
+    "chapter": 9,
+    "chapter_title": "الفصل التاسع: أنواع التخطيطات في Android",
+    "unit": 2,
+    "question": "إذا تم إضافة مفتاح في تخطيط القيود، وتم إضافة قيود افقية فقط فإن هذا المفتاح سيظهر ............ على جهاز الـ Android.",
+    "options": [
+      "ملاصق للحافة العلوية",
+      "ملاصق للحافة السفلية",
+      "ملاصق للحافة اليمنى",
+      "ملاصق للحافة اليسرى"
+    ],
+    "answer": 0,
+    "pdf_page": 366
+  },
+  {
+    "chapter": 9,
+    "chapter_title": "الفصل التاسع: أنواع التخطيطات في Android",
+    "unit": 3,
+    "question": "التخطيط ............ يحتوي على عمود واحد فقط به صفوف متعددة.",
+    "options": [
+      "الخطي الرأسي (Vertical)",
+      "الخطي الأفقي (Horizontal)",
+      "التخطيط النسبي (Relative)",
+      "تخطيط القيود (Constraint)"
+    ],
+    "answer": 0,
+    "pdf_page": 379
+  },
+  {
+    "chapter": 9,
+    "chapter_title": "الفصل التاسع: أنواع التخطيطات في Android",
+    "unit": 3,
+    "question": "التخطيط ............ يحتوي على صف واحدا فقط به أعمدة متعددة.",
+    "options": [
+      "الخطي الرأسي (Vertical)",
+      "الخطي الأفقي (Horizontal)",
+      "التخطيط النسبي (Relative)",
+      "تخطيط القيود (Constraint)"
+    ],
+    "answer": 1,
+    "pdf_page": 379
+  },
+  {
+    "chapter": 10,
+    "chapter_title": "الفصل العاشر: رد الفعل ودورة حياة الأجزاء Toast and Fragment Lifecycle",
+    "unit": 1,
+    "question": "نستخدم دالة ............ لإنشاء كائن Toast.",
+    "options": [
+      "makeToast()",
+      "createText()",
+      "makeText()",
+      "createToast()"
+    ],
+    "answer": 2,
+    "pdf_page": 395
+  },
+  {
+    "chapter": 10,
+    "chapter_title": "الفصل العاشر: رد الفعل ودورة حياة الأجزاء Toast and Fragment Lifecycle",
+    "unit": 1,
+    "question": "تستخدم ............ للتحكم في طول الفترة الزمنية لظهور الـ Toast على التطبيق.",
+    "options": [
+      "Toast.TIME",
+      "Toast.PERIOD",
+      "Toast.LENGTH",
+      "Toast.WIDTH"
+    ],
+    "answer": 2,
+    "pdf_page": 395
+  },
+  {
+    "chapter": 10,
+    "chapter_title": "الفصل العاشر: رد الفعل ودورة حياة الأجزاء Toast and Fragment Lifecycle",
+    "unit": 1,
+    "question": "تستخدم ............ للإنصات الى الضغط/اللمس على المعرف object داخل هذا النشاط.",
+    "options": [
+      "this.setOnClickListener(object)",
+      "object.setOnClickListener(this)",
+      "setOnClickListener(this. object)",
+      "setOnClickListener(object)"
+    ],
+    "answer": 1,
+    "pdf_page": 395
+  },
+  {
+    "chapter": 10,
+    "chapter_title": "الفصل العاشر: رد الفعل ودورة حياة الأجزاء Toast and Fragment Lifecycle",
+    "unit": 2,
+    "question": "يعتبر استدعاء ............ أول إشارة توضح أن المستخدم سوف يغادر الـ Fragment.",
+    "options": [
+      "onCreate()",
+      "onCreateView()",
+      "onStop()",
+      "دالة onPause()"
+    ],
+    "answer": 3,
+    "pdf_page": 409
+  },
+  {
+    "chapter": 10,
+    "chapter_title": "الفصل العاشر: رد الفعل ودورة حياة الأجزاء Toast and Fragment Lifecycle",
+    "unit": 2,
+    "question": "يعتبر استدعاء ............ الإشارة الاخيرة التي توضح أن المستخدم غادر الـ Fragment.",
+    "options": [
+      "onCreate()",
+      "onCreateView()",
+      "onStop()",
+      "دالة onPause()"
+    ],
+    "answer": 2,
+    "pdf_page": 409
+  },
+  {
+    "chapter": 10,
+    "chapter_title": "الفصل العاشر: رد الفعل ودورة حياة الأجزاء Toast and Fragment Lifecycle",
+    "unit": 2,
+    "question": "يستدعي النظام ............ عند إنشاء الجزء (الـ Fragment) وتستخدم أيضا لتهيئة المكونات الأساسية للجزء الذي تريد الاحتفاظ به عند إيقاف الجزء مؤقتا، ثم استئنافه.",
+    "options": [
+      "onCreate()",
+      "onCreateView()",
+      "onStop()",
+      "دالة onPause()"
+    ],
+    "answer": 0,
+    "pdf_page": 409
+  },
+  {
+    "chapter": 10,
+    "chapter_title": "الفصل العاشر: رد الفعل ودورة حياة الأجزاء Toast and Fragment Lifecycle",
+    "unit": 3,
+    "question": "يمكن تعديل ............ داخل ملف الـ MainActivity.kt وذلك لجعل التطبيق يعرض الـ Fragment بدلا من الـ MainActivity.",
+    "options": [
+      "setContentView()",
+      "setFragmentView()",
+      "setView()",
+      "setFragment()"
+    ],
+    "answer": 0,
+    "pdf_page": 423
+  },
+  {
+    "chapter": 10,
+    "chapter_title": "الفصل العاشر: رد الفعل ودورة حياة الأجزاء Toast and Fragment Lifecycle",
+    "unit": 3,
+    "question": "يمكن اضافة الـ Fragment داخل أي Activity وذلك عن طريق السحب لعنصر الـ ............ والالقاء على الـ Activity في نافذة التصميم.",
+    "options": [
+      "FragmentContainerView",
+      "AddFragmentView",
+      "AddFragmentContainer",
+      "AddFragmentContainerView"
+    ],
+    "answer": 0,
+    "pdf_page": 423
+  },
+  {
+    "chapter": 10,
+    "chapter_title": "الفصل العاشر: رد الفعل ودورة حياة الأجزاء Toast and Fragment Lifecycle",
+    "unit": 3,
+    "question": "يمكننا دمج عدد من الـ ............ داخل Activity واحدة.",
+    "options": [
+      "Expected Events",
+      "Null Activities",
+      "Fragments",
+      "Null Events"
+    ],
+    "answer": 2,
+    "pdf_page": 423
+  },
+  {
+    "chapter": 11,
+    "chapter_title": "الفصل الحادي عشر: القوائم Menus - 1",
+    "unit": 1,
+    "question": "يستخدم ............ لكي نجعل العنصر يخرج من القائمة ويظهر دائماً في شريط الإجراءات.",
+    "options": [
+      "app:showAsAction=\"always\"",
+      "app:showAsAction=”never\"",
+      "app:showAsAction=”ifRoom\"",
+      "app:showAsAction=”here\""
+    ],
+    "answer": 0,
+    "pdf_page": 438
+  },
+  {
+    "chapter": 11,
+    "chapter_title": "الفصل الحادي عشر: القوائم Menus - 1",
+    "unit": 1,
+    "question": "يستخدم ............ لكي نجعل العنصر يظهر في شريط الإجراءات عند وجود مساحة كافية لعرضه على الشريط والا فإنه سوف يظهر داخل القائمة.",
+    "options": [
+      "app:showAsAction=\"always\"",
+      "app:showAsAction=”never\"",
+      "app:showAsAction=”ifRoom\"",
+      "app:showAsAction=”here\""
+    ],
+    "answer": 2,
+    "pdf_page": 438
+  },
+  {
+    "chapter": 11,
+    "chapter_title": "الفصل الحادي عشر: القوائم Menus - 1",
+    "unit": 1,
+    "question": "يستخدم ............ لكي نجعل العنصر يظل داخل القائمة ولا يظهر ابدا في شريط الإجراءات.",
+    "options": [
+      "app:showAsAction=\"always\"",
+      "app:showAsAction=”never\"",
+      "app:showAsAction=”ifRoom\"",
+      "app:showAsAction=”here\""
+    ],
+    "answer": 1,
+    "pdf_page": 438
+  },
+  {
+    "chapter": 11,
+    "chapter_title": "الفصل الحادي عشر: القوائم Menus - 1",
+    "unit": 2,
+    "question": "تستخدم الدالة ............ لتحويل مورد XML إلى كائن قابل للبرمجة.",
+    "options": [
+      "convert()",
+      "convertXMLtoKT()",
+      "inflate()",
+      "inflateXML()"
+    ],
+    "answer": 2,
+    "pdf_page": 452
+  },
+  {
+    "chapter": 11,
+    "chapter_title": "الفصل الحادي عشر: القوائم Menus - 1",
+    "unit": 2,
+    "question": "تستخدم الدالة ............ لإظهار شريط الأدوات على النشاط.",
+    "options": [
+      "setToolBarToActivity()",
+      "setToolBar()",
+      "setSupportActionBar()",
+      "setActionBar()"
+    ],
+    "answer": 2,
+    "pdf_page": 452
+  },
+  {
+    "chapter": 11,
+    "chapter_title": "الفصل الحادي عشر: القوائم Menus - 1",
+    "unit": 2,
+    "question": "تستخدم الدالة ............ لإضافة حدث عند الضغط على أحد عناصر قائمة الخيارات.",
+    "options": [
+      "onOptionsItemClicked",
+      "onOptionsItemSelected",
+      "onOptionsItemSupported",
+      "onOptionsItemIgnored"
+    ],
+    "answer": 1,
+    "pdf_page": 452
+  },
+  {
+    "chapter": 11,
+    "chapter_title": "الفصل الحادي عشر: القوائم Menus - 1",
+    "unit": 3,
+    "question": "تعتبر ............ أحد أنواع القوائم وتظهر عندما يقوم المستخدم بالنقر لفترة طويلة على عنصر ما.",
+    "options": [
+      "قائمة الخيارات",
+      "قائمة السياق",
+      "القائمة المنبثقة",
+      "القائمة المتعددة"
+    ],
+    "answer": 1,
+    "pdf_page": 464
+  },
+  {
+    "chapter": 11,
+    "chapter_title": "الفصل الحادي عشر: القوائم Menus - 1",
+    "unit": 3,
+    "question": "نقوم بكتابة كود دالة inflate() داخل دالة ............ وذلك للسماح باستخدام قائمة السياق على عنصر معين داخل النشاط.",
+    "options": [
+      "onContextItemSelected()",
+      "onOptionsItemSelected()",
+      "onCreateContextMenu()",
+      "onCreateOptionsMenu()"
+    ],
+    "answer": 2,
+    "pdf_page": 464
+  },
+  {
+    "chapter": 11,
+    "chapter_title": "الفصل الحادي عشر: القوائم Menus - 1",
+    "unit": 3,
+    "question": "تعتبر ............ أحد أنواع القوائم ولا تدعم أي اختصارات للعناصر وأيقونات العناصر.",
+    "options": [
+      "قائمة الخيارات",
+      "قائمة السياق",
+      "القائمة المنبثقة",
+      "القائمة المتعددة"
+    ],
+    "answer": 1,
+    "pdf_page": 464
+  },
+  {
+    "chapter": 12,
+    "chapter_title": "الفصل الثاني عشر: القوائم Menus - 2",
+    "unit": 1,
+    "question": "يتم استخدام ............ قبل الإعلان عن الكائن وذلك للسماح بإعطائه قيمة ليست فارغة خارج الـ Constructor.",
+    "options": [
+      "preinit",
+      "lateinit",
+      "beforeinit",
+      "afterinit"
+    ],
+    "answer": 1,
+    "pdf_page": 480
+  },
+  {
+    "chapter": 12,
+    "chapter_title": "الفصل الثاني عشر: القوائم Menus - 2",
+    "unit": 1,
+    "question": "نقوم بإضافة الوظيفة لكل عنصر من عناصر قائمة السياق داخل دالة ............ وذلك لتنفيذ حدث معين عن الضغط على أحد عناصر قائمة السياق.",
+    "options": [
+      "onContextItemSelected()",
+      "onOptionsItemSelected()",
+      "onCreateContextMenu()",
+      "onCreateOptionsMenu()"
+    ],
+    "answer": 0,
+    "pdf_page": 480
+  },
+  {
+    "chapter": 12,
+    "chapter_title": "الفصل الثاني عشر: القوائم Menus - 2",
+    "unit": 1,
+    "question": "نستخدم دالة ............ لتلوين خلفية التخطيط الرئيسي للتطبيق.",
+    "options": [
+      "setMainLayoutColor()",
+      "setMainFrontColor()",
+      "setBackgroundColor()",
+      "setBackGround()"
+    ],
+    "answer": 2,
+    "pdf_page": 480
+  },
+  {
+    "chapter": 12,
+    "chapter_title": "الفصل الثاني عشر: القوائم Menus - 2",
+    "unit": 2,
+    "question": "تعتبر ............ أحد أنواع القوائم وتظهر قائمة بالعناصر في قائمة عمودية مرتبطة بطريقة العرض/ العنصر التي استدعت القائمة، وذلك عند الضغط/ اللمس لعنصر محدد.",
+    "options": [
+      "قائمة الخيارات",
+      "قائمة السياق",
+      "القائمة المنبثقة",
+      "القائمة المتعددة"
+    ],
+    "answer": 2,
+    "pdf_page": 493
+  },
+  {
+    "chapter": 12,
+    "chapter_title": "الفصل الثاني عشر: القوائم Menus - 2",
+    "unit": 2,
+    "question": "نستخدم دالة ............ وذلك لإظهار القائمة المنبثقة عند الضغط على مفتاح ما.",
+    "options": [
+      "onShow()",
+      "onClick()",
+      "show()",
+      "onDoubleClick()"
+    ],
+    "answer": 2,
+    "pdf_page": 493
+  },
+  {
+    "chapter": 12,
+    "chapter_title": "الفصل الثاني عشر: القوائم Menus - 2",
+    "unit": 2,
+    "question": "نقوم بكتابة كود دالة inflate() داخل دالة ............ وذلك للسماح باستخدام القائمة المنبثقة على عنصر معين داخل النشاط.",
+    "options": [
+      "onPopUpItemSelected()",
+      "onOptionsItemSelected()",
+      "setOnClickListener()",
+      "onCreatePopUpMenu()"
+    ],
+    "answer": 2,
+    "pdf_page": 493
+  },
+  {
+    "chapter": 12,
+    "chapter_title": "الفصل الثاني عشر: القوائم Menus - 2",
+    "unit": 3,
+    "question": "في إعداد القائمة المنبثقة يتم الإعلان عن كائن اسمه constLayout من النوع ConstraintLayout، وذلك ............ تعريف دالة onCreate وذلك لاستخدامه لتلوين خلفية التطبيق.",
+    "options": [
+      "قبل",
+      "بعد",
+      "داخل",
+      "داخل محتوى فرعي"
+    ],
+    "answer": 0,
+    "pdf_page": 506
+  },
+  {
+    "chapter": 12,
+    "chapter_title": "الفصل الثاني عشر: القوائم Menus - 2",
+    "unit": 3,
+    "question": "في إعداد القائمة المنبثقة نقوم بربط الكائن من النوع ConstraintLayout مع التخطيط الرئيسي للتطبيق وذلك ............ تعريف دالة onCreate .",
+    "options": [
+      "قبل",
+      "بعد",
+      "داخل",
+      "داخل محتوى فرعي"
+    ],
+    "answer": 2,
+    "pdf_page": 506
+  },
+  {
+    "chapter": 12,
+    "chapter_title": "الفصل الثاني عشر: القوائم Menus - 2",
+    "unit": 3,
+    "question": "في إعداد القائمة المنبثقة نستخدم دالة setBackgroundColor لتلوين خلفية التخطيط الرئيسي للتطبيق، وذلك داخل دالة ............ .",
+    "options": [
+      "onPopUpItemSelected()",
+      "onOptionsItemSelected()",
+      "SetOnMenuItemClickListener()",
+      "onCreatePopUpMenu()"
+    ],
+    "answer": 2,
+    "pdf_page": 506
+  },
+  {
+    "chapter": 13,
+    "chapter_title": "الفصل الثالث عشر: الوسائط المتعددة والتطبيقات المدركة للسياق - 1",
+    "unit": 1,
+    "question": "يعتبر ............ هو برنامج ترميز يحتوي على وحدة تشفير (encoder) وفك تشفير (decoder) ويتم استخدامه لأنواع بيانات مختلفة.",
+    "options": [
+      "Codec",
+      "MediaCodec",
+      "BentaCodec",
+      "DelatCodec"
+    ],
+    "answer": 0,
+    "pdf_page": 519
+  },
+  {
+    "chapter": 13,
+    "chapter_title": "الفصل الثالث عشر: الوسائط المتعددة والتطبيقات المدركة للسياق - 1",
+    "unit": 1,
+    "question": "في مرحلة الإدخال يقوم الـ Codec بإرسال ............ الى المستخدم.",
+    "options": [
+      "مخازن الإدخال المؤقتة المملوءة",
+      "مخازن الإخراج المؤقتة المملوءة",
+      "مخازن الإدخال المؤقتة الفارغة",
+      "مخازن الإخراج المهملة"
+    ],
+    "answer": 2,
+    "pdf_page": 519
+  },
+  {
+    "chapter": 13,
+    "chapter_title": "الفصل الثالث عشر: الوسائط المتعددة والتطبيقات المدركة للسياق - 1",
+    "unit": 1,
+    "question": "في مرحلة الإخراج يقوم الـ Codec بإرسال ............ الى المستخدم.",
+    "options": [
+      "مخازن الإدخال المؤقتة المملوءة",
+      "مخازن الإخراج المؤقتة المملوءة",
+      "مخازن الإدخال المؤقتة الفارغة",
+      "مخازن الإخراج المهملة"
+    ],
+    "answer": 1,
+    "pdf_page": 519
+  },
+  {
+    "chapter": 13,
+    "chapter_title": "الفصل الثالث عشر: الوسائط المتعددة والتطبيقات المدركة للسياق - 1",
+    "unit": 2,
+    "question": "يمكننا فتح مدير المصادر (Resource Manager) وذلك من خلال .............",
+    "options": [
+      "قائمة Tools ونختار Resource Manager",
+      "قائمة Build",
+      "قائمة View ونشير الى Tool Windows",
+      "قائمة Navigate"
+    ],
+    "answer": 2,
+    "pdf_page": 532
+  },
+  {
+    "chapter": 13,
+    "chapter_title": "الفصل الثالث عشر: الوسائط المتعددة والتطبيقات المدركة للسياق - 1",
+    "unit": 2,
+    "question": "يفضل استخدام الصور الثابتة بامتداد ............ في الـ Android.",
+    "options": [
+      "BMZ أو Webx",
+      "WTY أو GIS",
+      "HEIS أو AVR",
+      "PNG أو JPEG"
+    ],
+    "answer": 3,
+    "pdf_page": 532
+  },
+  {
+    "chapter": 13,
+    "chapter_title": "الفصل الثالث عشر: الوسائط المتعددة والتطبيقات المدركة للسياق - 1",
+    "unit": 2,
+    "question": "يمكن استخدام الصور المتحركة بامتداد ............ في الـ Android.",
+    "options": [
+      "MIG",
+      "GIM",
+      "GIF",
+      "FIG"
+    ],
+    "answer": 2,
+    "pdf_page": 532
+  },
+  {
+    "chapter": 13,
+    "chapter_title": "الفصل الثالث عشر: الوسائط المتعددة والتطبيقات المدركة للسياق - 1",
+    "unit": 3,
+    "question": "يتم استخدام فئة ............ للتحكم في ملفات الصوت أو الفيديو .",
+    "options": [
+      "android.media.AudioVideo",
+      "android.media.AudioMedia",
+      "android.media.MediaPlayer",
+      "android.media.Video"
+    ],
+    "answer": 2,
+    "pdf_page": 551
+  },
+  {
+    "chapter": 13,
+    "chapter_title": "الفصل الثالث عشر: الوسائط المتعددة والتطبيقات المدركة للسياق - 1",
+    "unit": 3,
+    "question": "عند إنشاء تطبيق يحتوي على بعض الصوتيات، فإنه يتم قراءة الملف الصوتي من المجلد ............ داخل الـ Android Studio.",
+    "options": [
+      "res>audio",
+      "res>raw",
+      "res>mipmap",
+      "res>xml"
+    ],
+    "answer": 1,
+    "pdf_page": 551
+  },
+  {
+    "chapter": 13,
+    "chapter_title": "الفصل الثالث عشر: الوسائط المتعددة والتطبيقات المدركة للسياق - 1",
+    "unit": 3,
+    "question": "تستخدم دالة ............ لبدء تشغيل ملف الصوت عند بناء التطبيق الصوتي.",
+    "options": [
+      "start()",
+      "Audio.start()",
+      "MediaPlayer.start()",
+      "Start.audio()"
+    ],
+    "answer": 2,
+    "pdf_page": 551
+  },
+  {
+    "chapter": 14,
+    "chapter_title": "الفصل الرابع عشر: الوسائط المتعددة والتطبيقات المدركة للسياق - 2",
+    "unit": 1,
+    "question": "تستخدم فئة ............ من Kotlin لعرض ملفات الفيديو في تطبيق الـ Android.",
+    "options": [
+      "VideoView",
+      "VideoShow",
+      "VideoPlayer",
+      "Video"
+    ],
+    "answer": 0,
+    "pdf_page": 567
+  },
+  {
+    "chapter": 14,
+    "chapter_title": "الفصل الرابع عشر: الوسائط المتعددة والتطبيقات المدركة للسياق - 2",
+    "unit": 1,
+    "question": "عند بناء تطبيق فيديو، في خطوة الإعلان عن متغيرات في ملف الـ MainActivity.kt، نقوم بالإعلان عن متغير من النوع VideoView ونضع قيمته الابتدائية ............ .",
+    "options": [
+      "R.id.video",
+      "null",
+      "R.id.null",
+      "video_url"
+    ],
+    "answer": 1,
+    "pdf_page": 567
+  },
+  {
+    "chapter": 14,
+    "chapter_title": "الفصل الرابع عشر: الوسائط المتعددة والتطبيقات المدركة للسياق - 2",
+    "unit": 1,
+    "question": "فئة VideoView قادرة على تشغيل ملف فيديو من جميع المصادر ماعدا ............ .",
+    "options": [
+      "عنوان URL",
+      "التخزين المحلي",
+      "ملف مشفر",
+      "ملف Resource"
+    ],
+    "answer": 2,
+    "pdf_page": 567
+  },
+  {
+    "chapter": 14,
+    "chapter_title": "الفصل الرابع عشر: الوسائط المتعددة والتطبيقات المدركة للسياق - 2",
+    "unit": 2,
+    "question": "التطبيق ............ هو تطبيق جوال يستخدم بيئة المستخدم وسلوكه لتوفير محتوى مخصص وملائم.",
+    "options": [
+      "المخصص",
+      "المدرك للسياق",
+      "الحساس",
+      "المتكامل"
+    ],
+    "answer": 1,
+    "pdf_page": 579
+  },
+  {
+    "chapter": 14,
+    "chapter_title": "الفصل الرابع عشر: الوسائط المتعددة والتطبيقات المدركة للسياق - 2",
+    "unit": 2,
+    "question": "يجب أن تطلب التطبيقات التي تستخدم خدمات الموقع أذونات الموقع من المستخدم وذلك ............ .",
+    "options": [
+      "لضمان تفاعل المستخدم مع التطبيق",
+      "لاطلاع المستخدم على التطبيق",
+      "لحماية خصوصية المستخدم",
+      "للسماح للمستخدم بالخروج من التطبيق"
+    ],
+    "answer": 2,
+    "pdf_page": 579
+  },
+  {
+    "chapter": 14,
+    "chapter_title": "الفصل الرابع عشر: الوسائط المتعددة والتطبيقات المدركة للسياق - 2",
+    "unit": 2,
+    "question": "إذا كان التطبيق يحتوي على ميزة تقوم بمشاركة معلومات الموقع أو تلقيها مرة واحدة فقط، أو لفترة زمنية محددة. فإن هذه الميزة تتطلب الوصول إلى ............ .",
+    "options": [
+      "الموقع الأمامي",
+      "الموقع الخلفي",
+      "الموقع الحيوي",
+      "الموقع الافتراضي"
+    ],
+    "answer": 0,
+    "pdf_page": 579
+  },
+  {
+    "chapter": 14,
+    "chapter_title": "الفصل الرابع عشر: الوسائط المتعددة والتطبيقات المدركة للسياق - 2",
+    "unit": 3,
+    "question": "عند بناء تطبيق تتبع/تعقب الموقع، فنقوم بإضافة اذونات وصول التطبيق الى الموقع التقريبي والموقع الدقيق في ملف الـ ............ .",
+    "options": [
+      "Permissions",
+      "LocationPermission",
+      "Location",
+      "Manifest"
+    ],
+    "answer": 3,
+    "pdf_page": 596
+  },
+  {
+    "chapter": 14,
+    "chapter_title": "الفصل الرابع عشر: الوسائط المتعددة والتطبيقات المدركة للسياق - 2",
+    "unit": 3,
+    "question": "يستخدم الإذن ............ للسماح للتطبيق بالوصول الى الموقع التقريبي.",
+    "options": [
+      "ACCESS_COARSE_LOCATION",
+      "ACCESS_CURRENT_LOCATION",
+      "ACCESS_FINE_LOCATION",
+      "ACCESS_EXACT_LOCATION"
+    ],
+    "answer": 0,
+    "pdf_page": 596
+  },
+  {
+    "chapter": 14,
+    "chapter_title": "الفصل الرابع عشر: الوسائط المتعددة والتطبيقات المدركة للسياق - 2",
+    "unit": 3,
+    "question": "يستخدم الإذن ............ للسماح للتطبيق بالوصول الى الموقع الدقيق.",
+    "options": [
+      "ACCESS_COARSE_LOCATION",
+      "ACCESS_CURRENT_LOCATION",
+      "ACCESS_FINE_LOCATION",
+      "ACCESS_EXACT_LOCATION"
+    ],
+    "answer": 2,
+    "pdf_page": 596
+  }
+]
