@@ -25,7 +25,7 @@
         <h1 dir="auto">{{ chapter["name"] }}</h1>
     </div>
 
-    {% if score is not none %}
+    {% if score is defined %}
         {% set ratio = score / total if total else 0 %}
         <section class="card score-card rise" aria-live="polite">
             <div class="score-ring" data-score="{{ score }}" data-total="{{ total }}">
@@ -58,8 +58,14 @@
         <div class="alert alert-error" role="alert">{{ error }}</div>
     {% endif %}
 
-    <form class="quiz-form stagger" method="post">
+    {% set review = results is defined %}
+    {% if review %}
+    <div class="quiz-form quiz-review stagger">
+    {% else %}
+    <form class="quiz-form stagger" method="post" action="/chapters/{{ chapter['id'] }}">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="attempt" value="{{ attempt }}">
+    {% endif %}
 
         {% for question in questions %}
             <fieldset class="card question spotlight"{% if is_ltr(question["text"]) %} dir="ltr"{% endif %}>
@@ -69,14 +75,14 @@
                 </legend>
 
                 {% for option in question["options"] %}
-                    {% set picked = request.form.get("q" ~ question["id"]) %}
-                    <label class="option{% if results is not none %}{% if option == answers[question['id']] %} is-correct{% elif picked == option %} is-wrong{% endif %}{% endif %}">
-                        <input type="radio" name="q{{ question['id'] }}" value="{{ option }}" {% if picked == option %}checked{% endif %}>
+                    {% set picked = selected.get(question["id"]) %}
+                    <label class="option{% if review %}{% if option == answers[question['id']] %} is-correct{% elif picked == option %} is-wrong{% endif %}{% endif %}">
+                        <input type="radio" name="q{{ question['id'] }}" value="{{ option }}" {% if picked == option %}checked{% endif %}{% if review %} disabled{% endif %}>
                         <span dir="auto">{{ option }}</span>
                     </label>
                 {% endfor %}
 
-                {% if results is not none %}
+                {% if results is defined %}
                     {% if results[question["id"]] %}
                         <p class="feedback feedback-ok">
                             <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>
@@ -93,9 +99,17 @@
             </fieldset>
         {% endfor %}
 
+        {% if review %}
+        <div class="quiz-actions">
+            <a class="btn btn-secondary" href="/results">نتائجي</a>
+            <a class="btn btn-primary" href="/chapters/{{ chapter['id'] }}">أعد الاختبار</a>
+        </div>
+    </div>
+        {% else %}
         <div class="quiz-actions">
             <p class="muted">جاوب على كل الأسئلة قبل التسليم.</p>
             <button type="submit" class="btn btn-primary">سلّم الإجابات</button>
         </div>
     </form>
+        {% endif %}
 {% endblock %}

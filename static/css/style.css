@@ -259,6 +259,8 @@ main { position: relative; z-index: 1; flex: 1; padding: 56px 0 96px; }
 .btn-secondary:hover { color: var(--text); }
 .btn-small { min-height: 38px; padding: 0 16px; font-size: 15px; border-radius: 12px; box-shadow: 0 3px 0 var(--edge); }
 .btn-block { width: 100%; }
+.btn:disabled,
+.btn:disabled:active { cursor: progress; opacity: 0.7; filter: none; transform: none; box-shadow: 0 4px 0 var(--edge); }
 
 /* Buttons on the dark header */
 .site-header .btn-secondary { background: transparent; color: var(--header-text); border-color: var(--header-chip); --edge: var(--header-chip); }
@@ -610,6 +612,16 @@ a.subject-tile:active { box-shadow: 0 2px 0 var(--edge); }
 }
 .option.is-correct input { accent-color: var(--ok); }
 .option.is-wrong input { accent-color: var(--err); }
+
+/* Result page: answers can be seen but not changed */
+.quiz-review .option { cursor: default; }
+.quiz-review .option:hover { border-color: var(--line); }
+.quiz-review .option:active { transform: none; box-shadow: 0 3px 0 var(--line); }
+.quiz-review .option.is-correct:hover { border-color: var(--ok); }
+.quiz-review .option.is-wrong:hover { border-color: var(--err); }
+.quiz-review .option.is-correct:active { box-shadow: 0 3px 0 var(--ok); }
+.quiz-review .option.is-wrong:active { box-shadow: 0 3px 0 var(--err); }
+.quiz-review .option input:disabled { opacity: 1; }
 
 .feedback { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 700; padding-top: 4px; }
 .feedback-ok { color: var(--ok); }
