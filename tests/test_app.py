@@ -183,7 +183,9 @@ def test_subject_page_links_to_chapter(client, logged_in):
 
 
 def test_chapter_quiz_one_wrong_answer(client, logged_in):
-    response = client.post("/chapters/1", data={"q1": "21", "q2": "443"})
+    response = client.post(
+        "/chapters/1", data={"q1": "21", "q2": "443"}, follow_redirects=True
+    )
     assert response.status_code == 200
     assert "إجابة خاطئة" in response.get_data(as_text=True)
     assert "إجابة صحيحة" in response.get_data(as_text=True)
@@ -191,7 +193,9 @@ def test_chapter_quiz_one_wrong_answer(client, logged_in):
 
 
 def test_chapter_quiz_all_answers_correct(client, logged_in):
-    response = client.post("/chapters/1", data={"q1": "22", "q2": "443"})
+    response = client.post(
+        "/chapters/1", data={"q1": "22", "q2": "443"}, follow_redirects=True
+    )
     assert response.status_code == 200
     assert "إجابة صحيحة" in response.get_data(as_text=True)
     assert "إجابة خاطئة" not in response.get_data(as_text=True)
@@ -211,7 +215,9 @@ def test_chapter_quiz_invalid_answer(client, logged_in):
 
 
 def test_chapter_quiz_all_answers_wrong_shows_zero(client, logged_in):
-    response = client.post("/chapters/1", data={"q1": "21", "q2": "80"})
+    response = client.post(
+        "/chapters/1", data={"q1": "21", "q2": "80"}, follow_redirects=True
+    )
     assert response.status_code == 200
     assert "نتيجتك: 0 من 2" in response.get_data(as_text=True)
     assert "إجابة صحيحة" not in response.get_data(as_text=True)
@@ -288,7 +294,9 @@ def login_user(client, username="nasser", password="mypassword123"):
 def test_result_saved_for_logged_in_user(client):
     register_user(client)
     login_user(client)
-    response = client.post("/chapters/1", data={"q1": "22", "q2": "443"})
+    response = client.post(
+        "/chapters/1", data={"q1": "22", "q2": "443"}, follow_redirects=True
+    )
     assert "تم حفظ نتيجتك" in response.get_data(as_text=True)
 
     response = client.get("/results")
@@ -328,6 +336,26 @@ def test_user_cannot_see_other_users_results(client):
     assert "2 من 2" not in response.get_data(as_text=True)
 
 
+def test_user_cannot_see_other_users_result_page(client):
+    register_user(client, "alice")
+    login_user(client, "alice")
+    client.post("/chapters/1", data={"q1": "22", "q2": "443"})
+    assert client.get("/chapters/1/result").status_code == 200
+    client.post("/logout")
+
+    register_user(client, "bob")
+    login_user(client, "bob")
+    response = client.get("/chapters/1/result")
+
+    assert response.status_code == 302
+    assert response.headers["Location"] == "/chapters/1"
+    page = client.get("/chapters/1/result", follow_redirects=True).get_data(
+        as_text=True
+    )
+    assert "نتيجتك" not in page
+    assert "checked" not in page
+
+
 def test_results_requires_login(client):
     response = client.get("/results")
     assert response.status_code == 302
@@ -345,7 +373,9 @@ def test_answers_hidden_until_submitted(client):
 
 
 def test_wrong_answer_shows_correct_one(client, logged_in):
-    response = client.post("/chapters/1", data={"q1": "21", "q2": "443"})
+    response = client.post(
+        "/chapters/1", data={"q1": "21", "q2": "443"}, follow_redirects=True
+    )
     page = response.get_data(as_text=True)
     assert 'الصح: <strong dir="auto">22</strong>' in page
     assert "صفحة 1 في الكتاب" in page
@@ -355,7 +385,7 @@ def test_true_false_question(client, logged_in):
     page = client.get("/chapters/2").get_data(as_text=True)
     assert page.count('type="radio"') == 2
 
-    response = client.post("/chapters/2", data={"q3": "صح"})
+    response = client.post("/chapters/2", data={"q3": "صح"}, follow_redirects=True)
     assert "نتيجتك: 1 من 1" in response.get_data(as_text=True)
 
 
@@ -457,3 +487,69 @@ def test_page_title_includes_site_name(client):
 
     page = client.get("/").get_data(as_text=True)
     assert "<title>منصة الاختبارات</title>" in page
+
+
+def count_results():
+    conn = db.get_connection()
+    count = conn.execute("SELECT COUNT(*) AS n FROM results").fetchone()["n"]
+    conn.close()
+    return count
+
+
+def test_submit_redirects_to_result_page(client, logged_in):
+    response = client.post("/chapters/1", data={"q1": "22", "q2": "443"})
+    assert response.status_code == 302
+    assert response.headers["Location"] == "/chapters/1/result"
+
+
+def test_refreshing_result_does_not_save_again(client, logged_in):
+    client.post("/chapters/1", data={"q1": "21", "q2": "443"})
+    assert count_results() == 1
+
+    for _ in range(3):
+        response = client.get("/chapters/1/result")
+        assert response.status_code == 200
+        assert "نتيجتك: 1 من 2" in response.get_data(as_text=True)
+
+    assert count_results() == 1
+
+
+def test_result_page_keeps_chosen_answers(client, logged_in):
+    client.post("/chapters/1", data={"q1": "21", "q2": "443"})
+    page = client.get("/chapters/1/result").get_data(as_text=True)
+    assert page.count("checked") == 2
+    assert 'value="21" checked' in page
+    assert 'value="443" checked' in page
+
+
+def test_retaking_quiz_saves_new_result(client, logged_in):
+    client.post("/chapters/1", data={"q1": "21", "q2": "443"})
+    client.post("/chapters/1", data={"q1": "22", "q2": "443"})
+    assert count_results() == 2
+    page = client.get("/chapters/1/result").get_data(as_text=True)
+    assert "نتيجتك: 2 من 2" in page
+
+
+def test_result_page_without_quiz_goes_to_quiz(client, logged_in):
+    response = client.get("/chapters/1/result")
+    assert response.status_code == 302
+    assert response.headers["Location"] == "/chapters/1"
+
+
+def test_result_page_for_other_chapter_goes_to_quiz(client, logged_in):
+    client.post("/chapters/1", data={"q1": "22", "q2": "443"})
+    response = client.get("/chapters/2/result")
+    assert response.status_code == 302
+    assert response.headers["Location"] == "/chapters/2"
+
+
+def test_result_page_requires_login(client):
+    response = client.get("/chapters/1/result")
+    assert response.status_code == 302
+    assert response.headers["Location"] == "/login"
+
+
+def test_invalid_answer_keeps_other_choices(client, logged_in):
+    response = client.post("/chapters/1", data={"q1": "22"})
+    assert response.status_code == 400
+    assert 'value="22" checked' in response.get_data(as_text=True)
