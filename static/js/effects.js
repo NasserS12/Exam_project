@@ -34,6 +34,31 @@ document.addEventListener("DOMContentLoaded", function () {
         requestAnimationFrame(step);
     });
 
+    // Subject progress rings on the home page
+    document.querySelectorAll(".ring[data-percent]").forEach(function (ring) {
+        var target = parseFloat(ring.getAttribute("data-percent"));
+        if (isNaN(target)) {
+            return;
+        }
+        if (reduceMotion) {
+            ring.style.setProperty("--p", target);
+            return;
+        }
+        var start = null;
+        function step(time) {
+            if (start === null) {
+                start = time;
+            }
+            var progress = Math.min((time - start) / 900, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            ring.style.setProperty("--p", target * eased);
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            }
+        }
+        requestAnimationFrame(step);
+    });
+
     // Score ring fills up to the result
     document.querySelectorAll(".score-ring").forEach(function (ring) {
         var score = parseFloat(ring.getAttribute("data-score"));
