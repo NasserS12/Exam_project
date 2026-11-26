@@ -17,7 +17,7 @@
         {% for chapter in chapters %}
             <a class="card spotlight tone-{{ ((subject['id'] - 1) % 5) + 1 }}" href="/chapters/{{ chapter['id'] }}">
                 <div class="card-top">
-                    <span class="tone-icon">{{ loop.index }}</span>
+                    <span class="tone-icon">{{ chapter["number"] }}</span>
                     {% if chapter["best"] is not none %}
                         {% if chapter["best"] == chapter["questions"] %}
                             <span class="chip chip-ok">{{ chapter["best"] }}/{{ chapter["questions"] }}</span>
