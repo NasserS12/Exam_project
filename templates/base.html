@@ -38,7 +38,7 @@
 
             <nav class="nav" aria-label="القائمة الرئيسية">
                 {% if session.get("user_id") %}
-                    <a class="nav-link" href="/" {% if request.endpoint in ("home", "subject", "chapter_quiz") %}aria-current="page"{% endif %}>المواد</a>
+                    <a class="nav-link" href="/" {% if request.endpoint in ("home", "subject", "chapter_quiz", "chapter_result") %}aria-current="page"{% endif %}>المواد</a>
                     <a class="nav-link" href="/results" {% if request.endpoint == "results_page" %}aria-current="page"{% endif %}>نتائجي</a>
                     <span class="nav-sep"></span>
                 {% endif %}

@@ -1,5 +1,6 @@
 import os
 import re
+import secrets
 from datetime import timedelta
 from functools import wraps
 
@@ -23,6 +24,9 @@ app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(hours=2)
 csrf = CSRFProtect(app)
 
 USERNAME_PATTERN = re.compile(r"[A-Za-z][A-Za-z0-9_]{2,29}")
+
+# How many quiz attempts a user can have open at once (for example in two tabs).
+MAX_OPEN_ATTEMPTS = 5
 
 
 def login_required(view):
@@ -177,9 +181,7 @@ def subject(subject_id):
     return render_template("subject.html", subject=row, chapters=chapter_list)
 
 
-@app.route("/chapters/<int:chapter_id>", methods=["GET", "POST"])
-@login_required
-def chapter_quiz(chapter_id):
+def load_chapter(chapter_id):
     conn = get_connection()
     chapter = conn.execute(
         "SELECT chapters.id, chapters.name, chapters.subject_id, "
@@ -219,50 +221,113 @@ def chapter_quiz(chapter_id):
             }
         )
         answers[row["id"]] = row["answer"]
+    return chapter, questions, answers
 
-    results = None
-    error = None
-    score = None
-    total = None
-    saved = None
-    if request.method == "POST":
-        results = {}
-        for question in questions:
-            selected = request.form.get(f"q{question['id']}")
-            if selected not in question["options"]:
-                error = "جاوب على كل الأسئلة من الخيارات"
-                return render_template(
-                    "chapter_quiz.html",
-                    chapter=chapter,
-                    questions=questions,
-                    results=None,
-                    error=error,
-                ), 400
-            results[question["id"]] = selected == answers[question["id"]]
-        score = sum(results.values())
-        total = len(results)
-        user_id = session.get("user_id")
-        saved = user_id is not None
-        if saved:
-            conn = get_connection()
-            conn.execute(
-                "INSERT INTO results (user_id, chapter_id, score, total) "
-                "VALUES (%s, %s, %s, %s)",
-                (user_id, chapter_id, score, total),
-            )
-            conn.commit()
-            conn.close()
 
+def start_attempt(chapter_id):
+    """Give the quiz page a one-time ticket. A result is saved only once per ticket."""
+    ticket = f"{chapter_id}:{secrets.token_urlsafe(16)}"
+    open_attempts = session.get("open_attempts", [])
+    session["open_attempts"] = (open_attempts + [ticket])[-MAX_OPEN_ATTEMPTS:]
+    return ticket
+
+
+def attempt_is_open(chapter_id, ticket):
+    """False if the ticket is unknown, already used, or for another chapter."""
+    return ticket in session.get("open_attempts", []) and ticket.startswith(
+        f"{chapter_id}:"
+    )
+
+
+def close_attempt(ticket):
+    session["open_attempts"] = [
+        t for t in session.get("open_attempts", []) if t != ticket
+    ]
+
+
+@app.route("/chapters/<int:chapter_id>", methods=["GET", "POST"])
+@login_required
+def chapter_quiz(chapter_id):
+    chapter, questions, answers = load_chapter(chapter_id)
+
+    if request.method == "GET":
+        return render_template(
+            "chapter_quiz.html",
+            chapter=chapter,
+            questions=questions,
+            selected={},
+            attempt=start_attempt(chapter_id),
+        )
+
+    ticket = request.form.get("attempt", "")
+    if not attempt_is_open(chapter_id, ticket):
+        # This attempt was already saved (or is not valid): never save it again.
+        last_quiz = session.get("last_quiz")
+        if last_quiz and last_quiz.get("chapter_id") == chapter_id:
+            return redirect(f"/chapters/{chapter_id}/result")
+        return redirect(f"/chapters/{chapter_id}")
+
+    selected = {}
+    picks = {}
+    for question in questions:
+        choice = request.form.get(f"q{question['id']}")
+        if choice in question["options"]:
+            selected[question["id"]] = choice
+            picks[str(question["id"])] = question["options"].index(choice)
+    if len(selected) != len(questions):
+        return render_template(
+            "chapter_quiz.html",
+            chapter=chapter,
+            questions=questions,
+            selected=selected,
+            attempt=ticket,
+            error="جاوب على كل الأسئلة من الخيارات",
+        ), 400
+
+    close_attempt(ticket)
+    score = sum(selected[qid] == answer for qid, answer in answers.items())
+    conn = get_connection()
+    conn.execute(
+        "INSERT INTO results (user_id, chapter_id, score, total) "
+        "VALUES (%s, %s, %s, %s)",
+        (session["user_id"], chapter_id, score, len(questions)),
+    )
+    conn.commit()
+    conn.close()
+
+    # Remember the picks and send the user to a separate page, so refreshing
+    # the result does not send the answers again and save a second result.
+    session["last_quiz"] = {"chapter_id": chapter_id, "picks": picks}
+    return redirect(f"/chapters/{chapter_id}/result")
+
+
+@app.route("/chapters/<int:chapter_id>/result")
+@login_required
+def chapter_result(chapter_id):
+    chapter, questions, answers = load_chapter(chapter_id)
+
+    last_quiz = session.get("last_quiz")
+    if not last_quiz or last_quiz.get("chapter_id") != chapter_id:
+        return redirect(f"/chapters/{chapter_id}")
+
+    selected = {}
+    for question in questions:
+        index = last_quiz["picks"].get(str(question["id"]))
+        if index is None or not 0 <= index < len(question["options"]):
+            return redirect(f"/chapters/{chapter_id}")
+        selected[question["id"]] = question["options"][index]
+
+    results = {qid: selected[qid] == answer for qid, answer in answers.items()}
     return render_template(
         "chapter_quiz.html",
         chapter=chapter,
         questions=questions,
+        selected=selected,
         results=results,
-        answers=answers if results is not None else None,
-        error=error,
-        score=score,
-        total=total,
-        saved=saved,
+        answers=answers,
+        score=sum(results.values()),
+        total=len(results),
+        saved=True,
     )
 
 
