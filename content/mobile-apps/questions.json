@@ -232,7 +232,7 @@
       "map( )",
       "sameOper( )",
       "convert( )",
-      "د- لا يوجد اجابة صحيحة"
+      "لا يوجد اجابة صحيحة"
     ],
     "answer": 0,
     "pdf_page": 137
@@ -381,7 +381,7 @@
     "chapter": 7,
     "chapter_title": "الفصل السابع: تخطيطات XML والأنشطة",
     "unit": 1,
-    "question": "يحتوي ............ على أكثر من عنصر داخلي كأطفال له ويمكن عرضهم في صف أو عمود>",
+    "question": "يحتوي ............ على أكثر من عنصر داخلي كأطفال له ويمكن عرضهم في صف أو عمود.",
     "options": [
       "FrameLayout",
       "ConstraintLayout",
@@ -507,7 +507,7 @@
     "chapter": 8,
     "chapter_title": "الفصل الثامن: جعل التطبيق تفاعلياً",
     "unit": 1,
-    "question": "يتم استدعاء ............ عندما عندما ينتقل المستخدم إلى العنصر أو بعيدًا عنه، باستخدام مفاتيح التنقل أو كرة التتبع.",
+    "question": "يتم استدعاء ............ عندما ينتقل المستخدم إلى العنصر أو بعيدًا عنه، باستخدام مفاتيح التنقل أو كرة التتبع.",
     "options": [
       "View.onClickListener",
       "View.onLongClickListener",
@@ -723,6 +723,19 @@
       "الخطي الأفقي (Horizontal)",
       "التخطيط النسبي (Relative)",
       "تخطيط القيود (Constraint)"
+    ],
+    "answer": 1,
+    "pdf_page": 379
+  },
+  {
+    "chapter": 9,
+    "chapter_title": "الفصل التاسع: أنواع التخطيطات في Android",
+    "unit": 3,
+    "question": "يمكننا تغيير اتجاه التخطيط الخطي باستخدام الخاصية ............. .",
+    "options": [
+      "android:layoutStyle",
+      "android:orientation",
+      "android:linearStyle"
     ],
     "answer": 1,
     "pdf_page": 379
