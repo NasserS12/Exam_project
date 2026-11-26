@@ -3,7 +3,7 @@
 {% block content %}
     <section class="hero landing-hero">
         <span class="badge rise">منصة مراجعة للمواد</span>
-        <h1 class="grad-text rise rise-2">ذاكر موادك، واعرف وين تراجع</h1>
+        <h1 class="grad-text rise rise-2">ذاكر موادك، <span class="hl">واعرف وين تراجع</span></h1>
         <p class="rise rise-3">أسئلة من الكتاب نفسه، وبعد كل اختبار تشوف الإجابة الصحيحة ورقم الصفحة اللي فيها.</p>
         <div class="hero-actions rise rise-3">
             <a class="btn btn-primary" href="/register">إنشاء حساب</a>
@@ -11,20 +11,7 @@
         </div>
     </section>
 
-    <div class="stat-strip rise rise-3">
-        <div>
-            <strong data-count="{{ counts['subjects'] }}">{{ counts["subjects"] }}</strong>
-            <span>مواد</span>
-        </div>
-        <div>
-            <strong data-count="{{ counts['chapters'] }}">{{ counts["chapters"] }}</strong>
-            <span>فصل</span>
-        </div>
-        <div>
-            <strong data-count="{{ counts['questions'] }}">{{ counts["questions"] }}</strong>
-            <span>سؤال</span>
-        </div>
-    </div>
+    <p class="tagline rise rise-3">كل غلطة هنا، <span class="tagline-ok">سؤال صح في الاختبار.</span></p>
 
     <div class="section-title">
         <h2>كيف تشتغل المنصة</h2>

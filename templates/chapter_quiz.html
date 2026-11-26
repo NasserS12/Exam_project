@@ -69,8 +69,9 @@
                 </legend>
 
                 {% for option in question["options"] %}
-                    <label class="option">
-                        <input type="radio" name="q{{ question['id'] }}" value="{{ option }}" {% if selected.get(question["id"]) == option %}checked{% endif %}>
+                    {% set picked = selected.get(question["id"]) %}
+                    <label class="option{% if results is defined %}{% if option == answers[question['id']] %} is-correct{% elif picked == option %} is-wrong{% endif %}{% endif %}">
+                        <input type="radio" name="q{{ question['id'] }}" value="{{ option }}" {% if picked == option %}checked{% endif %}>
                         <span dir="auto">{{ option }}</span>
                     </label>
                 {% endfor %}

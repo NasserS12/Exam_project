@@ -381,6 +381,22 @@ def test_wrong_answer_shows_correct_one(client, logged_in):
     assert "صفحة 1 في الكتاب" in page
 
 
+def test_submitted_quiz_marks_right_and_wrong_options(client, logged_in):
+    response = client.post(
+        "/chapters/1", data={"q1": "21", "q2": "443"}, follow_redirects=True
+    )
+    page = response.get_data(as_text=True)
+    # q1: picked 21 (wrong), the right one is 22. q2: picked 443 (right).
+    assert page.count("is-correct") == 2
+    assert page.count("is-wrong") == 1
+
+
+def test_options_not_marked_before_submitting(client, logged_in):
+    page = client.get("/chapters/1").get_data(as_text=True)
+    assert "is-correct" not in page
+    assert "is-wrong" not in page
+
+
 def test_true_false_question(client, logged_in):
     page = client.get("/chapters/2").get_data(as_text=True)
     assert page.count('type="radio"') == 2

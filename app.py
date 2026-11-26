@@ -121,14 +121,7 @@ def home():
 
 
 def landing():
-    conn = get_connection()
-    counts = conn.execute(
-        "SELECT (SELECT COUNT(*) FROM subjects) AS subjects, "
-        "(SELECT COUNT(*) FROM chapters WHERE subject_id IS NOT NULL) AS chapters, "
-        "(SELECT COUNT(*) FROM questions) AS questions"
-    ).fetchone()
-    conn.close()
-    return render_template("landing.html", counts=counts)
+    return render_template("landing.html")
 
 
 @app.route("/about")
