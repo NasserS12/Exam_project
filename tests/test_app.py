@@ -179,6 +179,57 @@ def test_subject_page_shows_real_chapter_numbers(client, logged_in):
     assert badges == ["1", "2", "5"]
 
 
+EXTRA_TITLE = "قسم إضافي: أسئلة الواجبات والتقييم"
+
+
+def add_extra_section():
+    """Add the extra section (position 99) with one question to subject 1."""
+    conn = db.get_connection()
+    chapter_id = conn.execute(
+        "INSERT INTO chapters (subject_id, name, position) VALUES (1, %s, 99) "
+        "RETURNING id",
+        (EXTRA_TITLE,),
+    ).fetchone()["id"]
+    question_id = conn.execute(
+        "INSERT INTO questions (chapter_id, text, option_1, option_2, answer) "
+        "VALUES (%s, 'Extra question', 'a', 'b', 'a') RETURNING id",
+        (chapter_id,),
+    ).fetchone()["id"]
+    conn.commit()
+    conn.close()
+    return chapter_id, question_id
+
+
+def test_extra_section_shows_star_and_comes_last(client, logged_in):
+    chapter_id, _ = add_extra_section()
+    page = client.get("/subjects/1").get_data(as_text=True)
+
+    cards = re.findall(r'href="/chapters/(\d+)"', page)
+    assert cards[-1] == str(chapter_id)
+    last_card = page[page.index(f'href="/chapters/{chapter_id}"') - 200 :]
+    assert "card-extra" in last_card
+    assert "⭐" in last_card
+    assert re.findall(r'<span class="tone-icon">(\d+)</span>', page) == ["1", "2"]
+
+
+def test_extra_section_is_not_counted_as_chapter(client, logged_in):
+    chapter_id, question_id = add_extra_section()
+    submit(client, chapter_id, {f"q{question_id}": "a"})
+    page = client.get("/").get_data(as_text=True)
+
+    assert "2 فصول · 4 سؤال" in page
+    assert "خلصت 0 من 2 فصول" in page
+
+
+def test_home_last_result_shows_subject_name(client, logged_in):
+    chapter_id, question_id = add_extra_section()
+    submit(client, chapter_id, {f"q{question_id}": "a"})
+    page = client.get("/").get_data(as_text=True)
+
+    box = page[page.index("آخر اختبار") :]
+    assert box.index("Test subject") < box.index(EXTRA_TITLE)
+
+
 def test_missing_subject_returns_404(client, logged_in):
     response = client.get("/subjects/999")
     assert response.status_code == 404
