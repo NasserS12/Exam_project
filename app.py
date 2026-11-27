@@ -27,6 +27,9 @@ USERNAME_PATTERN = re.compile(r"[A-Za-z][A-Za-z0-9_]{2,29}")
 
 # How many quiz attempts a user can have open at once (for example in two tabs).
 MAX_OPEN_ATTEMPTS = 5
+# Chapter position used for the extra section at the end of a subject.
+# It is not a real chapter, so chapter counts leave it out.
+EXTRA_CHAPTER = 99
 
 
 def login_required(view):
@@ -87,24 +90,29 @@ def home():
     conn = get_connection()
     subjects = conn.execute(
         "SELECT subjects.id, subjects.name, "
-        "COUNT(DISTINCT chapters.id) AS chapters, COUNT(questions.id) AS questions "
+        "COUNT(DISTINCT chapters.id) FILTER (WHERE chapters.position <> %s) "
+        "AS chapters, COUNT(questions.id) AS questions "
         "FROM subjects "
         "LEFT JOIN chapters ON chapters.subject_id = subjects.id "
         "LEFT JOIN questions ON questions.chapter_id = chapters.id "
-        "GROUP BY subjects.id ORDER BY subjects.id"
+        "GROUP BY subjects.id ORDER BY subjects.id",
+        (EXTRA_CHAPTER,),
     ).fetchall()
 
     user_id = session["user_id"]
     done_rows = conn.execute(
         "SELECT chapters.subject_id, COUNT(DISTINCT results.chapter_id) AS done "
         "FROM results JOIN chapters ON chapters.id = results.chapter_id "
-        "WHERE results.user_id = %s GROUP BY chapters.subject_id",
-        (user_id,),
+        "WHERE results.user_id = %s AND chapters.position <> %s "
+        "GROUP BY chapters.subject_id",
+        (user_id, EXTRA_CHAPTER),
     ).fetchall()
     last_result = conn.execute(
-        "SELECT chapters.name, results.score, results.total "
+        "SELECT subjects.name AS subject, chapters.name, results.score, results.total "
         "FROM results JOIN chapters ON chapters.id = results.chapter_id "
-        "WHERE results.user_id = %s ORDER BY results.created_at DESC LIMIT 1",
+        "LEFT JOIN subjects ON subjects.id = chapters.subject_id "
+        "WHERE results.user_id = %s ORDER BY results.created_at DESC, results.id DESC "
+        "LIMIT 1",
         (user_id,),
     ).fetchone()
     attempts = conn.execute(
@@ -174,6 +182,7 @@ def subject(subject_id):
             {
                 "id": chapter["id"],
                 "number": chapter["position"],
+                "extra": chapter["position"] == EXTRA_CHAPTER,
                 "label": label,
                 "title": title,
                 "questions": chapter["questions"],

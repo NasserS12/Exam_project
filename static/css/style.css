@@ -47,6 +47,8 @@
     --s3: #13AFD0;
     --s4: #E45A98;
     --s5: #2DB477;
+    --extra: #F2B01E;
+    --extra-bg: #2A2418;
 
     --ok: #2FBF7A;
     --ok-bg: #12321F;
@@ -88,6 +90,8 @@
     --s3: #0A9FBF;
     --s4: #DB4A8B;
     --s5: #1F9A62;
+    --extra: #C98A0A;
+    --extra-bg: #FFF7E3;
 
     --ok: #1E9E63;
     --ok-bg: #E3F6EC;
@@ -397,6 +401,19 @@ a.card:hover .card-go { gap: 12px; }
 .tone-4 { --tone: var(--s4); }
 .tone-5 { --tone: var(--s5); }
 
+/* Extra section card (homework and self-assessment) on the subject page */
+.card-extra {
+    --tone: var(--extra);
+    background: var(--extra-bg);
+    box-shadow: 0 6px 0 var(--card-edge), inset 0 0 0 2px var(--extra);
+}
+a.card-extra:hover {
+    background: var(--extra-bg);
+    box-shadow: 0 10px 0 var(--card-edge), inset 0 0 0 2px var(--extra);
+}
+a.card-extra:active { box-shadow: 0 2px 0 var(--card-edge), inset 0 0 0 2px var(--extra); }
+.card-extra .tone-icon { font-size: 22px; }
+
 .tone-icon {
     width: 46px;
     height: 46px;
@@ -478,6 +495,7 @@ a.subject-tile:active { box-shadow: 0 2px 0 var(--edge); }
 .stat-label { font-size: 15px; color: var(--muted); font-weight: 500; }
 .stat-value { font-size: 32px; font-weight: 800; line-height: 1.2; font-variant-numeric: tabular-nums; }
 .stat-title { font-size: 22px; font-weight: 700; }
+.stat-sub { font-size: 14px; font-weight: 700; color: var(--s1); }
 
 .muted { color: var(--muted); }
 
