@@ -11,3 +11,5 @@ tests/
 .ruff_cache/
 .coverage
 htmlcov/
+# Logs
+*.log
