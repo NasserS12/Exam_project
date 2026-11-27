@@ -32,6 +32,7 @@
                 <div class="stat">
                     <span class="stat-label">آخر اختبار</span>
                     {% if last_result %}
+                        {% if last_result["subject"] %}<span class="stat-sub" dir="auto">{{ last_result["subject"] }}</span>{% endif %}
                         <span class="stat-title" dir="auto">{{ last_result["name"] }}</span>
                     {% else %}
                         <span class="stat-title">ما سويت اختبار للحين</span>
